@@ -1,114 +1,162 @@
-'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ArrowLeft, Save, Upload } from 'lucide-react';
-import Link from 'next/link';
-import { useCreatePropertyMutation } from '@/lib/redux/slices/apiSlice';
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Save } from "lucide-react";
+import Link from "next/link";
+import { useCreatePropertyMutation } from "@/lib/redux/slices/apiSlice";
+import ImageUrlManager from "@/components/ImageUrlManager";
+
+const FIELD_CLASS =
+  "w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm";
+const LABEL_CLASS = "block text-sm font-semibold text-gray-700 mb-1.5";
+const SECTION_CLASS =
+  "bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-6";
 
 export default function NewProperty() {
   const router = useRouter();
   const [createProperty, { isLoading }] = useCreatePropertyMutation();
+  const [images, setImages] = useState<string[]>([]);
+  const [error, setError] = useState("");
+
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    price: '',
-    address: '',
-    area: '',
-    city: 'Mumbai',
-    type: 'Apartment',
-    status: 'For Sale',
-    bedrooms: '',
-    bathrooms: '',
-    size: '',
-    amenities: '',
+    title: "",
+    description: "",
+    price: "",
+    address: "",
+    area: "",
+    city: "Mumbai",
+    type: "Apartment",
+    status: "For Sale",
+    bedrooms: "",
+    bathrooms: "",
+    size: "",
+    amenities: "",
     featured: false,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value, type } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+      [name]:
+        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     try {
       const dataToSubmit = {
         ...formData,
         price: Number(formData.price),
-        bedrooms: Number(formData.bedrooms),
-        bathrooms: Number(formData.bathrooms),
+        bedrooms: Number(formData.bedrooms) || 0,
+        bathrooms: Number(formData.bathrooms) || 0,
         size: Number(formData.size),
         location: {
           address: formData.address,
           area: formData.area,
-          city: formData.city
+          city: formData.city,
         },
-        amenities: formData.amenities.split(',').map(a => a.trim()).filter(a => a !== '')
+        amenities: formData.amenities
+          .split(",")
+          .map((a) => a.trim())
+          .filter(Boolean),
+        images,
       };
-
       await createProperty(dataToSubmit).unwrap();
-      router.push('/admin/properties');
-    } catch (error) {
-      console.error('Error creating property:', error);
-      alert('Failed to create property. Check console for details.');
+      router.push("/admin/properties");
+      router.refresh();
+    } catch (err: unknown) {
+      setError(
+        (err as { data?: { error?: string } })?.data?.error ||
+          "Failed to create property. Please check all fields.",
+      );
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-12">
       <div className="flex items-center justify-between">
-        <Link href="/admin/properties" className="text-gray-600 hover:text-gray-900 flex items-center">
-          <ArrowLeft className="w-5 h-5 mr-2" />
-          Back to List
-        </Link>
-        <button 
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/properties"
+            className="p-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Link>
+          <h2 className="text-2xl font-bold text-gray-800">Add New Property</h2>
+        </div>
+        <button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg flex items-center hover:bg-blue-700 disabled:bg-blue-300"
+          className="bg-blue-600 text-white px-6 py-2.5 rounded-lg flex items-center hover:bg-blue-700 disabled:bg-blue-300 transition-colors font-medium"
         >
           <Save className="w-5 h-5 mr-2" />
-          {isLoading ? 'Saving...' : 'Save Property'}
+          {isLoading ? "Saving..." : "Save Property"}
         </button>
       </div>
 
-      <form className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-8">
-        <div>
-          <h3 className="text-lg font-bold text-gray-800 mb-6 border-b pb-2">Basic Information</h3>
+      {error && (
+        <div className="bg-red-50 border border-red-100 text-red-700 px-6 py-4 rounded-xl text-sm font-medium">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Basic Information */}
+        <div className={SECTION_CLASS}>
+          <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
+            Basic Information
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Property Title</label>
-              <input 
-                type="text" name="title" value={formData.title} onChange={handleChange}
+              <label className={LABEL_CLASS}>Property Title *</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
                 placeholder="e.g. 3 BHK Luxury Apartment in South Mumbai"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                className={FIELD_CLASS}
                 required
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-              <textarea 
-                name="description" value={formData.description} onChange={handleChange}
+              <label className={LABEL_CLASS}>Description *</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                className={FIELD_CLASS}
                 required
-              ></textarea>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Price (₹)</label>
-              <input 
-                type="number" name="price" value={formData.price} onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                required
+                placeholder="Describe the property, its highlights, and what makes it special..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Property Type</label>
-              <select 
-                name="type" value={formData.type} onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              <label className={LABEL_CLASS}>Price (₹) *</label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                className={FIELD_CLASS}
+                required
+                placeholder="e.g. 15000000"
+              />
+            </div>
+            <div>
+              <label className={LABEL_CLASS}>Property Type *</label>
+              <select
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+                className={FIELD_CLASS}
               >
                 <option>Apartment</option>
                 <option>Villa</option>
@@ -116,81 +164,160 @@ export default function NewProperty() {
                 <option>Plot</option>
               </select>
             </div>
+            <div>
+              <label className={LABEL_CLASS}>Listing Status *</label>
+              <select
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                className={FIELD_CLASS}
+              >
+                <option value="For Sale">For Sale</option>
+                <option value="For Rent">For Rent</option>
+              </select>
+            </div>
+            <div className="flex items-center gap-3 mt-2">
+              <input
+                type="checkbox"
+                name="featured"
+                id="featured"
+                checked={formData.featured}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    featured: e.target.checked,
+                  }))
+                }
+                className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <label
+                htmlFor="featured"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Mark as Featured{" "}
+                <span className="text-gray-400 font-normal">
+                  (appears on homepage)
+                </span>
+              </label>
+            </div>
           </div>
         </div>
 
-        <div>
-          <h3 className="text-lg font-bold text-gray-800 mb-6 border-b pb-2">Location Details</h3>
+        {/* Location */}
+        <div className={SECTION_CLASS}>
+          <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
+            Location Details
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-              <input 
-                type="text" name="address" value={formData.address} onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              <label className={LABEL_CLASS}>Full Address *</label>
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                className={FIELD_CLASS}
+                required
+                placeholder="e.g. 12, Marine Lines, Near Charni Road Station"
+              />
+            </div>
+            <div>
+              <label className={LABEL_CLASS}>Area / Locality *</label>
+              <input
+                type="text"
+                name="area"
+                value={formData.area}
+                onChange={handleChange}
+                placeholder="e.g. Bandra West"
+                className={FIELD_CLASS}
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Area</label>
-              <input 
-                type="text" name="area" value={formData.area} onChange={handleChange}
-                placeholder="e.g. Opera House"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
-              <input 
-                type="text" name="city" value={formData.city} onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              <label className={LABEL_CLASS}>City *</label>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                className={FIELD_CLASS}
                 required
               />
             </div>
           </div>
         </div>
 
-        <div>
-          <h3 className="text-lg font-bold text-gray-800 mb-6 border-b pb-2">Features & Amenities</h3>
+        {/* Features */}
+        <div className={SECTION_CLASS}>
+          <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
+            Features & Details
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Bedrooms</label>
-              <input 
-                type="number" name="bedrooms" value={formData.bedrooms} onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              <label className={LABEL_CLASS}>Bedrooms</label>
+              <input
+                type="number"
+                name="bedrooms"
+                value={formData.bedrooms}
+                onChange={handleChange}
+                className={FIELD_CLASS}
+                min="0"
+                placeholder="0"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Bathrooms</label>
-              <input 
-                type="number" name="bathrooms" value={formData.bathrooms} onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              <label className={LABEL_CLASS}>Bathrooms</label>
+              <input
+                type="number"
+                name="bathrooms"
+                value={formData.bathrooms}
+                onChange={handleChange}
+                className={FIELD_CLASS}
+                min="0"
+                placeholder="0"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Size (Sq Ft)</label>
-              <input 
-                type="number" name="size" value={formData.size} onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              <label className={LABEL_CLASS}>Size (Sq Ft) *</label>
+              <input
+                type="number"
+                name="size"
+                value={formData.size}
+                onChange={handleChange}
+                className={FIELD_CLASS}
                 required
+                placeholder="e.g. 1200"
               />
             </div>
             <div className="md:col-span-3">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Amenities (comma separated)</label>
-              <input 
-                type="text" name="amenities" value={formData.amenities} onChange={handleChange}
-                placeholder="Parking, Swimming Pool, Gym, Security"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              <label className={LABEL_CLASS}>
+                Amenities{" "}
+                <span className="text-gray-400 font-normal">
+                  (comma-separated)
+                </span>
+              </label>
+              <input
+                type="text"
+                name="amenities"
+                value={formData.amenities}
+                onChange={handleChange}
+                placeholder="Parking, Swimming Pool, Gym, Security, Power Backup, Club House"
+                className={FIELD_CLASS}
               />
-            </div>
-            <div className="flex items-center space-x-2">
-              <input 
-                type="checkbox" name="featured" checked={formData.featured} onChange={(e) => setFormData(prev => ({...prev, featured: e.target.checked}))}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-              />
-              <label className="text-sm font-medium text-gray-700">Mark as Featured</label>
             </div>
           </div>
+        </div>
+
+        {/* Images */}
+        <div className={SECTION_CLASS}>
+          <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
+            Property Images
+          </h3>
+          <p className="text-sm text-gray-500">
+            Add image URLs from any hosting service (e.g. Unsplash, Cloudinary,
+            etc.)
+          </p>
+          <ImageUrlManager images={images} onChange={setImages} />
         </div>
       </form>
     </div>

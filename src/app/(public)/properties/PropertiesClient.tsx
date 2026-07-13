@@ -1,79 +1,141 @@
-'use client';
-import { useState } from 'react';
-import { Search, MapPin, Home, Star, SlidersHorizontal } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { IProperty } from '@/models/Property';
+"use client";
+import { useState } from "react";
+import {
+  Search,
+  MapPin,
+  Home,
+  Star,
+  SlidersHorizontal,
+  X,
+  BedDouble,
+  Bath,
+  Square,
+  ArrowRight,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface PropertiesClientProps {
-  initialProperties: any[]; // Using any because IProperty has Document properties that might not serialize well
+  initialProperties: any[];
+  initialSearch?: string;
+  initialType?: string;
+  initialStatus?: string;
 }
 
-export default function PropertiesClient({ initialProperties }: PropertiesClientProps) {
+export default function PropertiesClient({
+  initialProperties,
+  initialSearch = "",
+  initialType = "All",
+  initialStatus = "All",
+}: PropertiesClientProps) {
   const [filter, setFilter] = useState({
-    type: 'All',
-    status: 'All',
-    search: '',
+    type: initialType,
+    status: initialStatus,
+    search: initialSearch,
+    minPrice: "",
+    maxPrice: "",
   });
 
-  const filteredProperties = initialProperties.filter(p => {
-    const matchType = filter.type === 'All' || p.type === filter.type;
-    const matchStatus = filter.status === 'All' || p.status === filter.status;
-    const matchSearch = p.title.toLowerCase().includes(filter.search.toLowerCase()) || 
-                        p.location.area.toLowerCase().includes(filter.search.toLowerCase());
-    return matchType && matchStatus && matchSearch;
+  const filteredProperties = initialProperties.filter((p) => {
+    const matchType = filter.type === "All" || p.type === filter.type;
+    const matchStatus = filter.status === "All" || p.status === filter.status;
+    const matchSearch =
+      !filter.search ||
+      p.title.toLowerCase().includes(filter.search.toLowerCase()) ||
+      p.location.area.toLowerCase().includes(filter.search.toLowerCase()) ||
+      p.location.city.toLowerCase().includes(filter.search.toLowerCase());
+    const matchMinPrice =
+      !filter.minPrice || p.price >= Number(filter.minPrice);
+    const matchMaxPrice =
+      !filter.maxPrice || p.price <= Number(filter.maxPrice);
+    return (
+      matchType && matchStatus && matchSearch && matchMinPrice && matchMaxPrice
+    );
   });
+
+  const hasActiveFilters =
+    filter.type !== "All" ||
+    filter.status !== "All" ||
+    filter.search !== "" ||
+    filter.minPrice !== "" ||
+    filter.maxPrice !== "";
+
+  const clearFilters = () =>
+    setFilter({
+      type: "All",
+      status: "All",
+      search: "",
+      minPrice: "",
+      maxPrice: "",
+    });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 mt-12 flex flex-col lg:flex-row gap-8">
+    <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col lg:flex-row gap-12">
       {/* Sidebar Filters */}
-      <aside className="w-full lg:w-72 space-y-8">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
-          <div className="flex items-center text-gray-900 font-bold">
-            <SlidersHorizontal className="w-5 h-5 mr-2 text-blue-600" />
-            Filters
+      <aside className="w-full lg:w-80 shrink-0 space-y-6">
+        <div className="bg-white p-8 rounded-[2rem] shadow-premium border border-gray-100 space-y-8 sticky top-28">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center text-brand-dark font-black text-xl tracking-tight">
+              <SlidersHorizontal className="w-5 h-5 mr-3 text-brand-gold" />
+              Refine Search
+            </div>
           </div>
-          
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-gray-700 ml-1">Search</label>
+
+          {/* Search */}
+          <div className="space-y-3">
+            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+              Location or Project
+            </label>
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input 
-                type="text" 
-                placeholder="Area or Title..." 
-                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-gold" />
+              <input
+                type="text"
+                placeholder="Where would you like to live?"
+                className="w-full pl-11 pr-4 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:border-brand-gold/30 transition-all font-medium"
                 value={filter.search}
-                onChange={(e) => setFilter({...filter, search: e.target.value})}
+                onChange={(e) =>
+                  setFilter({ ...filter, search: e.target.value })
+                }
               />
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-gray-700 ml-1">Property Type</label>
-            <select 
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all appearance-none"
-              value={filter.type}
-              onChange={(e) => setFilter({...filter, type: e.target.value})}
-            >
-              <option>All</option>
-              <option>Apartment</option>
-              <option>Villa</option>
-              <option>Commercial</option>
-              <option>Plot</option>
-            </select>
+          {/* Property Type */}
+          <div className="space-y-3">
+            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+              Property Type
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              {["All", "Apartment", "Villa", "Commercial", "Plot"].map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setFilter({ ...filter, type: t })}
+                  className={`px-4 py-3 rounded-xl text-xs font-bold transition-all border ${
+                    filter.type === t
+                      ? "bg-brand-dark text-white border-brand-dark shadow-lg"
+                      : "border-gray-100 text-gray-500 hover:border-brand-gold/50 hover:text-brand-gold bg-gray-50/50"
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-gray-700 ml-1">Status</label>
-            <div className="flex flex-col space-y-2">
-              {['All', 'For Sale', 'For Rent'].map((status) => (
-                <button 
+          {/* Status */}
+          <div className="space-y-3">
+            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+              Listing Status
+            </label>
+            <div className="flex flex-col gap-2">
+              {["All", "For Sale", "For Rent"].map((status) => (
+                <button
                   key={status}
-                  onClick={() => setFilter({...filter, status})}
-                  className={`text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                    filter.status === status 
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
-                      : 'text-gray-600 hover:bg-gray-100'
+                  onClick={() => setFilter({ ...filter, status })}
+                  className={`w-full text-left px-5 py-3.5 rounded-xl text-sm font-bold transition-all ${
+                    filter.status === status
+                      ? "bg-brand-gold text-white shadow-lg shadow-brand-gold/20"
+                      : "text-gray-500 hover:bg-gray-100 bg-gray-50/50"
                   }`}
                 >
                   {status}
@@ -81,80 +143,166 @@ export default function PropertiesClient({ initialProperties }: PropertiesClient
               ))}
             </div>
           </div>
+
+          {/* Price Range */}
+          <div className="space-y-3">
+            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+              Budget Range (₹)
+            </label>
+            <div className="space-y-3">
+              <input
+                type="number"
+                placeholder="Minimum"
+                value={filter.minPrice}
+                onChange={(e) =>
+                  setFilter({ ...filter, minPrice: e.target.value })
+                }
+                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-gold/30 transition-all font-medium"
+              />
+              <input
+                type="number"
+                placeholder="Maximum"
+                value={filter.maxPrice}
+                onChange={(e) =>
+                  setFilter({ ...filter, maxPrice: e.target.value })
+                }
+                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-gold/30 transition-all font-medium"
+              />
+            </div>
+          </div>
+
+          {hasActiveFilters && (
+            <button
+              onClick={clearFilters}
+              className="w-full py-4 rounded-xl text-xs font-black uppercase tracking-widest text-red-500 bg-red-50 hover:bg-red-100 transition-colors flex items-center justify-center gap-2"
+            >
+              <X className="w-4 h-4" /> Reset All Filters
+            </button>
+          )}
         </div>
       </aside>
 
       {/* Property Grid */}
-      <div className="flex-1">
+      <div className="flex-1 min-w-0">
+        {/* Results Header */}
+        <div className="flex items-center justify-between mb-10 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+          <div>
+            <h2 className="text-2xl font-black text-brand-dark tracking-tight">
+              Property Collection
+            </h2>
+            <p className="text-gray-400 text-sm font-medium mt-1">
+              Showing{" "}
+              <span className="text-brand-gold font-bold">
+                {filteredProperties.length}
+              </span>{" "}
+              exclusive listings in Mumbai
+            </p>
+          </div>
+        </div>
+
         {filteredProperties.length === 0 ? (
-          <div className="bg-white p-16 rounded-3xl text-center space-y-6 border border-dashed border-gray-200 shadow-sm">
-            <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
-              <Search className="w-12 h-12 text-gray-300" />
+          <div className="bg-white p-20 rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm">
+            <div className="w-32 h-32 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
+              <Search className="w-16 h-16 text-gray-200" />
             </div>
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">No properties found</h3>
-              <p className="text-gray-500">Try adjusting your filters or search terms to find what you're looking for.</p>
+            <div className="max-w-md mx-auto">
+              <h3 className="text-3xl font-black text-brand-dark mb-3 tracking-tight">
+                No matching properties
+              </h3>
+              <p className="text-gray-400 font-medium leading-relaxed">
+                We couldn't find any listings matching your current criteria.
+                Try broadening your search or resetting the filters.
+              </p>
             </div>
-            <button 
-              onClick={() => setFilter({type: 'All', status: 'All', search: ''})}
-              className="text-blue-600 font-bold hover:text-blue-700 transition-colors"
-            >
-              Clear all filters
+            <button onClick={clearFilters} className="premium-button-primary">
+              Clear All Filters
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {filteredProperties.map((property) => (
-              <Link 
+              <Link
                 href={`/properties/${property._id}`}
-                key={property._id} 
-                className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col transform hover:-translate-y-1"
+                key={property._id}
+                className="premium-card group/item bg-white flex flex-col h-full"
               >
-                <div className="relative h-64 overflow-hidden">
-                  <Image 
-                    src={property.images[0] || `https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800`} 
-                    alt={property.title} 
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={
+                      property.images && property.images.length > 0
+                        ? property.images[0]
+                        : "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800"
+                    }
+                    alt={property.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="object-cover group-hover/item:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-bold text-blue-600 uppercase tracking-wider shadow-sm">
-                    {property.type}
+                  <div className="absolute top-5 left-5 flex gap-2">
+                    <span className="glass-morphism px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-brand-dark">
+                      {property.type}
+                    </span>
+                    {property.featured && (
+                      <span className="bg-brand-gold text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                        Featured
+                      </span>
+                    )}
                   </div>
-                  <div className={`absolute bottom-4 right-4 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-bold text-white shadow-lg ${
-                    property.status === 'For Sale' ? 'bg-green-600/90' : 'bg-orange-600/90'
-                  } uppercase tracking-wider`}>
-                    {property.status}
+                  <div className="absolute bottom-5 left-5">
+                    <span className="bg-brand-gold text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg">
+                      ₹{property.price?.toLocaleString()}
+                    </span>
+                  </div>
+                  <div className="absolute top-5 right-5">
+                    <span className="bg-brand-dark/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                      {property.status}
+                    </span>
                   </div>
                 </div>
+
                 <div className="p-8 flex-1 flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 leading-tight">
-                        {property.title}
-                      </h4>
-                      <div className="flex items-center text-gray-400 text-xs mt-2 font-medium">
-                        <MapPin className="w-3.5 h-3.5 mr-1.5 text-blue-500" />
-                        {property.location.area}, {property.location.city}
+                  <div>
+                    <div className="flex items-center gap-2 text-brand-gold text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                      <Star className="w-3 h-3 fill-current" />
+                      Premium Listing
+                    </div>
+                    <h4 className="text-2xl font-bold text-brand-dark group-hover/item:text-brand-gold transition-colors line-clamp-1 mb-2">
+                      {property.title}
+                    </h4>
+                    <div className="flex items-center text-gray-500 text-sm mb-6">
+                      <MapPin className="w-4 h-4 mr-1.5 text-brand-gold shrink-0" />
+                      <span className="line-clamp-1">
+                        {property.location?.address ||
+                          property.location?.city ||
+                          property.location?.type ||
+                          "Mumbai"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="pt-6 border-t border-gray-100 flex justify-between items-center">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-1.5 text-gray-600">
+                        <BedDouble className="w-4 h-4 text-brand-gold" />
+                        <span className="text-sm font-semibold">
+                          {property.bedrooms || 0}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-gray-600">
+                        <Bath className="w-4 h-4 text-brand-gold" />
+                        <span className="text-sm font-semibold">
+                          {property.bathrooms || 2}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-gray-600">
+                        <Square className="w-4 h-4 text-brand-gold" />
+                        <span className="text-sm font-semibold">
+                          {property.size || 0}{" "}
+                          <span className="text-[10px] uppercase">Sq.Ft</span>
+                        </span>
                       </div>
                     </div>
-                    <p className="text-blue-600 font-extrabold text-2xl">
-                      ₹{property.price.toLocaleString('en-IN')}
-                    </p>
-                  </div>
-                  
-                  <div className="pt-6 mt-6 border-t border-gray-50 flex justify-between items-center text-gray-500 text-xs font-bold uppercase tracking-wider">
-                    <div className="flex items-center bg-gray-50 px-3 py-1.5 rounded-lg">
-                      <Home className="w-3.5 h-3.5 mr-1.5 text-blue-500" />
-                      {property.bedrooms} BHK
-                    </div>
-                    <div className="bg-gray-50 px-3 py-1.5 rounded-lg">
-                      {property.size} Sq Ft
-                    </div>
-                    <div className="flex items-center text-orange-500 bg-orange-50 px-3 py-1.5 rounded-lg">
-                      <Star className="w-3.5 h-3.5 fill-current mr-1.5" />
-                      4.8
-                    </div>
+                    <ArrowRight className="w-5 h-5 text-gray-300 group-hover/item:text-brand-gold group-hover/item:translate-x-1 transition-all" />
                   </div>
                 </div>
               </Link>

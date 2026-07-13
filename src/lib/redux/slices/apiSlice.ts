@@ -80,6 +80,23 @@ export const apiSlice = createApi({
       invalidatesTags: ["Inquiry"],
     }),
 
+    updateInquiryStatus: builder.mutation<any, { id: string; status: string }>({
+      query: ({ id, status }) => ({
+        url: `/inquiries/${id}`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: ["Inquiry"],
+    }),
+
+    deleteInquiry: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `/inquiries/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Inquiry"],
+    }),
+
     // ─── Partners ────────────────────────────────────────
     createPartner: builder.mutation<any, any>({
       query: (data) => ({
@@ -125,6 +142,8 @@ export const {
   useDeleteBlogMutation,
   useGetBlogByIdQuery,
   useSubmitInquiryMutation,
+  useUpdateInquiryStatusMutation,
+  useDeleteInquiryMutation,
   useCreatePartnerMutation,
   useUpdatePartnerMutation,
   useDeletePartnerMutation,

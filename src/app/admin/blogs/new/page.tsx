@@ -1,123 +1,207 @@
-'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ArrowLeft, Save, Loader2 } from 'lucide-react';
-import Link from 'next/link';
-import { useCreateBlogMutation } from '@/lib/redux/slices/apiSlice';
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Save } from "lucide-react";
+import Link from "next/link";
+import SingleImageUpload from "@/components/SingleImageUpload";
+import { useCreateBlogMutation } from "@/lib/redux/slices/apiSlice";
+
+const FIELD_CLASS =
+  "w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm";
+const LABEL_CLASS = "block text-sm font-semibold text-gray-700 mb-1.5";
+const SECTION_CLASS =
+  "bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-6";
 
 export default function NewBlog() {
   const router = useRouter();
   const [createBlog, { isLoading }] = useCreateBlogMutation();
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    title: '',
-    content: '',
-    author: 'Administrator',
-    excerpt: '',
-    image: '',
-    tags: '',
+    title: "",
+    content: "",
+    author: "Roman Estate",
+    excerpt: "",
+    image: "",
+    tags: "",
     published: true,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value, type } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+      [name]:
+        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     try {
       const dataToSubmit = {
         ...formData,
-        tags: formData.tags.split(',').map(t => t.trim()).filter(t => t !== '')
+        tags: formData.tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean),
       };
-
       await createBlog(dataToSubmit).unwrap();
-      router.push('/admin/blogs');
-    } catch (error) {
-      console.error('Error creating blog:', error);
-      alert('Failed to create blog post.');
+      router.push("/admin/blogs");
+      router.refresh();
+    } catch (err: any) {
+      setError(
+        err?.data?.error ||
+          "Failed to create blog post. Please check all fields.",
+      );
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-12">
       <div className="flex items-center justify-between">
-        <Link href="/admin/blogs" className="text-gray-600 hover:text-gray-900 flex items-center">
-          <ArrowLeft className="w-5 h-5 mr-2" />
-          Back to List
-        </Link>
-        <button 
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/blogs"
+            className="p-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Link>
+          <h2 className="text-2xl font-bold text-gray-800">Create New Post</h2>
+        </div>
+        <button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg flex items-center hover:bg-blue-700 disabled:bg-blue-300 transition-colors"
+          className="bg-blue-600 text-white px-6 py-2.5 rounded-lg flex items-center hover:bg-blue-700 disabled:bg-blue-300 transition-colors font-medium"
         >
           <Save className="w-5 h-5 mr-2" />
-          {isLoading ? 'Posting...' : 'Publish Post'}
+          {isLoading ? "Publishing..." : "Publish Post"}
         </button>
       </div>
 
-      <form className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-8">
-        <div>
-          <h3 className="text-lg font-bold text-gray-800 mb-6 border-b pb-2">Create New Blog Post</h3>
-          <div className="space-y-6">
+      {error && (
+        <div className="bg-red-50 border border-red-100 text-red-700 px-6 py-4 rounded-xl text-sm font-medium">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className={SECTION_CLASS}>
+          <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
+            Post Details
+          </h3>
+          <div className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Post Title</label>
-              <input 
-                type="text" name="title" value={formData.title} onChange={handleChange}
+              <label className={LABEL_CLASS}>Post Title *</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
                 placeholder="e.g. 5 Tips for First-Time Home Buyers in Mumbai"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                className={FIELD_CLASS}
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Excerpt (Short Summary)</label>
-              <textarea 
-                name="excerpt" value={formData.excerpt} onChange={handleChange}
+              <label className={LABEL_CLASS}>
+                Excerpt{" "}
+                <span className="text-gray-400 font-normal">
+                  (short summary shown in listings)
+                </span>
+              </label>
+              <textarea
+                name="excerpt"
+                value={formData.excerpt}
+                onChange={handleChange}
                 rows={2}
                 placeholder="A brief overview to entice readers..."
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                className={FIELD_CLASS}
                 required
-              ></textarea>
+              />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Content (Markdown or HTML supported)</label>
-              <textarea 
-                name="content" value={formData.content} onChange={handleChange}
-                rows={10}
-                placeholder="Write your blog content here..."
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none font-mono text-sm"
+              <label className={LABEL_CLASS}>Content *</label>
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleChange}
+                rows={14}
+                placeholder="Write your full blog content here. Each new line will become a new paragraph."
+                className={`${FIELD_CLASS} font-mono`}
                 required
-              ></textarea>
+              />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Author Name</label>
-                <input 
-                  type="text" name="author" value={formData.author} onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Tags (comma separated)</label>
-                <input 
-                  type="text" name="tags" value={formData.tags} onChange={handleChange}
-                  placeholder="Real Estate, Mumbai, Investment"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-              </div>
+          </div>
+        </div>
+
+        <div className={SECTION_CLASS}>
+          <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
+            Meta & Publishing
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className={LABEL_CLASS}>Author Name *</label>
+              <input
+                type="text"
+                name="author"
+                value={formData.author}
+                onChange={handleChange}
+                className={FIELD_CLASS}
+                required
+              />
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <input 
-                  type="checkbox" name="published" checked={formData.published} onChange={(e) => setFormData(prev => ({...prev, published: e.target.checked}))}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <label className="text-sm font-medium text-gray-700">Published</label>
-              </div>
+            <div>
+              <label className={LABEL_CLASS}>
+                Tags{" "}
+                <span className="text-gray-400 font-normal">
+                  (comma-separated)
+                </span>
+              </label>
+              <input
+                type="text"
+                name="tags"
+                value={formData.tags}
+                onChange={handleChange}
+                placeholder="Real Estate, Mumbai, Investment Tips"
+                className={FIELD_CLASS}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <SingleImageUpload
+                label="Cover Image"
+                value={formData.image}
+                onChange={(url) => setFormData((p) => ({ ...p, image: url }))}
+                hint="This image appears at the top of the blog post and in the listing grid."
+              />
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                name="published"
+                id="published"
+                checked={formData.published}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    published: e.target.checked,
+                  }))
+                }
+                className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <label
+                htmlFor="published"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Published{" "}
+                <span className="text-gray-400 font-normal">
+                  (uncheck to save as draft)
+                </span>
+              </label>
             </div>
           </div>
         </div>

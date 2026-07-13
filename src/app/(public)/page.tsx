@@ -1,11 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Search,
-  MapPin,
-  Home as HomeIcon,
-  Star,
-  ArrowRight,
+import { 
+  MapPin, 
+  ArrowRight, 
+  CheckCircle2, 
+  Users, 
+  Trophy, 
+  Globe, 
+  Building2,
+  Quote,
+  Plus,
+  HelpCircle,
+  ShieldCheck,
+  TrendingUp,
+  Zap
 } from "lucide-react";
 import type { Metadata } from "next";
 import connectDB from "@/lib/mongodb";
@@ -13,6 +21,7 @@ import Property from "@/models/Property";
 import Partner from "@/models/Partner";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import PartnersCarousel from "@/components/PartnersCarousel";
+import HeroSearch from "@/components/HeroSearch";
 
 export const metadata: Metadata = {
   title: "Roman Estate | Luxury Real Estate Mumbai",
@@ -25,7 +34,6 @@ export const dynamic = "force-dynamic";
 async function getFeaturedProperties() {
   try {
     await connectDB();
-    // Assuming featured is a boolean field in your Property model
     const properties = await Property.find({ featured: true })
       .sort({ createdAt: -1 })
       .limit(6)
@@ -72,100 +80,85 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center bg-gray-900 overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-brand-navy">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/50 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/60 via-brand-navy/40 to-brand-navy/90 z-10" />
           <Image
             src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=2000"
-            alt="Luxury Home"
+            alt="Luxury Mumbai Home"
             fill
             sizes="100vw"
-            className="object-cover"
+            className="object-cover scale-105 animate-pulse-slow"
             priority
           />
         </div>
 
-        <div className="relative z-20 max-w-5xl mx-auto px-4 text-center text-white space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            Find Your <span className="text-blue-500">Dream Home</span> <br />{" "}
-            in Mumbai
-          </h1>
-          <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-            Discover premium properties, luxury apartments, and exclusive
-            commercial spaces with Roman Estate.
-          </p>
-
-          {/* Search Bar */}
-          <div className="bg-white p-2 rounded-2xl shadow-2xl max-w-3xl mx-auto flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-2">
-            <div className="flex-1 w-full flex items-center px-4 py-3 border-b md:border-b-0 md:border-r border-gray-100">
-              <Search className="w-5 h-5 text-gray-400 mr-3" />
-              <input
-                type="text"
-                placeholder="Search area, project, or developer..."
-                className="w-full bg-transparent text-gray-900 outline-none text-sm"
-              />
-            </div>
-            <div className="w-full md:w-48 flex items-center px-4 py-3 border-b md:border-b-0 md:border-r border-gray-100">
-              <HomeIcon className="w-5 h-5 text-gray-400 mr-3" />
-              <select className="bg-transparent text-gray-900 outline-none text-sm w-full appearance-none">
-                <option>Property Type</option>
-                <option>Apartment</option>
-                <option>Villa</option>
-                <option>Commercial</option>
-              </select>
-            </div>
-            <button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 active:scale-95">
-              Search
-            </button>
+        <div className="relative z-20 max-w-7xl mx-auto px-4 text-center text-white space-y-12 py-20">
+          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
+            <span className="inline-block px-4 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-brand-gold text-xs font-bold uppercase tracking-[0.3em]">
+              Mumbai's Premier Real Estate
+            </span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
+              Elevating Your <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold">Lifestyle Experience</span>
+            </h1>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed">
+              Discover a curated collection of Mumbai's most exclusive properties, 
+              crafted for those who demand nothing less than perfection.
+            </p>
           </div>
+
+          <div className="animate-in fade-in slide-in-from-bottom-16 delay-300 duration-1000">
+            <HeroSearch />
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2">
+          <div className="w-px h-12 bg-gradient-to-b from-brand-gold to-transparent" />
+          <span className="text-[10px] text-brand-gold uppercase tracking-[0.3em] font-bold rotate-90 origin-left mt-8">Scroll</span>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="bg-white py-12 -mt-10 relative z-30 max-w-6xl mx-auto w-full px-4 rounded-2xl shadow-xl grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-gray-100">
-        <div className="text-center px-4">
-          <p className="text-3xl font-bold text-gray-900">1000+</p>
-          <p className="text-sm text-gray-500 uppercase tracking-widest font-medium">
-            Properties
-          </p>
-        </div>
-        <div className="text-center px-4">
-          <p className="text-3xl font-bold text-gray-900">500+</p>
-          <p className="text-sm text-gray-500 uppercase tracking-widest font-medium">
-            Happy Clients
-          </p>
-        </div>
-        <div className="text-center px-4">
-          <p className="text-3xl font-bold text-gray-900">30+</p>
-          <p className="text-sm text-gray-500 uppercase tracking-widest font-medium">
-            Experience
-          </p>
-        </div>
-        <div className="text-center px-4">
-          <p className="text-3xl font-bold text-gray-900">15+</p>
-          <p className="text-sm text-gray-500 uppercase tracking-widest font-medium">
-            Locations
-          </p>
+      <section className="relative z-30 -mt-16 max-w-6xl mx-auto w-full px-4">
+        <div className="bg-white rounded-[2rem] shadow-2xl p-8 md:p-12 grid grid-cols-2 lg:grid-cols-4 gap-8 border border-gray-100">
+          {[
+            { label: "Premium Properties", value: "1,200+", icon: Building2 },
+            { label: "Happy Homeowners", value: "850+", icon: Users },
+            { label: "Years of Excellence", value: "32", icon: Trophy },
+            { label: "Global Reach", value: "15+", icon: Globe },
+          ].map((stat, i) => (
+            <div key={i} className="flex flex-col items-center text-center group">
+              <div className="w-12 h-12 rounded-2xl bg-brand-gold/10 flex items-center justify-center mb-4 group-hover:bg-brand-gold group-hover:rotate-6 transition-all duration-300">
+                <stat.icon className="w-6 h-6 text-brand-gold group-hover:text-white transition-colors" />
+              </div>
+              <p className="text-4xl font-black text-brand-dark mb-1">{stat.value}</p>
+              <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
+                {stat.label}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Featured Properties Section */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-end mb-12">
-            <div className="space-y-2">
-              <h2 className="text-sm font-bold text-blue-600 uppercase tracking-widest">
-                Our Selection
+          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
+            <div className="space-y-4 max-w-xl">
+              <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+                Curated Selection
+              </span>
+              <h2 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight">
+                Masterpieces of <br />Mumbai Architecture
               </h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Featured Properties
-              </h3>
             </div>
             <Link
               href="/properties"
-              className="text-blue-600 font-bold flex items-center hover:underline"
+              className="premium-button-outline flex items-center gap-2"
             >
-              View All <ArrowRight className="w-5 h-5 ml-2" />
+              Explore Collection <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
 
@@ -173,94 +166,93 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Services Teaser */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="relative h-[400px] md:h-[500px]">
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-50 rounded-full z-0" />
-            <Image
-              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1000"
-              alt="Our Service"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="relative z-10 rounded-3xl shadow-2xl object-cover"
-            />
-            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl z-20">
-              <p className="text-2xl font-bold text-blue-600">30+</p>
-              <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">
-                Years Exp
-              </p>
+      {/* Investment Benefits / Why Choose Us */}
+      <section className="py-32 bg-brand-dark overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 -skew-x-12 transform translate-x-1/2" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="relative aspect-square">
+              <div className="absolute inset-4 border-2 border-brand-gold/30 rounded-[3rem] -rotate-3" />
+              <div className="absolute inset-0 bg-brand-gold/10 rounded-[3rem] rotate-3" />
+              <Image
+                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1000"
+                alt="Our Expertise"
+                fill
+                className="relative z-10 rounded-[3rem] object-cover shadow-2xl"
+              />
+              <div className="absolute -bottom-10 -right-10 glass-morphism p-10 rounded-[2rem] shadow-2xl z-20 animate-bounce-slow">
+                <p className="text-5xl font-black text-brand-gold mb-1">30+</p>
+                <p className="text-xs text-brand-dark font-bold uppercase tracking-widest">
+                  Years of Trust
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-sm font-bold text-blue-600 uppercase tracking-widest">
-                Why Choose Us
-              </h2>
-              <h3 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                We Help You Find the <br /> Right Property
-              </h3>
-            </div>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              With decades of experience in the South Mumbai real estate market,
-              we provide unparalleled expertise and personalized service for
-              buyers, sellers, and investors.
-            </p>
-            <ul className="space-y-4">
-              {[
-                "Market Analysis",
-                "Legal Documentation",
-                "Direct Negotiations",
-                "Property Management",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center text-gray-800 font-medium"
-                >
-                  <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                    <div className="w-2 h-2 rounded-full bg-blue-600" />
+
+            <div className="space-y-10">
+              <div className="space-y-6">
+                <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+                  Why Roman Estate
+                </span>
+                <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
+                  Your Strategic Partner in <br />Luxury Real Estate
+                </h3>
+                <p className="text-lg text-gray-400 leading-relaxed max-w-xl">
+                  We don't just sell properties; we build legacies. Our deep-rooted expertise 
+                  in Mumbai's micro-markets ensures your investment is both safe and prosperous.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[
+                  { title: "Market Intel", desc: "Exclusive off-market opportunities.", icon: Zap },
+                  { title: "Legal Safety", desc: "100% verified documentation.", icon: ShieldCheck },
+                  { title: "ROI Focus", desc: "Data-driven investment strategies.", icon: TrendingUp },
+                  { title: "Concierge", desc: "End-to-end property management.", icon: CheckCircle2 },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 group">
+                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-gold group-hover:border-brand-gold transition-all">
+                      <item.icon className="w-6 h-6 text-brand-gold group-hover:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold mb-1">{item.title}</h4>
+                      <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                    </div>
                   </div>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <button className="bg-gray-900 text-white px-10 py-4 rounded-2xl font-bold hover:bg-gray-800 transition-all shadow-lg">
-              Learn More About Us
-            </button>
+                ))}
+              </div>
+
+              <Link href="/contact" className="premium-button-primary inline-flex items-center gap-2 mt-4">
+                Consult an Expert <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Latest Properties Section */}
-      <section className="py-24 bg-[#fff5f0]">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="space-y-4 mb-12">
-            <h2 className="text-sm font-bold text-[#800000] tracking-widest">
-              Properties
+      {/* Latest Listings Grid */}
+      <section className="py-32 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center space-y-4 mb-20">
+            <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+              Latest Additions
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-brand-dark">
+              Newly Unveiled Properties
             </h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-gray-900 font-serif">
-              Latest Listings
-            </h3>
-            <div className="flex justify-center items-center space-x-2 text-[#800000] py-2">
-              <span>- - - - -</span>
-              <div className="w-3 h-3 border border-[#800000] rotate-45"></div>
-              <span>- - - - -</span>
-            </div>
-            <p className="text-gray-600 text-sm max-w-2xl mx-auto pt-2 leading-relaxed">
-              Explore premium residential options crafted for urban comfort and
-              luxury living. Each listing includes top-tier amenities,
-              convenient access, and thoughtfully designed spaces.
+            <p className="text-gray-500 max-w-2xl mx-auto text-lg">
+              Explore our newest listings, ranging from sleek modern penthouses 
+              to timeless heritage villas.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {latestProperties.map((property: any) => (
               <Link
                 href={`/properties/${property._id}`}
                 key={property._id}
-                className="group bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 flex flex-col rounded-sm"
+                className="premium-card group/item bg-white flex flex-col h-full"
               >
-                <div className="relative h-64 overflow-hidden bg-gray-100">
+                <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
                     src={
                       property.images && property.images.length > 0
@@ -270,73 +262,31 @@ export default async function HomePage() {
                     alt={property.title || "Property"}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover/item:scale-110 transition-transform duration-700"
                   />
-                  {/* Featured slanted ribbon */}
-                  <div className="absolute top-4 -left-8 bg-[#800000] text-white px-8 py-1 text-[10px] font-bold shadow-sm transform -rotate-45 text-center origin-center uppercase tracking-widest">
-                    Featured
-                  </div>
-                  {/* Status Box */}
-                  <div className="absolute top-2 right-2 bg-[#800000] text-white px-2 py-1 text-[10px] font-bold uppercase tracking-wider">
-                    {property.status === "For Sale"
-                      ? "Ongoing Project"
-                      : property.status || "For Sale"}
-                  </div>
-                  {/* Bottom overlay with basic stats */}
-                  <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent">
-                    <p className="text-gray-200 text-xs font-bold font-serif">
-                      {property.size || 0} SQ.FT. -{" "}
-                      {property.size ? property.size + 1000 : 0} SQ.FT.
-                    </p>
-                    <p className="text-white font-bold text-lg">
-                      {property.bedrooms || 0} BHK /{" "}
-                      {property.bedrooms ? property.bedrooms + 1 : 0} BHK
-                    </p>
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-brand-dark/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                      {property.status || "For Sale"}
+                    </span>
                   </div>
                 </div>
 
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div>
-                    <h4 className="text-lg font-bold text-gray-900 group-hover:text-[#800000] transition-colors line-clamp-1 font-serif">
-                      {property.title}
-                    </h4>
-                    <div className="flex items-center text-gray-500 text-xs mt-3">
-                      <MapPin className="w-3 h-3 mr-2 shrink-0 text-[#800000]" />
-                      <span className="line-clamp-1">
-                        {property.location?.address ||
-                          property.location?.city ||
-                          property.location?.type ||
-                          "Mumbai"}
-                      </span>
-                    </div>
+                <div className="p-8 flex-1 flex flex-col">
+                  <h4 className="text-xl font-bold text-brand-dark group-hover/item:text-brand-gold transition-colors mb-2">
+                    {property.title}
+                  </h4>
+                  <div className="flex items-center text-gray-500 text-sm mb-6">
+                    <MapPin className="w-4 h-4 mr-2 text-brand-gold shrink-0" />
+                    <span className="line-clamp-1">{property.location?.city || "Mumbai"}</span>
                   </div>
-
-                  <div className="pt-4 border-t border-gray-100 border-dashed grid grid-cols-2 gap-y-3">
-                    <div className="flex items-center text-[10px] text-gray-600">
-                      <span className="text-[#800000] mr-2 text-sm font-bold">
-                        ✓
-                      </span>
-                      <span className="truncate">Premium Amenities</span>
-                    </div>
-                    <div className="flex items-center text-[10px] text-gray-600">
-                      <span className="text-[#800000] mr-2 text-sm font-bold">
-                        ✓
-                      </span>
-                      <span className="truncate">Secure Layout</span>
-                    </div>
-                  </div>
-
-                  {/* Mock Pagination Buttons for Card Aesthetics block */}
-                  <div className="pt-4 bg-gray-50 -mx-6 -mb-6 px-6 py-4 flex justify-between items-center text-gray-400 border-t border-gray-100 border-dashed">
-                    <span className="text-gray-400 font-black text-xl hover:text-[#800000]">
-                      ◀
-                    </span>
-                    <div className="flex space-x-2">
-                      <div className="w-8 h-5 bg-gray-300"></div>
-                      <div className="w-8 h-5 bg-gray-300 opacity-0 hidden sm:block"></div>
-                    </div>
-                    <span className="text-gray-400 font-black text-xl hover:text-[#800000]">
-                      ▶
+                  
+                  <div className="mt-auto pt-6 border-t border-gray-100 flex justify-between items-center">
+                    <p className="text-xl font-black text-brand-dark">
+                      ₹{property.price?.toLocaleString()}
+                    </p>
+                    <span className="text-brand-gold font-bold text-sm flex items-center gap-1 group/btn">
+                      View Details 
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </span>
                   </div>
                 </div>
@@ -344,38 +294,111 @@ export default async function HomePage() {
             ))}
           </div>
 
-          <div className="mt-16">
+          <div className="mt-20 text-center">
             <Link
               href="/properties"
-              className="inline-block bg-[#800000] font-serif tracking-widest text-sm text-white px-8 py-3 font-bold hover:bg-red-900 transition-all"
+              className="premium-button-outline inline-flex"
             >
-              Explore All Properties
+              View All Properties
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="py-24 bg-white relative">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="space-y-4 mb-16">
-            <h3 className="text-3xl md:text-5xl font-bold text-gray-900 font-serif tracking-wide">
-              Our Partners
-            </h3>
-            <div className="flex justify-center items-center space-x-2 text-[#800000] py-2">
-              <span>- - - - -</span>
-              <div className="w-3 h-3 border border-[#800000] rotate-45"></div>
-              <span>- - - - -</span>
+      {/* Testimonials Section */}
+      <section className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-8">
+              <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+                Testimonials
+              </span>
+              <h2 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight">
+                What Our Elite <br />Clients Say
+              </h2>
+              <p className="text-lg text-gray-500 leading-relaxed">
+                We take pride in building lasting relationships. Here's how we've helped 
+                Mumbai's elite find their perfect sanctuaries.
+              </p>
+              <div className="flex gap-4">
+                <div className="flex flex-col">
+                  <span className="text-3xl font-black text-brand-dark">98%</span>
+                  <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">Client Satisfaction</span>
+                </div>
+                <div className="w-px h-10 bg-gray-200" />
+                <div className="flex flex-col">
+                  <span className="text-3xl font-black text-brand-dark">400+</span>
+                  <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">Verified Reviews</span>
+                </div>
+              </div>
             </div>
-            <p className="text-gray-900 font-medium max-w-3xl mx-auto pt-4 leading-relaxed font-serif text-lg">
-              Our success is built on trusted partnerships with industry-leading
-              collaborators.
-              <br />
-              These alliances help us deliver exceptional quality, consistent
-              reliability, and
-              <br />
-              exclusive opportunities that benefit every client.
-            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                { name: "Rajesh Malhotra", role: "CEO, Tech Corp", text: "Roman Estate's attention to detail and understanding of luxury is unparalleled in Mumbai." },
+                { name: "Priya Sharma", role: "Fashion Designer", text: "They found me a hidden gem in Bandra that wasn't even on the market. Truly exceptional service." },
+              ].map((t, i) => (
+                <div key={i} className="bg-gray-50 p-8 rounded-[2rem] space-y-6 relative group hover:bg-brand-gold transition-all duration-500">
+                  <Quote className="w-10 h-10 text-brand-gold group-hover:text-white/20 transition-colors" />
+                  <p className="text-gray-600 group-hover:text-white transition-colors leading-relaxed">"{t.text}"</p>
+                  <div>
+                    <h5 className="font-bold text-brand-dark group-hover:text-white transition-colors">{t.name}</h5>
+                    <p className="text-xs text-gray-400 group-hover:text-white/70 transition-colors">{t.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-32 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4">
+          <div className="text-center space-y-4 mb-16">
+            <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+              Common Questions
+            </span>
+            <h2 className="text-4xl font-black text-brand-dark">
+              Everything You Need to Know
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { q: "What areas of Mumbai do you specialize in?", a: "We specialize in South Mumbai, Bandra, Worli, and emerging luxury hubs in the suburbs." },
+              { q: "Do you handle RERA and legal documentation?", a: "Yes, our in-house legal team ensures every property is 100% RERA compliant and handles all paperwork." },
+              { q: "Can you help with property management for NRIs?", a: "Absolutely. We offer comprehensive property management services tailored for NRI investors." },
+            ].map((faq, i) => (
+              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-gold/30 transition-all cursor-pointer group">
+                <div className="flex justify-between items-center">
+                  <h4 className="font-bold text-brand-dark flex items-center gap-3">
+                    <HelpCircle className="w-5 h-5 text-brand-gold" />
+                    {faq.q}
+                  </h4>
+                  <Plus className="w-5 h-5 text-gray-300 group-hover:text-brand-gold transition-colors" />
+                </div>
+                <p className="mt-4 text-gray-500 text-sm leading-relaxed hidden group-hover:block animate-in fade-in slide-in-from-top-2 duration-300">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
+            <div className="space-y-4">
+              <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+                Our Network
+              </span>
+              <h2 className="text-4xl md:text-5xl font-black text-brand-dark">
+                Trusted by Industry Titans
+              </h2>
+            </div>
           </div>
 
           <PartnersCarousel partners={partners} />
