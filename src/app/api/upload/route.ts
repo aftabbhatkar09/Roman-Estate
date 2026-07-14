@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
-import { existsSync } from "fs";
 
 export const dynamic = "force-dynamic";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"];
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3 MB (base64 adds ~33% overhead, keep under MongoDB's 16MB doc limit)
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,16 +14,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No files provided" }, { status: 400 });
     }
 
-    const uploadDir = join(process.cwd(), "public", "uploads");
-
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
-    }
-
     const urls: string[] = [];
 
     for (const file of files) {
-      // Validate type
       if (!ALLOWED_TYPES.includes(file.type)) {
         return NextResponse.json(
           { error: `"${file.name}" is not a supported image type. Use JPG, PNG, WebP, or GIF.` },
@@ -34,26 +24,17 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      // Validate size
       if (file.size > MAX_FILE_SIZE) {
         return NextResponse.json(
-          { error: `"${file.name}" exceeds the 10 MB size limit.` },
+          { error: `"${file.name}" exceeds the 3 MB size limit.` },
           { status: 400 }
         );
       }
 
       const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-
-      // Build a safe, unique filename
-      const timestamp = Date.now();
-      const random = Math.random().toString(36).slice(2, 8);
-      const rawExt = file.name.split(".").pop() ?? "jpg";
-      const ext = rawExt.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 5) || "jpg";
-      const filename = `upload-${timestamp}-${random}.${ext}`;
-
-      await writeFile(join(uploadDir, filename), buffer);
-      urls.push(`/uploads/${filename}`);
+      const base64 = Buffer.from(bytes).toString("base64");
+      const dataUrl = `data:${file.type};base64,${base64}`;
+      urls.push(dataUrl);
     }
 
     return NextResponse.json({ urls });
