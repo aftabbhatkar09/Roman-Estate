@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import Image from "next/image";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export interface Partner {
@@ -97,7 +97,7 @@ export default function PartnersCarousel({
           >
             <div className="bg-white border border-gray-100 rounded-2xl p-6 h-28 flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/5 transition-all duration-500 cursor-pointer">
               <div className="relative w-full h-full">
-                <Image
+                <ImageWithFallback
                   src={partner.logo}
                   alt={partner.name || "Partner"}
                   fill

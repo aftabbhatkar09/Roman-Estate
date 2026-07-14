@@ -12,7 +12,7 @@ import {
   Square,
   ArrowRight,
 } from "lucide-react";
-import Image from "next/image";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import Link from "next/link";
 
 interface PropertiesClientProps {
@@ -227,16 +227,17 @@ export default function PropertiesClient({
                 className="premium-card group/item bg-white flex flex-col h-full"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
+                  <ImageWithFallback
                     src={
                       property.images && property.images.length > 0
                         ? property.images[0]
-                        : "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800"
+                        : null
                     }
                     alt={property.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover/item:scale-110 transition-transform duration-700"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    className="group-hover/item:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute top-5 left-5 flex gap-2">
                     <span className="glass-morphism px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-brand-dark">

@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import Image from "next/image";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import Link from "next/link";
 import { MapPin, Star, ChevronLeft, ChevronRight, BedDouble, Square, Bath } from "lucide-react";
 
@@ -91,16 +91,17 @@ export default function FeaturedCarousel({
               className="premium-card h-full group/card flex flex-col"
             >
               <div className="relative aspect-[4/3] overflow-hidden image-hover-zoom">
-                <Image
+                <ImageWithFallback
                   src={
                     property.images && property.images.length > 0
                       ? property.images[0]
-                      : "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800"
+                      : null
                   }
                   alt={property.title || "Property"}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover/card:scale-110 transition-transform duration-700"
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  className="group-hover/card:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute top-5 left-5 flex gap-2">
                   <span className="glass-morphism px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-brand-dark">

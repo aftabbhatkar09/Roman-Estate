@@ -2,6 +2,7 @@ import connectDB from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import { Calendar, User, ArrowLeft, Tag, Share2, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -47,18 +48,21 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
   return (
     <article className="bg-white min-h-screen pb-24">
       {/* Article Header/Hero */}
-      <div className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden bg-brand-dark">
-        <Image
-          src={
-            blog.image ||
-            `https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1600`
-          }
+      <div className="relative h-[55vw] max-h-[85vh] min-h-[420px] md:min-h-[520px] w-full overflow-hidden bg-brand-dark">
+        <ImageWithFallback
+          src={blog.image}
           alt={blog.title}
           fill
-          className="object-cover opacity-60"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+          style={{
+            objectFit: "cover",
+            objectPosition: "center center",
+            opacity: 0.55,
+          }}
+          quality={90}
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-brand-primary/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/35 to-brand-primary/5" />
 
         <div className="absolute bottom-0 left-0 w-full p-6 md:p-16">
           <div className="max-w-5xl mx-auto space-y-8">

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { useDeletePartnerMutation } from "@/lib/redux/slices/apiSlice";
 import DeleteModal from "@/components/DeleteModal";
@@ -102,7 +102,7 @@ export default function AdminPartnersClient({
                 >
                   <td className="px-6 py-4 flex items-center space-x-4">
                     <div className="relative w-16 h-16 bg-gray-100 rounded p-1">
-                      <Image
+                      <ImageWithFallback
                         src={partner.logo}
                         alt={partner.name}
                         fill

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { FileText, Calendar, User, ArrowRight, Search, Tag, Clock } from 'lucide-react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ImageWithFallback';
 import Link from 'next/link';
 
 interface BlogListingClientProps {
@@ -71,12 +71,13 @@ export default function BlogListingClient({ initialBlogs }: BlogListingClientPro
               className="premium-card group/item bg-white flex flex-col h-full"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
-                <Image 
-                  src={blog.image || `https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800`} 
-                  alt={blog.title} 
+                <ImageWithFallback
+                  src={blog.image}
+                  alt={blog.title}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover/item:scale-110 transition-transform duration-1000"
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  className="group-hover/item:scale-110 transition-transform duration-1000"
                 />
                 <div className="absolute top-5 left-5">
                   <span className="glass-morphism px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-brand-dark">

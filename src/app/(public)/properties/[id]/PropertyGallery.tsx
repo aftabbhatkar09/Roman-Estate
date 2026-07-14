@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import Link from "next/link";
 import { ArrowLeft, ChevronLeft, ChevronRight, X, Images, Maximize2 } from "lucide-react";
 
@@ -25,7 +25,7 @@ export default function PropertyGallery({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-[60vh] md:h-[70vh]">
         {/* Main Large Image */}
         <div className="lg:col-span-8 relative rounded-[2rem] overflow-hidden group">
-          <Image
+          <ImageWithFallback
             src={allImages[activeIdx]}
             alt={title}
             fill
@@ -83,7 +83,7 @@ export default function PropertyGallery({
                 activeIdx === i ? 'ring-2 ring-brand-primary ring-offset-2' : 'opacity-80 hover:opacity-100'
               }`}
             >
-              <Image src={img} alt={`${title} ${i + 1}`} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+              <ImageWithFallback src={img} alt={`${title} ${i + 1}`} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
               {i === 2 && allImages.length > 3 && (
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/80 to-brand-accent/80 flex flex-col items-center justify-center text-white backdrop-blur-[2px]">
                   <span className="text-3xl font-black text-white">+{allImages.length - 3}</span>
@@ -112,7 +112,7 @@ export default function PropertyGallery({
           </div>
           
           <div className="flex-1 relative flex items-center justify-center px-20">
-            <Image
+            <ImageWithFallback
               src={allImages[activeIdx]}
               alt={title}
               fill
@@ -142,7 +142,7 @@ export default function PropertyGallery({
                     i === activeIdx ? 'ring-2 ring-brand-primary scale-110 shadow-2xl' : 'opacity-40 hover:opacity-100'
                   }`}
                 >
-                  <Image src={img} alt="" fill className="object-cover" />
+                  <ImageWithFallback src={img} alt="" fill className="object-cover" />
                 </button>
               ))}
             </div>
