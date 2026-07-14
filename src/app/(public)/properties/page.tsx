@@ -11,27 +11,29 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+interface PropertiesPageProps {
+  searchParams: Promise<{ search?: string; type?: string; status?: string }>;
+}
+
 async function getProperties() {
   try {
-    // The `fetch` call is implicitly being used by Next.js when rendering this page.
-    // To ensure we get fresh data, we can re-fetch from our own API endpoint
-    // with caching disabled. This is more explicit for production environments.
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/properties`, {
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch properties");
-    }
-    const properties = await res.json();
-    return properties;
+    await connectDB();
+    const properties = await Property.find({}).sort({ createdAt: -1 }).lean();
+    return JSON.parse(JSON.stringify(properties));
   } catch (error) {
     console.error("Error fetching properties:", error);
     return [];
   }
 }
 
-export default async function PropertiesPage() {
+export default async function PropertiesPage({
+  searchParams,
+}: PropertiesPageProps) {
   const properties = await getProperties();
+  const sp = await searchParams;
+  const initialSearch = sp?.search || "";
+  const initialType = sp?.type || "All";
+  const initialStatus = sp?.status || "All";
 
   return (
     <div className="bg-gray-50 min-h-screen pb-24">
@@ -49,7 +51,12 @@ export default async function PropertiesPage() {
         </div>
       </div>
 
-      <PropertiesClient initialProperties={properties} />
+      <PropertiesClient
+        initialProperties={properties}
+        initialSearch={initialSearch}
+        initialType={initialType}
+        initialStatus={initialStatus}
+      />
     </div>
   );
 }

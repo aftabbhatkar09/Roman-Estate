@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import Image from "next/image";
+import SingleImageUpload from "@/components/SingleImageUpload";
 import {
   useCreatePartnerMutation,
   useUpdatePartnerMutation,
@@ -65,6 +65,10 @@ export default function PartnerForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.logo) {
+      setError("Please upload a partner logo.");
+      return;
+    }
     setIsLoading(true);
     setError("");
 
@@ -159,32 +163,16 @@ export default function PartnerForm() {
             </div>
 
             <div className="space-y-2 md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Logo Image URL *
-              </label>
-              <input
-                type="url"
-                name="logo"
-                required
+              <SingleImageUpload
+                label="Partner Logo *"
                 value={formData.logo}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                placeholder="https://..."
+                onChange={(url) =>
+                  setFormData((prev) => ({ ...prev, logo: url }))
+                }
+                previewClass="h-36"
+                objectFit="object-contain"
+                hint="For best results use a PNG with a transparent background."
               />
-              <p className="text-xs text-gray-500 mt-1">
-                Provide a direct link to the partner's logo image. For best
-                results, use PNGs with transparent backgrounds.
-              </p>
-              {formData.logo && (
-                <div className="mt-4 p-4 border border-gray-100 rounded bg-gray-50 flex items-center justify-center h-32 relative">
-                  <Image
-                    src={formData.logo}
-                    alt="Preview"
-                    fill
-                    className="object-contain grayscale p-2"
-                  />
-                </div>
-              )}
             </div>
 
             <div className="space-y-2">

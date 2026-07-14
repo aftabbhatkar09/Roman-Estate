@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { FileText, Calendar, User, ArrowRight, Search } from 'lucide-react';
+import { FileText, Calendar, User, ArrowRight, Search, Tag, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -17,80 +17,105 @@ export default function BlogListingClient({ initialBlogs }: BlogListingClientPro
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 mt-12">
-      {/* Search Bar */}
-      <div className="max-w-md mx-auto mb-16">
-        <div className="relative group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
-          <input 
-            type="text" 
-            placeholder="Search articles..." 
-            className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-2xl shadow-sm outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all text-gray-700 font-medium"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+    <div className="max-w-7xl mx-auto px-4 py-24">
+      {/* Header Section */}
+      <div className="text-center space-y-6 mb-20">
+        <span className="inline-block px-4 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-[10px] font-black uppercase tracking-[0.3em]">
+          Insights & Perspectives
+        </span>
+        <h1 className="text-4xl md:text-6xl font-black text-brand-dark tracking-tight leading-tight">
+          Roman Estate <span className="text-brand-gold">Journal</span>
+        </h1>
+        <p className="text-gray-500 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+          Expert analysis, market trends, and luxury lifestyle inspiration 
+          from Mumbai's premier real estate consultants.
+        </p>
+
+        {/* Search Bar */}
+        <div className="max-w-xl mx-auto pt-8">
+          <div className="relative group">
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-gold group-focus-within:scale-110 transition-transform" />
+            <input 
+              type="text" 
+              placeholder="Search the archive..." 
+              className="w-full pl-14 pr-6 py-5 bg-white border border-gray-100 rounded-3xl shadow-premium outline-none focus:border-brand-gold/30 transition-all text-brand-dark font-bold placeholder:text-gray-300"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
         </div>
       </div>
 
       {filteredBlogs.length === 0 ? (
-        <div className="bg-white p-16 rounded-3xl text-center space-y-6 border border-dashed border-gray-200 shadow-sm max-w-2xl mx-auto">
-          <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
-            <FileText className="w-12 h-12 text-gray-300" />
+        <div className="bg-white p-24 rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm max-w-3xl mx-auto">
+          <div className="w-32 h-32 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
+            <FileText className="w-16 h-16 text-gray-200" />
           </div>
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">No articles found</h3>
-            <p className="text-gray-500">We couldn't find any articles matching your search criteria.</p>
+          <div className="space-y-4">
+            <h3 className="text-3xl font-black text-brand-dark tracking-tight">No articles found</h3>
+            <p className="text-gray-400 font-medium leading-relaxed">We couldn't find any entries matching your search criteria. <br />Try searching for market trends, luxury, or South Mumbai.</p>
           </div>
           <button 
             onClick={() => setSearchTerm('')}
-            className="inline-flex items-center text-blue-600 font-bold hover:text-blue-700 transition-colors"
+            className="premium-button-primary"
           >
-            Show all articles <ArrowRight className="w-4 h-4 ml-2" />
+            Show All Articles
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {filteredBlogs.map((blog) => (
             <Link 
               href={`/blog/${blog.slug}`}
               key={blog._id} 
-              className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col transform hover:-translate-y-2"
+              className="premium-card group/item bg-white flex flex-col h-full"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative aspect-[16/10] overflow-hidden">
                 <Image 
                   src={blog.image || `https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800`} 
                   alt={blog.title} 
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="object-cover group-hover/item:scale-110 transition-transform duration-1000"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-bold text-blue-600 uppercase tracking-wider shadow-sm">
-                  {blog.tags?.[0] || 'Real Estate'}
+                <div className="absolute top-5 left-5">
+                  <span className="glass-morphism px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-brand-dark">
+                    {blog.tags?.[0] || 'Market Insights'}
+                  </span>
                 </div>
               </div>
-              <div className="p-8 flex-1 flex flex-col">
-                <div className="flex items-center space-x-4 mb-4 text-xs text-gray-400 font-bold uppercase tracking-wider">
-                  <div className="flex items-center bg-gray-50 px-3 py-1 rounded-lg">
-                    <Calendar className="w-3.5 h-3.5 mr-1.5 text-blue-500" />
+              
+              <div className="p-10 flex-1 flex flex-col">
+                <div className="flex items-center gap-6 mb-6">
+                  <div className="flex items-center text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <Calendar className="w-4 h-4 mr-2 text-brand-gold" />
                     {new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </div>
-                  <div className="flex items-center bg-gray-50 px-3 py-1 rounded-lg">
-                    <User className="w-3.5 h-3.5 mr-1.5 text-blue-500" />
-                    {blog.author}
+                  <div className="flex items-center text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <Clock className="w-4 h-4 mr-2 text-brand-gold" />
+                    5 min read
                   </div>
                 </div>
                 
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-3 line-clamp-2 leading-tight">
+                <h3 className="text-2xl font-black text-brand-dark group-hover/item:text-brand-gold transition-colors mb-4 line-clamp-2 leading-tight tracking-tight">
                   {blog.title}
                 </h3>
                 
-                <p className="text-gray-500 text-sm mb-6 line-clamp-3 leading-relaxed">
+                <p className="text-gray-500 font-medium text-sm mb-8 line-clamp-3 leading-relaxed">
                   {blog.excerpt}
                 </p>
                 
-                <div className="mt-auto pt-6 border-t border-gray-50 flex items-center text-blue-600 text-sm font-bold group-hover:translate-x-2 transition-transform duration-300">
-                  Read Article <ArrowRight className="w-4 h-4 ml-2" />
+                <div className="mt-auto pt-8 border-t border-gray-100 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-brand-gold/10 flex items-center justify-center font-black text-[10px] text-brand-gold">
+                      RE
+                    </div>
+                    <span className="text-[10px] font-black text-brand-dark uppercase tracking-widest">{blog.author}</span>
+                  </div>
+                  <span className="text-brand-gold font-bold text-xs flex items-center gap-1.5 group/btn">
+                    Read Article 
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </span>
                 </div>
               </div>
             </Link>

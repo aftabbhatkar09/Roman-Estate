@@ -1,68 +1,187 @@
-import Link from 'next/link';
-import { Mail, Phone, MapPin, Globe } from 'lucide-react';
+import Link from "next/link";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Camera,
+  Briefcase,
+  Send,
+  Video,
+  ArrowRight,
+} from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="space-y-6">
-            <Link href="/" className="text-2xl font-bold text-white">
-              Roman Estate
-            </Link>
-            <p className="text-sm leading-relaxed text-gray-400">
-              Leading property experts in Mumbai. We provide personalized real estate solutions with over 30 years of experience.
+    <footer className="bg-brand-navy text-gray-300">
+      {/* Top CTA Banner */}
+      <div className="bg-brand-gold py-16">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="text-center md:text-left">
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">
+              Ready to find your masterpiece?
+            </h3>
+            <p className="text-white/80 text-lg">
+              Explore Mumbai's most exclusive collection of premium properties.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="hover:text-white transition-colors"><Globe className="w-5 h-5" /></a>
+          </div>
+          <div className="flex gap-4 flex-wrap justify-center">
+            <Link
+              href="/properties"
+              className="bg-white text-brand-gold px-10 py-4 rounded-full font-bold hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2"
+            >
+              Browse Properties <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+          {/* Brand */}
+          <div className="space-y-8">
+            <div className="flex flex-col leading-none">
+              <span className="text-3xl font-black tracking-tight text-white">
+                ROMAN<span className="text-brand-gold">.</span>
+              </span>
+              <span className="text-[10px] font-bold text-gray-500 tracking-[0.3em] uppercase mt-1">
+                ESTATE
+              </span>
+            </div>
+            <p className="text-base leading-relaxed text-gray-400 max-w-xs">
+              Redefining luxury real estate in Mumbai for over three decades.
+              Excellence in every square foot.
+            </p>
+            <div className="flex gap-4">
+              {[
+                { icon: Camera, href: "#", label: "Instagram" },
+                { icon: Briefcase, href: "#", label: "LinkedIn" },
+                { icon: Send, href: "#", label: "Twitter" },
+                { icon: Video, href: "#", label: "YouTube" },
+              ].map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="w-10 h-10 bg-white/5 hover:bg-brand-gold rounded-full flex items-center justify-center transition-all duration-300 border border-white/10 hover:border-brand-gold text-white"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul className="space-y-4 text-sm">
-              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/properties" className="hover:text-white transition-colors">Our Properties</Link></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors">Latest Blog</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-[0.2em]">
+              Navigation
+            </h4>
+            <ul className="space-y-4">
+              {[
+                { label: "Home", href: "/" },
+                { label: "Properties", href: "/properties" },
+                { label: "Blog", href: "/blog" },
+                { label: "Contact", href: "/contact" },
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-brand-gold transition-colors flex items-center gap-2 group text-base"
+                  >
+                    <span className="w-1.5 h-1.5 bg-brand-gold rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-bold mb-6">Our Services</h4>
-            <ul className="space-y-4 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">Property Consulting</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Buying & Selling</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Rentals & Leasing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Documentation Support</a></li>
+            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-[0.2em]">
+              Expertise
+            </h4>
+            <ul className="space-y-4">
+              {[
+                "Luxury Consulting",
+                "Property Acquisition",
+                "Portfolio Management",
+                "Legal Advisory",
+                "Market Intelligence",
+              ].map((s) => (
+                <li
+                  key={s}
+                  className="text-gray-400 flex items-center gap-2 text-base"
+                >
+                  <span className="w-1.5 h-1.5 bg-brand-gold/30 rounded-full" />
+                  {s}
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-white font-bold mb-6">Get in Touch</h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-start">
-                <MapPin className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                <span>Opera House, Charni Road, Mumbai, Maharashtra 400004</span>
+            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-[0.2em]">
+              Get in Touch
+            </h4>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                  <MapPin className="w-5 h-5 text-brand-gold" />
+                </div>
+                <span className="text-gray-400 text-base leading-relaxed">
+                  Opera House, Charni Road,
+                  <br />
+                  Mumbai, Maharashtra 400004
+                </span>
               </li>
-              <li className="flex items-center">
-                <Phone className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                <span>+91 98765 43210</span>
+              <li>
+                <a
+                  href="tel:+919876543210"
+                  className="flex items-center gap-4 group transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-brand-gold group-hover:bg-brand-gold/10 transition-all">
+                    <Phone className="w-5 h-5 text-brand-gold" />
+                  </div>
+                  <span className="text-gray-400 group-hover:text-white text-base">
+                    +91 98765 43210
+                  </span>
+                </a>
               </li>
-              <li className="flex items-center">
-                <Mail className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                <span>info@romanestate.com</span>
+              <li>
+                <a
+                  href="mailto:info@romanestate.com"
+                  className="flex items-center gap-4 group transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-brand-gold group-hover:bg-brand-gold/10 transition-all">
+                    <Mail className="w-5 h-5 text-brand-gold" />
+                  </div>
+                  <span className="text-gray-400 group-hover:text-white text-base">
+                    info@romanestate.com
+                  </span>
+                </a>
               </li>
             </ul>
           </div>
         </div>
-        
-        <div className="border-t border-gray-800 mt-16 pt-8 text-sm text-center text-gray-500">
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
           <p>© {new Date().getFullYear()} Roman Estate. All rights reserved.</p>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-white transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              Terms of Service
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              RERA Compliance
+            </a>
+          </div>
         </div>
       </div>
     </footer>

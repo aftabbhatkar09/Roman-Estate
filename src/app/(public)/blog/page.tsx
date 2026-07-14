@@ -14,7 +14,9 @@ export const dynamic = "force-dynamic";
 async function getBlogs() {
   try {
     await connectDB();
-    const blogs = await Blog.find({}).sort({ createdAt: -1 }).lean();
+    const blogs = await Blog.find({ published: true })
+      .sort({ createdAt: -1 })
+      .lean();
     return JSON.parse(JSON.stringify(blogs));
   } catch (error) {
     console.error("Error fetching blogs:", error);
