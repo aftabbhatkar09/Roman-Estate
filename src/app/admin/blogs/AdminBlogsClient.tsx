@@ -22,7 +22,7 @@ export default function AdminBlogsClient({ initialBlogs }: AdminBlogsClientProps
 
   const handleDelete = async () => {
     if (!selectedBlog) return;
-    
+
     try {
       await deleteBlog(selectedBlog._id).unwrap();
       setBlogs(blogs.filter(b => b._id !== selectedBlog._id));
@@ -36,25 +36,25 @@ export default function AdminBlogsClient({ initialBlogs }: AdminBlogsClientProps
 
   return (
     <div className="space-y-6">
-      <DeleteModal 
+      <DeleteModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleDelete}
         title={selectedBlog?.title || ''}
       />
-      
+
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-800">Manage Blogs</h2>
-        <Link 
-          href="/admin/blogs/new" 
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-700 transition-colors"
+        <Link
+          href="/admin/blogs/new"
+          className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 font-medium text-sm"
         >
           <Plus className="w-5 h-5 mr-2" />
           Add New Post
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <table className="w-full text-left">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
@@ -93,13 +93,13 @@ export default function AdminBlogsClient({ initialBlogs }: AdminBlogsClientProps
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right space-x-2">
-                    <Link 
+                    <Link
                       href={`/admin/blogs/${blog._id}`}
-                      className="inline-flex p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      className="inline-flex p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
                     >
                       <Edit className="w-5 h-5" />
                     </Link>
-                    <button 
+                    <button
                       onClick={() => openDeleteModal(blog)}
                       className="inline-flex p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                     >

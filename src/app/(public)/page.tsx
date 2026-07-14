@@ -80,30 +80,31 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-brand-navy">
+      <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-brand-dark">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/60 via-brand-navy/40 to-brand-navy/90 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/30 via-brand-dark/80 to-brand-accent/20 z-10" />
           <Image
             src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=2000"
             alt="Luxury Mumbai Home"
             fill
             sizes="100vw"
-            className="object-cover scale-105 animate-pulse-slow"
+            className="object-cover scale-105"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent z-10" />
         </div>
 
         <div className="relative z-20 max-w-7xl mx-auto px-4 text-center text-white space-y-12 py-20">
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
-            <span className="inline-block px-4 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-brand-gold text-xs font-bold uppercase tracking-[0.3em]">
-              Mumbai's Premier Real Estate
+            <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white text-xs font-bold uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
+              Mumbai&apos;s Premier Real Estate
             </span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
               Elevating Your <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold">Lifestyle Experience</span>
+              <span className="gradient-text">Lifestyle Experience</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed">
-              Discover a curated collection of Mumbai's most exclusive properties, 
+              Discover a curated collection of Mumbai&apos;s most exclusive properties, 
               crafted for those who demand nothing less than perfection.
             </p>
           </div>
@@ -115,8 +116,8 @@ export default async function HomePage() {
         
         {/* Scroll Indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2">
-          <div className="w-px h-12 bg-gradient-to-b from-brand-gold to-transparent" />
-          <span className="text-[10px] text-brand-gold uppercase tracking-[0.3em] font-bold rotate-90 origin-left mt-8">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-brand-primary to-transparent" />
+          <span className="text-[10px] text-brand-primary-light uppercase tracking-[0.3em] font-bold rotate-90 origin-left mt-8">Scroll</span>
         </div>
       </section>
 
@@ -130,8 +131,8 @@ export default async function HomePage() {
             { label: "Global Reach", value: "15+", icon: Globe },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col items-center text-center group">
-              <div className="w-12 h-12 rounded-2xl bg-brand-gold/10 flex items-center justify-center mb-4 group-hover:bg-brand-gold group-hover:rotate-6 transition-all duration-300">
-                <stat.icon className="w-6 h-6 text-brand-gold group-hover:text-white transition-colors" />
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-4 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:rotate-6 transition-all duration-300">
+                <stat.icon className="w-6 h-6 text-brand-primary group-hover:text-white transition-colors" />
               </div>
               <p className="text-4xl font-black text-brand-dark mb-1">{stat.value}</p>
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
@@ -147,7 +148,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
             <div className="space-y-4 max-w-xl">
-              <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+              <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                 Curated Selection
               </span>
               <h2 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight">
@@ -168,20 +169,20 @@ export default async function HomePage() {
 
       {/* Investment Benefits / Why Choose Us */}
       <section className="py-32 bg-brand-dark overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 -skew-x-12 transform translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-primary/5 to-transparent -skew-x-12 transform translate-x-1/2" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="relative aspect-square">
-              <div className="absolute inset-4 border-2 border-brand-gold/30 rounded-[3rem] -rotate-3" />
-              <div className="absolute inset-0 bg-brand-gold/10 rounded-[3rem] rotate-3" />
+              <div className="absolute inset-4 border-2 border-brand-primary/30 rounded-[3rem] -rotate-3" />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-[3rem] rotate-3" />
               <Image
                 src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1000"
                 alt="Our Expertise"
                 fill
                 className="relative z-10 rounded-[3rem] object-cover shadow-2xl"
               />
-              <div className="absolute -bottom-10 -right-10 glass-morphism p-10 rounded-[2rem] shadow-2xl z-20 animate-bounce-slow">
-                <p className="text-5xl font-black text-brand-gold mb-1">30+</p>
+              <div className="absolute -bottom-10 -right-10 glass-morphism p-10 rounded-[2rem] shadow-2xl z-20">
+                <p className="text-5xl font-black gradient-text mb-1">30+</p>
                 <p className="text-xs text-brand-dark font-bold uppercase tracking-widest">
                   Years of Trust
                 </p>
@@ -190,15 +191,15 @@ export default async function HomePage() {
 
             <div className="space-y-10">
               <div className="space-y-6">
-                <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+                <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                   Why Roman Estate
                 </span>
                 <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
                   Your Strategic Partner in <br />Luxury Real Estate
                 </h3>
                 <p className="text-lg text-gray-400 leading-relaxed max-w-xl">
-                  We don't just sell properties; we build legacies. Our deep-rooted expertise 
-                  in Mumbai's micro-markets ensures your investment is both safe and prosperous.
+                  We don&apos;t just sell properties; we build legacies. Our deep-rooted expertise 
+                  in Mumbai&apos;s micro-markets ensures your investment is both safe and prosperous.
                 </p>
               </div>
 
@@ -210,8 +211,8 @@ export default async function HomePage() {
                   { title: "Concierge", desc: "End-to-end property management.", icon: CheckCircle2 },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 group">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-gold group-hover:border-brand-gold transition-all">
-                      <item.icon className="w-6 h-6 text-brand-gold group-hover:text-white transition-colors" />
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 flex items-center justify-center shrink-0 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:border-transparent transition-all">
+                      <item.icon className="w-6 h-6 text-brand-primary-light group-hover:text-white transition-colors" />
                     </div>
                     <div>
                       <h4 className="text-white font-bold mb-1">{item.title}</h4>
@@ -233,7 +234,7 @@ export default async function HomePage() {
       <section className="py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center space-y-4 mb-20">
-            <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+            <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
               Latest Additions
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-brand-dark">
@@ -264,6 +265,7 @@ export default async function HomePage() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover/item:scale-110 transition-transform duration-700"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500" />
                   <div className="absolute top-4 right-4">
                     <span className="bg-brand-dark/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
                       {property.status || "For Sale"}
@@ -272,11 +274,11 @@ export default async function HomePage() {
                 </div>
 
                 <div className="p-8 flex-1 flex flex-col">
-                  <h4 className="text-xl font-bold text-brand-dark group-hover/item:text-brand-gold transition-colors mb-2">
+                  <h4 className="text-xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors mb-2">
                     {property.title}
                   </h4>
                   <div className="flex items-center text-gray-500 text-sm mb-6">
-                    <MapPin className="w-4 h-4 mr-2 text-brand-gold shrink-0" />
+                    <MapPin className="w-4 h-4 mr-2 text-brand-primary shrink-0" />
                     <span className="line-clamp-1">{property.location?.city || "Mumbai"}</span>
                   </div>
                   
@@ -284,7 +286,7 @@ export default async function HomePage() {
                     <p className="text-xl font-black text-brand-dark">
                       ₹{property.price?.toLocaleString()}
                     </p>
-                    <span className="text-brand-gold font-bold text-sm flex items-center gap-1 group/btn">
+                    <span className="text-brand-primary font-bold text-sm flex items-center gap-1 group/btn">
                       View Details 
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </span>
@@ -310,15 +312,15 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-8">
-              <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+              <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                 Testimonials
               </span>
               <h2 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight">
                 What Our Elite <br />Clients Say
               </h2>
               <p className="text-lg text-gray-500 leading-relaxed">
-                We take pride in building lasting relationships. Here's how we've helped 
-                Mumbai's elite find their perfect sanctuaries.
+                We take pride in building lasting relationships. Here&apos;s how we&apos;ve helped 
+                Mumbai&apos;s elite find their perfect sanctuaries.
               </p>
               <div className="flex gap-4">
                 <div className="flex flex-col">
@@ -338,9 +340,9 @@ export default async function HomePage() {
                 { name: "Rajesh Malhotra", role: "CEO, Tech Corp", text: "Roman Estate's attention to detail and understanding of luxury is unparalleled in Mumbai." },
                 { name: "Priya Sharma", role: "Fashion Designer", text: "They found me a hidden gem in Bandra that wasn't even on the market. Truly exceptional service." },
               ].map((t, i) => (
-                <div key={i} className="bg-gray-50 p-8 rounded-[2rem] space-y-6 relative group hover:bg-brand-gold transition-all duration-500">
-                  <Quote className="w-10 h-10 text-brand-gold group-hover:text-white/20 transition-colors" />
-                  <p className="text-gray-600 group-hover:text-white transition-colors leading-relaxed">"{t.text}"</p>
+                <div key={i} className="bg-gray-50 p-8 rounded-[2rem] space-y-6 relative group bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent transition-all duration-500 cursor-default">
+                  <Quote className="w-10 h-10 text-brand-primary group-hover:text-white/30 transition-colors" />
+                  <p className="text-gray-600 group-hover:text-white transition-colors leading-relaxed">&ldquo;{t.text}&rdquo;</p>
                   <div>
                     <h5 className="font-bold text-brand-dark group-hover:text-white transition-colors">{t.name}</h5>
                     <p className="text-xs text-gray-400 group-hover:text-white/70 transition-colors">{t.role}</p>
@@ -356,7 +358,7 @@ export default async function HomePage() {
       <section className="py-32 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
-            <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+            <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
               Common Questions
             </span>
             <h2 className="text-4xl font-black text-brand-dark">
@@ -370,13 +372,13 @@ export default async function HomePage() {
               { q: "Do you handle RERA and legal documentation?", a: "Yes, our in-house legal team ensures every property is 100% RERA compliant and handles all paperwork." },
               { q: "Can you help with property management for NRIs?", a: "Absolutely. We offer comprehensive property management services tailored for NRI investors." },
             ].map((faq, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-gold/30 transition-all cursor-pointer group">
+              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-primary/30 transition-all cursor-pointer group shadow-sm hover:shadow-md">
                 <div className="flex justify-between items-center">
                   <h4 className="font-bold text-brand-dark flex items-center gap-3">
-                    <HelpCircle className="w-5 h-5 text-brand-gold" />
+                    <HelpCircle className="w-5 h-5 text-brand-primary" />
                     {faq.q}
                   </h4>
-                  <Plus className="w-5 h-5 text-gray-300 group-hover:text-brand-gold transition-colors" />
+                  <Plus className="w-5 h-5 text-gray-300 group-hover:text-brand-primary transition-colors" />
                 </div>
                 <p className="mt-4 text-gray-500 text-sm leading-relaxed hidden group-hover:block animate-in fade-in slide-in-from-top-2 duration-300">
                   {faq.a}
@@ -392,7 +394,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
             <div className="space-y-4">
-              <span className="text-brand-gold text-sm font-bold uppercase tracking-[0.3em]">
+              <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                 Our Network
               </span>
               <h2 className="text-4xl md:text-5xl font-black text-brand-dark">

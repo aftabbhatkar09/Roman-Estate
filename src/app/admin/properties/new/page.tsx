@@ -7,7 +7,7 @@ import { useCreatePropertyMutation } from "@/lib/redux/slices/apiSlice";
 import ImageUrlManager from "@/components/ImageUrlManager";
 
 const FIELD_CLASS =
-  "w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm";
+  "w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-sm";
 const LABEL_CLASS = "block text-sm font-semibold text-gray-700 mb-1.5";
 const SECTION_CLASS =
   "bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-6";
@@ -94,7 +94,7 @@ export default function NewProperty() {
         <button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="bg-blue-600 text-white px-6 py-2.5 rounded-lg flex items-center hover:bg-blue-700 disabled:bg-blue-300 transition-colors font-medium"
+          className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 disabled:opacity-50 transition-all shadow-lg shadow-indigo-500/20 font-medium"
         >
           <Save className="w-5 h-5 mr-2" />
           {isLoading ? "Saving..." : "Save Property"}
@@ -108,7 +108,6 @@ export default function NewProperty() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Basic Information */}
         <div className={SECTION_CLASS}>
           <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
             Basic Information
@@ -188,7 +187,7 @@ export default function NewProperty() {
                     featured: e.target.checked,
                   }))
                 }
-                className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                className="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
               />
               <label
                 htmlFor="featured"
@@ -203,7 +202,6 @@ export default function NewProperty() {
           </div>
         </div>
 
-        {/* Location */}
         <div className={SECTION_CLASS}>
           <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
             Location Details
@@ -247,7 +245,6 @@ export default function NewProperty() {
           </div>
         </div>
 
-        {/* Features */}
         <div className={SECTION_CLASS}>
           <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
             Features & Details
@@ -308,7 +305,6 @@ export default function NewProperty() {
           </div>
         </div>
 
-        {/* Images */}
         <div className={SECTION_CLASS}>
           <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
             Property Images

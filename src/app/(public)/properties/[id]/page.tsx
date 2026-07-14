@@ -68,14 +68,14 @@ export default async function PropertyDetailPage({
             <div className="flex flex-col md:flex-row justify-between items-start gap-8 border-b border-gray-100 pb-12">
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-3">
-                  <span className="bg-brand-gold/10 text-brand-gold px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-brand-gold/20">
+                  <span className="bg-gradient-to-r from-brand-primary/10 to-brand-accent/10 text-brand-primary px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-brand-primary/20">
                     {property.type}
                   </span>
-                  <span className="bg-brand-navy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+                  <span className="bg-brand-dark text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
                     {property.status}
                   </span>
                   {property.featured && (
-                    <span className="bg-white border border-brand-gold text-brand-gold px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
+                    <span className="bg-white border border-brand-primary text-brand-primary px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
                       Premium Selection
                     </span>
                   )}
@@ -84,8 +84,8 @@ export default async function PropertyDetailPage({
                   {property.title}
                 </h1>
                 <div className="flex items-center text-gray-500 font-medium">
-                  <div className="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center mr-4 shrink-0">
-                    <MapPin className="w-5 h-5 text-brand-gold" />
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mr-4 shrink-0">
+                    <MapPin className="w-5 h-5 text-brand-primary" />
                   </div>
                   <span className="text-lg">
                     {property.location.address}, {property.location.area},{" "}
@@ -94,12 +94,12 @@ export default async function PropertyDetailPage({
                 </div>
               </div>
 
-              <div className="bg-brand-navy p-10 rounded-[2.5rem] shadow-2xl text-center md:text-right min-w-[280px] relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-brand-gold/10 rounded-full -mr-12 -mt-12 transition-transform duration-700 group-hover:scale-150" />
+              <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light p-10 rounded-[2.5rem] shadow-2xl text-center md:text-right min-w-[280px] relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 rounded-full -mr-12 -mt-12 transition-transform duration-700 group-hover:scale-150" />
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-2 relative z-10">
                   Valuation
                 </p>
-                <p className="text-4xl font-black text-brand-gold relative z-10">
+                <p className="text-4xl font-black gradient-text relative z-10">
                   ₹{property.price.toLocaleString("en-IN")}
                 </p>
               </div>
@@ -134,10 +134,10 @@ export default async function PropertyDetailPage({
               ].map((spec, i) => (
                 <div
                   key={i}
-                  className="bg-gray-50/50 p-8 rounded-[2rem] border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-premium transition-all duration-500"
+                  className="bg-gray-50/50 p-8 rounded-[2rem] border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-card transition-all duration-500"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                    <spec.icon className="w-6 h-6 text-brand-gold" />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-6 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                    <spec.icon className="w-6 h-6 text-brand-primary group-hover:text-white" />
                   </div>
                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
                     {spec.label}
@@ -152,7 +152,7 @@ export default async function PropertyDetailPage({
             {/* Description */}
             <div className="space-y-8">
               <div className="flex items-center gap-4">
-                <div className="w-1.5 h-10 bg-brand-gold rounded-full" />
+                <div className="w-1.5 h-10 bg-gradient-to-b from-brand-primary to-brand-accent rounded-full" />
                 <h2 className="text-3xl font-black text-brand-dark tracking-tight">
                   Overview
                 </h2>
@@ -172,7 +172,7 @@ export default async function PropertyDetailPage({
             {property.amenities && property.amenities.length > 0 && (
               <div className="space-y-10">
                 <div className="flex items-center gap-4">
-                  <div className="w-1.5 h-10 bg-brand-gold rounded-full" />
+                  <div className="w-1.5 h-10 bg-gradient-to-b from-brand-primary to-brand-accent rounded-full" />
                   <h2 className="text-3xl font-black text-brand-dark tracking-tight">
                     Exclusive Features
                   </h2>
@@ -181,10 +181,10 @@ export default async function PropertyDetailPage({
                   {property.amenities.map((amenity: string, i: number) => (
                     <div
                       key={i}
-                      className="flex items-center p-5 bg-white rounded-2xl border border-gray-100 group hover:border-brand-gold/30 hover:shadow-premium transition-all duration-500"
+                      className="flex items-center p-5 bg-white rounded-2xl border border-gray-100 group hover:border-brand-primary/30 hover:shadow-card transition-all duration-500"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-brand-gold/10 flex items-center justify-center mr-4 shrink-0 group-hover:bg-brand-gold transition-colors">
-                        <CheckCircle2 className="w-5 h-5 text-brand-gold group-hover:text-white" />
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mr-4 shrink-0 group-hover:from-brand-primary group-hover:to-brand-accent transition-colors">
+                        <CheckCircle2 className="w-5 h-5 text-brand-primary group-hover:text-white" />
                       </div>
                       <span className="font-bold text-brand-dark">
                         {amenity}
@@ -198,8 +198,8 @@ export default async function PropertyDetailPage({
 
           {/* Right Column: Sidebar */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="bg-brand-navy rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden group sticky top-28">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-brand-gold/10 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
+            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden group sticky top-28">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
 
               <div className="relative z-10 space-y-8">
                 <div>
@@ -215,9 +215,9 @@ export default async function PropertyDetailPage({
                 <div className="space-y-4">
                   <a
                     href="tel:+919876543210"
-                    className="w-full bg-brand-gold hover:bg-brand-gold-dark text-white py-5 rounded-2xl font-black text-lg flex items-center justify-center transition-all shadow-xl shadow-brand-gold/20 active:scale-95 group/call"
+                    className="w-full premium-button-primary py-5 text-lg flex items-center justify-center group/call"
                   >
-                    <Phone className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform" />{" "}
+                    <Phone className="w-5 h-5 mr-3 group-hover/call:rotate-12 transition-transform" />{" "}
                     Contact Agent
                   </a>
                   <Link
@@ -229,14 +229,14 @@ export default async function PropertyDetailPage({
                 </div>
 
                 <div className="pt-8 border-t border-white/10 flex items-center gap-5">
-                  <div className="w-16 h-16 rounded-2xl bg-brand-gold flex items-center justify-center font-black text-2xl shadow-xl">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center font-black text-2xl shadow-xl">
                     RE
                   </div>
                   <div>
                     <p className="font-black text-xl tracking-tight">
                       Roman Estate
                     </p>
-                    <p className="text-xs text-brand-gold font-bold flex items-center gap-2 mt-1 uppercase tracking-widest">
+                    <p className="text-xs text-brand-primary-light font-bold flex items-center gap-2 mt-1 uppercase tracking-widest">
                       <ShieldCheck className="w-4 h-4" />
                       Elite Advisor
                     </p>
@@ -245,10 +245,10 @@ export default async function PropertyDetailPage({
               </div>
             </div>
 
-            <div className="bg-brand-gold/5 p-10 rounded-[3rem] border border-brand-gold/10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-brand-gold/5 rounded-full -mr-10 -mt-10" />
+            <div className="bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 p-10 rounded-[3rem] border border-brand-primary/10 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 rounded-full -mr-10 -mt-10" />
               <h4 className="font-black text-brand-dark mb-4 flex items-center gap-3">
-                <TrendingUp className="w-5 h-5 text-brand-gold" />
+                <TrendingUp className="w-5 h-5 text-brand-primary" />
                 Market Insight
               </h4>
               <p className="text-gray-600 text-sm leading-relaxed font-medium">

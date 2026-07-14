@@ -71,13 +71,13 @@ export default function PartnersCarousel({
       <div className="absolute -top-16 right-0 flex gap-2">
         <button
           onClick={() => scroll("left")}
-          className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all duration-300"
+          className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
         <button
           onClick={() => scroll("right")}
-          className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all duration-300"
+          className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
@@ -95,7 +95,7 @@ export default function PartnersCarousel({
             key={partner._id}
             className="min-w-[180px] md:min-w-[220px] snap-center shrink-0"
           >
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 h-28 flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-brand-gold/20 hover:shadow-xl hover:shadow-brand-gold/5 transition-all duration-500 cursor-pointer">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 h-28 flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/5 transition-all duration-500 cursor-pointer">
               <div className="relative w-full h-full">
                 <Image
                   src={partner.logo}
@@ -114,9 +114,9 @@ export default function PartnersCarousel({
         {partners.map((_, index) => (
           <button
             key={index}
-            className={`h-1 rounded-full transition-all duration-500 ${
+            className={`h-1.5 rounded-full transition-all duration-500 ${
               activeIndex === index
-                ? "w-8 bg-brand-gold"
+                ? "w-8 bg-gradient-to-r from-brand-primary to-brand-accent"
                 : "w-2 bg-gray-200"
             }`}
             aria-label={`Go to partner slide ${index + 1}`}

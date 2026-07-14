@@ -33,7 +33,7 @@ export default function PropertyGallery({
             className="object-cover transition-transform duration-1000 group-hover:scale-105"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/50 via-transparent to-brand-dark/10" />
           
           {/* Back Button */}
           <div className="absolute top-6 left-6 z-20">
@@ -41,7 +41,7 @@ export default function PropertyGallery({
               href="/properties"
               className="glass-morphism px-5 py-2.5 rounded-2xl font-bold hover:bg-white transition-all flex items-center gap-2 text-sm shadow-xl"
             >
-              <ArrowLeft className="w-4 h-4 text-brand-gold" /> 
+              <ArrowLeft className="w-4 h-4 text-brand-primary" /> 
               <span className="text-brand-dark">Return to Collection</span>
             </Link>
           </div>
@@ -53,13 +53,13 @@ export default function PropertyGallery({
                 onClick={prev}
                 className="w-12 h-12 rounded-full glass-morphism flex items-center justify-center hover:bg-white transition-all shadow-xl group/btn"
               >
-                <ChevronLeft className="w-6 h-6 text-brand-dark group-hover/btn:text-brand-gold" />
+                <ChevronLeft className="w-6 h-6 text-brand-dark group-hover/btn:text-brand-primary" />
               </button>
               <button
                 onClick={next}
                 className="w-12 h-12 rounded-full glass-morphism flex items-center justify-center hover:bg-white transition-all shadow-xl group/btn"
               >
-                <ChevronRight className="w-6 h-6 text-brand-dark group-hover/btn:text-brand-gold" />
+                <ChevronRight className="w-6 h-6 text-brand-dark group-hover/btn:text-brand-primary" />
               </button>
             </div>
           )}
@@ -68,7 +68,7 @@ export default function PropertyGallery({
             onClick={() => setLightboxOpen(true)}
             className="absolute bottom-8 left-8 glass-morphism px-6 py-3 rounded-2xl font-bold text-sm hover:bg-white transition-all shadow-xl flex items-center gap-2 text-brand-dark"
           >
-            <Maximize2 className="w-4 h-4 text-brand-gold" />
+            <Maximize2 className="w-4 h-4 text-brand-primary" />
             Expand Gallery
           </button>
         </div>
@@ -80,13 +80,13 @@ export default function PropertyGallery({
               key={i}
               onClick={() => setActiveIdx(i)}
               className={`relative flex-1 rounded-[1.5rem] overflow-hidden group transition-all duration-500 ${
-                activeIdx === i ? 'ring-2 ring-brand-gold' : 'opacity-80 hover:opacity-100'
+                activeIdx === i ? 'ring-2 ring-brand-primary ring-offset-2' : 'opacity-80 hover:opacity-100'
               }`}
             >
               <Image src={img} alt={`${title} ${i + 1}`} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
               {i === 2 && allImages.length > 3 && (
-                <div className="absolute inset-0 bg-brand-dark/60 flex flex-col items-center justify-center text-white backdrop-blur-[2px]">
-                  <span className="text-3xl font-black text-brand-gold">+{allImages.length - 3}</span>
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/80 to-brand-accent/80 flex flex-col items-center justify-center text-white backdrop-blur-[2px]">
+                  <span className="text-3xl font-black text-white">+{allImages.length - 3}</span>
                   <span className="text-[10px] font-black uppercase tracking-[0.2em]">More Photos</span>
                 </div>
               )}
@@ -97,11 +97,11 @@ export default function PropertyGallery({
 
       {/* Lightbox */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-[100] bg-brand-navy flex flex-col">
+        <div className="fixed inset-0 z-[100] bg-brand-dark flex flex-col">
           <div className="flex items-center justify-between px-8 py-6">
             <div className="flex flex-col">
               <span className="text-white font-black text-lg tracking-tight">{title}</span>
-              <span className="text-brand-gold text-xs font-bold uppercase tracking-widest">{activeIdx + 1} of {allImages.length} Photos</span>
+              <span className="gradient-text text-xs font-bold uppercase tracking-widest">{activeIdx + 1} of {allImages.length} Photos</span>
             </div>
             <button 
               onClick={() => setLightboxOpen(false)} 
@@ -120,13 +120,13 @@ export default function PropertyGallery({
             />
             <button 
               onClick={prev} 
-              className="absolute left-8 w-16 h-16 rounded-full bg-white/5 hover:bg-brand-gold flex items-center justify-center text-white transition-all border border-white/10"
+              className="absolute left-8 w-16 h-16 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center text-white transition-all border border-white/10"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
             <button 
               onClick={next} 
-              className="absolute right-8 w-16 h-16 rounded-full bg-white/5 hover:bg-brand-gold flex items-center justify-center text-white transition-all border border-white/10"
+              className="absolute right-8 w-16 h-16 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center text-white transition-all border border-white/10"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
@@ -139,7 +139,7 @@ export default function PropertyGallery({
                   key={i}
                   onClick={() => setActiveIdx(i)}
                   className={`relative w-24 h-16 rounded-xl overflow-hidden transition-all duration-300 ${
-                    i === activeIdx ? 'ring-2 ring-brand-gold scale-110 shadow-2xl' : 'opacity-40 hover:opacity-100'
+                    i === activeIdx ? 'ring-2 ring-brand-primary scale-110 shadow-2xl' : 'opacity-40 hover:opacity-100'
                   }`}
                 >
                   <Image src={img} alt="" fill className="object-cover" />

@@ -11,13 +11,13 @@ const STATUS_OPTIONS = ["New", "In Progress", "Resolved"] as const;
 type Status = (typeof STATUS_OPTIONS)[number];
 
 const STATUS_STYLES: Record<Status, string> = {
-  New: "bg-blue-100 text-blue-700",
+  New: "bg-indigo-100 text-indigo-700",
   "In Progress": "bg-orange-100 text-orange-700",
   Resolved: "bg-green-100 text-green-700",
 };
 
 const BORDER_STYLES: Record<Status, string> = {
-  New: "bg-blue-500",
+  New: "bg-indigo-500",
   "In Progress": "bg-orange-500",
   Resolved: "bg-green-500",
 };
@@ -123,7 +123,7 @@ export default function AdminInquiriesClient({
                 <div className="flex flex-col md:flex-row justify-between gap-8">
                   <div className="space-y-6 flex-1">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center font-bold text-blue-600 border border-gray-100 text-lg">
+                      <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center font-bold text-indigo-600 border border-indigo-100 text-lg">
                         {inquiry.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
@@ -131,7 +131,7 @@ export default function AdminInquiriesClient({
                           {inquiry.name}
                         </h3>
                         <div className="flex items-center text-gray-400 text-xs font-bold uppercase tracking-wider mt-1">
-                          <Calendar className="w-3.5 h-3.5 mr-1.5 text-blue-500" />
+                          <Calendar className="w-3.5 h-3.5 mr-1.5 text-indigo-500" />
                           {new Date(inquiry.createdAt).toLocaleString()}
                         </div>
                       </div>
@@ -139,21 +139,21 @@ export default function AdminInquiriesClient({
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="flex items-center text-gray-600 bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
-                        <Mail className="w-4 h-4 mr-3 text-blue-500" />
+                        <Mail className="w-4 h-4 mr-3 text-indigo-500" />
                         <span className="text-sm font-medium">
                           {inquiry.email}
                         </span>
                       </div>
                       <div className="flex items-center text-gray-600 bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
-                        <Phone className="w-4 h-4 mr-3 text-blue-500" />
+                        <Phone className="w-4 h-4 mr-3 text-indigo-500" />
                         <span className="text-sm font-medium">
                           {inquiry.phone}
                         </span>
                       </div>
                     </div>
 
-                    <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100/50">
-                      <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-3 flex items-center">
+                    <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100/50">
+                      <p className="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-3 flex items-center">
                         <MessageSquare className="w-3 h-3 mr-2" /> Message
                       </p>
                       <p className="text-gray-700 leading-relaxed italic">
@@ -184,7 +184,7 @@ export default function AdminInquiriesClient({
                       ))}
                       <a
                         href={`mailto:${inquiry.email}`}
-                        className="block w-full text-center bg-gray-900 text-white py-3 rounded-xl text-sm font-bold hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/10 active:scale-95"
+                        className="block w-full text-center bg-gradient-to-r from-[#0f172a] to-[#1e293b] text-white py-3 rounded-xl text-sm font-bold hover:from-[#1e293b] hover:to-[#0f172a] transition-all shadow-lg shadow-gray-900/10 active:scale-95"
                       >
                         Reply by Email
                       </a>

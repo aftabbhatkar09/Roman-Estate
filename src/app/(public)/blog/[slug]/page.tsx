@@ -44,9 +44,10 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
 
   if (!blog) notFound();
 
-  return (    <article className="bg-white min-h-screen pb-24">
+  return (
+    <article className="bg-white min-h-screen pb-24">
       {/* Article Header/Hero */}
-      <div className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden bg-brand-navy">
+      <div className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden bg-brand-dark">
         <Image
           src={
             blog.image ||
@@ -57,7 +58,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
           className="object-cover opacity-60"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-brand-primary/10" />
 
         <div className="absolute bottom-0 left-0 w-full p-6 md:p-16">
           <div className="max-w-5xl mx-auto space-y-8">
@@ -65,7 +66,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
               href="/blog"
               className="glass-morphism px-6 py-2.5 rounded-2xl font-black text-brand-dark hover:bg-white transition-all inline-flex items-center gap-2 text-xs shadow-xl"
             >
-              <ArrowLeft className="w-4 h-4 text-brand-gold" /> Journal Archive
+              <ArrowLeft className="w-4 h-4 text-brand-primary" /> Journal Archive
             </Link>
 
             <div className="space-y-6">
@@ -73,7 +74,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
                 {blog.tags?.map((tag: string) => (
                   <span
                     key={tag}
-                    className="bg-brand-gold text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg"
+                    className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-primary/30"
                   >
                     {tag}
                   </span>
@@ -86,7 +87,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
 
               <div className="flex flex-wrap items-center gap-8 pt-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-brand-gold flex items-center justify-center font-black text-white text-lg shadow-xl">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center font-black text-white text-lg shadow-xl">
                     {blog.author.charAt(0)}
                   </div>
                   <div>
@@ -99,7 +100,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
 
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-brand-gold" />
+                    <Calendar className="w-5 h-5 text-brand-primary-light" />
                   </div>
                   <div>
                     <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em]">Published</p>
@@ -121,7 +122,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
       {/* Article Content */}
       <div className="max-w-7xl mx-auto px-4 mt-24 flex flex-col lg:flex-row gap-20">
         <div className="lg:w-2/3">
-          <div className="prose prose-xl max-w-none text-gray-500 font-medium leading-relaxed prose-headings:text-brand-dark prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-gold prose-strong:text-brand-dark prose-blockquote:border-brand-gold prose-blockquote:bg-gray-50 prose-blockquote:p-8 prose-blockquote:rounded-3xl prose-blockquote:italic prose-blockquote:font-bold prose-blockquote:text-brand-dark">
+          <div className="prose prose-xl max-w-none text-gray-500 font-medium leading-relaxed prose-headings:text-brand-dark prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-primary prose-strong:text-brand-dark prose-blockquote:border-brand-primary prose-blockquote:bg-gray-50 prose-blockquote:p-8 prose-blockquote:rounded-3xl prose-blockquote:italic prose-blockquote:font-bold prose-blockquote:text-brand-dark">
             {blog.content.split("\n").map((para: string, i: number) =>
               para.trim() ? (
                 <p key={i} className="mb-8">
@@ -143,7 +144,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
               {['Facebook', 'Twitter', 'LinkedIn'].map((social, i) => (
                 <button
                   key={i}
-                  className="px-6 py-3 rounded-2xl border border-gray-100 font-black text-xs uppercase tracking-widest text-brand-dark hover:bg-brand-gold hover:text-white hover:border-brand-gold transition-all duration-300"
+                  className="px-6 py-3 rounded-2xl border border-gray-100 font-black text-xs uppercase tracking-widest text-brand-dark hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent hover:text-white hover:border-transparent transition-all duration-300"
                 >
                   {social}
                 </button>
@@ -156,7 +157,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
         <aside className="lg:w-1/3 space-y-12">
           <div className="bg-gray-50 p-10 rounded-[3rem] border border-gray-100 space-y-8">
             <div className="flex items-center gap-3">
-              <Tag className="w-5 h-5 text-brand-gold" />
+              <Tag className="w-5 h-5 text-brand-primary" />
               <h4 className="text-xl font-black text-brand-dark tracking-tight">Curated Topics</h4>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -169,7 +170,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="px-5 py-2.5 bg-white border border-gray-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-gray-400 hover:border-brand-gold hover:text-brand-gold cursor-pointer transition-all shadow-sm"
+                  className="px-5 py-2.5 bg-white border border-gray-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-gray-400 hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-all shadow-sm"
                 >
                   {tag}
                 </span>
@@ -177,8 +178,8 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
             </div>
           </div>
 
-          <div className="bg-brand-navy p-12 rounded-[3.5rem] text-white shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-brand-gold/10 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
+          <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light p-12 rounded-[3.5rem] text-white shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
             <div className="relative z-10 space-y-8">
               <div className="space-y-4">
                 <h4 className="text-3xl font-black leading-tight tracking-tight">
@@ -205,9 +206,9 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-1000"
              />
-             <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/20 to-transparent" />
+             <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent" />
              <div className="absolute bottom-0 left-0 w-full p-10 space-y-4">
-                <span className="text-brand-gold text-[10px] font-black uppercase tracking-[0.3em]">Featured Offering</span>
+                <span className="text-brand-primary-light text-[10px] font-black uppercase tracking-[0.3em]">Featured Offering</span>
                 <h5 className="text-2xl font-black text-white tracking-tight">Penthouse at Worli Skyline</h5>
                 <Link href="/properties" className="text-white font-bold text-xs flex items-center gap-2 group/link">
                   View Masterpiece <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />

@@ -28,8 +28,6 @@ export default function ImageUrlManager({
   const [showUrlInput, setShowUrlInput] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // ── Upload helpers ──────────────────────────────────────────────────────────
-
   const uploadFiles = async (fileList: FileList | File[]) => {
     const files = Array.from(fileList);
     if (files.length === 0) return;
@@ -58,10 +56,8 @@ export default function ImageUrlManager({
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) uploadFiles(e.target.files);
-    e.target.value = ""; // allow re-selecting the same file
+    e.target.value = "";
   };
-
-  // ── Drag-and-drop ───────────────────────────────────────────────────────────
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -69,7 +65,6 @@ export default function ImageUrlManager({
   }, []);
 
   const handleDragLeave = useCallback((e: React.DragEvent) => {
-    // Only trigger when leaving the drop zone entirely
     if (!e.currentTarget.contains(e.relatedTarget as Node)) {
       setIsDragging(false);
     }
@@ -84,8 +79,6 @@ export default function ImageUrlManager({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [images],
   );
-
-  // ── URL input ───────────────────────────────────────────────────────────────
 
   const addUrl = () => {
     const url = urlInput.trim();
@@ -103,8 +96,6 @@ export default function ImageUrlManager({
     setUrlError("");
   };
 
-  // ── Image management ────────────────────────────────────────────────────────
-
   const removeImage = (idx: number) =>
     onChange(images.filter((_, i) => i !== idx));
 
@@ -116,15 +107,14 @@ export default function ImageUrlManager({
 
   return (
     <div className="space-y-5">
-      {/* ── Drop Zone ── */}
       <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={`relative rounded-2xl border-2 border-dashed transition-all duration-200 ${
           isDragging
-            ? "border-blue-500 bg-blue-50 scale-[1.01]"
-            : "border-gray-200 bg-gray-50 hover:border-blue-400 hover:bg-blue-50/40"
+            ? "border-indigo-500 bg-indigo-50 scale-[1.01]"
+            : "border-gray-200 bg-gray-50 hover:border-indigo-400 hover:bg-indigo-50/40"
         }`}
       >
         <input
@@ -138,17 +128,17 @@ export default function ImageUrlManager({
 
         {uploading ? (
           <div className="flex flex-col items-center justify-center gap-3 py-10">
-            <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
-            <p className="text-sm font-semibold text-blue-600">
+            <Loader2 className="w-10 h-10 text-indigo-500 animate-spin" />
+            <p className="text-sm font-semibold text-indigo-600">
               Uploading images…
             </p>
           </div>
         ) : isDragging ? (
           <div className="flex flex-col items-center justify-center gap-3 py-10 pointer-events-none">
-            <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center">
-              <Upload className="w-8 h-8 text-blue-500" />
+            <div className="w-16 h-16 rounded-2xl bg-indigo-100 flex items-center justify-center">
+              <Upload className="w-8 h-8 text-indigo-500" />
             </div>
-            <p className="text-base font-bold text-blue-600">
+            <p className="text-base font-bold text-indigo-600">
               Drop images here
             </p>
           </div>
@@ -168,7 +158,7 @@ export default function ImageUrlManager({
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-colors shadow-sm shadow-blue-600/20"
+              className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-sm shadow-indigo-500/20"
             >
               <Upload className="w-4 h-4" />
               Choose Files from Device
@@ -177,7 +167,6 @@ export default function ImageUrlManager({
         )}
       </div>
 
-      {/* ── Upload Error ── */}
       {uploadError && (
         <div className="flex items-start gap-2 bg-red-50 border border-red-100 text-red-700 px-4 py-3 rounded-xl text-sm font-medium">
           <X className="w-4 h-4 mt-0.5 shrink-0" />
@@ -185,7 +174,6 @@ export default function ImageUrlManager({
         </div>
       )}
 
-      {/* ── URL Input Toggle ── */}
       <div>
         <button
           type="button"
@@ -193,7 +181,7 @@ export default function ImageUrlManager({
             setShowUrlInput((v) => !v);
             setUrlError("");
           }}
-          className="flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-blue-600 transition-colors"
+          className="flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-indigo-600 transition-colors"
         >
           <LinkIcon className="w-3.5 h-3.5" />
           {showUrlInput ? "Hide URL input" : "Or add image by URL instead"}
@@ -218,7 +206,7 @@ export default function ImageUrlManager({
                     }
                   }}
                   placeholder="https://example.com/image.jpg"
-                  className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm"
+                  className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-sm"
                 />
               </div>
               <button
@@ -236,7 +224,6 @@ export default function ImageUrlManager({
         )}
       </div>
 
-      {/* ── Image Preview Grid ── */}
       {images.length > 0 && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
@@ -253,7 +240,7 @@ export default function ImageUrlManager({
               <div
                 key={`${url}-${idx}`}
                 className="relative group rounded-xl overflow-hidden border-2 bg-gray-100 aspect-video transition-all duration-200 hover:shadow-lg"
-                style={{ borderColor: idx === 0 ? "#3b82f6" : "transparent" }}
+                style={{ borderColor: idx === 0 ? "#6366f1" : "transparent" }}
               >
                 <Image
                   src={url}
@@ -267,21 +254,19 @@ export default function ImageUrlManager({
                   }}
                 />
 
-                {/* Primary badge */}
                 {idx === 0 && (
-                  <div className="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow">
+                  <div className="absolute top-2 left-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow">
                     <Star className="w-2.5 h-2.5 fill-current" /> Primary
                   </div>
                 )}
 
-                {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                   {idx !== 0 && (
                     <button
                       type="button"
                       onClick={() => moveToFirst(idx)}
                       title="Set as primary"
-                      className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors shadow-lg"
+                      className="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg transition-colors shadow-lg"
                     >
                       <Star className="w-3.5 h-3.5" />
                     </button>
@@ -298,11 +283,10 @@ export default function ImageUrlManager({
               </div>
             ))}
 
-            {/* Add more button */}
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="aspect-video rounded-xl border-2 border-dashed border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-blue-500"
+              className="aspect-video rounded-xl border-2 border-dashed border-gray-200 hover:border-indigo-400 hover:bg-indigo-50 transition-all flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-indigo-500"
             >
               <Plus className="w-6 h-6" />
               <span className="text-xs font-medium">Add More</span>
@@ -310,8 +294,8 @@ export default function ImageUrlManager({
           </div>
 
           <p className="text-xs text-gray-400 flex items-center gap-1.5">
-            <Star className="w-3 h-3 text-blue-500 fill-current" />
-            The first (blue-bordered) image is the primary display image. Hover
+            <Star className="w-3 h-3 text-indigo-500 fill-current" />
+            The first (indigo-bordered) image is the primary display image. Hover
             to change.
           </p>
         </div>

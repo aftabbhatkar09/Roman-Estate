@@ -27,10 +27,6 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         <StoreProvider>{children}</StoreProvider>
-        <script
-          src="https://revochat.io/api/chatbot/widget?id=6a33d61873f80d672dc37b9b"
-          defer
-        ></script>
       </body>
     </html>
   );

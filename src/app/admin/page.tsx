@@ -52,25 +52,25 @@ export default async function AdminDashboard() {
       name: "Total Properties",
       value: data.propertyCount,
       icon: Home,
-      color: "bg-blue-500",
+      gradient: "from-indigo-500 to-indigo-600",
     },
     {
       name: "Total Blogs",
       value: data.blogCount,
       icon: FileText,
-      color: "bg-green-500",
+      gradient: "from-cyan-500 to-cyan-600",
     },
     {
       name: "New Inquiries",
       value: data.inquiryCount,
       icon: MessageSquare,
-      color: "bg-purple-500",
+      gradient: "from-purple-500 to-purple-600",
     },
     {
       name: "Total Visits",
       value: "0",
       icon: TrendingUp,
-      color: "bg-orange-500",
+      gradient: "from-indigo-400 to-cyan-500",
     },
   ];
 
@@ -80,9 +80,9 @@ export default async function AdminDashboard() {
         {stats.map((stat) => (
           <div
             key={stat.name}
-            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center"
+            className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:shadow-md transition-shadow"
           >
-            <div className={`p-4 rounded-lg ${stat.color} text-white mr-4`}>
+            <div className={`p-4 rounded-xl bg-gradient-to-br ${stat.gradient} text-white mr-4 shadow-lg shadow-indigo-500/10`}>
               <stat.icon className="w-6 h-6" />
             </div>
             <div>
@@ -94,15 +94,14 @@ export default async function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Recent Inquiries */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
             <h3 className="font-bold text-gray-800">Recent Inquiries</h3>
             <Link
               href="/admin/inquiries"
-              className="text-sm text-blue-600 hover:underline"
+              className="text-sm text-indigo-600 hover:text-indigo-700 font-medium transition-colors"
             >
-              View All
+              View All →
             </Link>
           </div>
           <div className="p-6">
@@ -128,17 +127,16 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        {/* Recently Added Properties */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
             <h3 className="font-bold text-gray-800">
               Recently Added Properties
             </h3>
             <Link
               href="/admin/properties"
-              className="text-sm text-blue-600 hover:underline"
+              className="text-sm text-indigo-600 hover:text-indigo-700 font-medium transition-colors"
             >
-              View All
+              View All →
             </Link>
           </div>
           <div className="p-6">
@@ -162,7 +160,7 @@ export default async function AdminDashboard() {
                         {property.price.toLocaleString("en-IN")}
                       </p>
                     </div>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 uppercase">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 uppercase">
                       {property.status}
                     </span>
                   </li>

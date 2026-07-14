@@ -117,7 +117,7 @@ export default function PartnerForm() {
         <button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg flex items-center hover:bg-blue-700 transition-colors disabled:bg-blue-400"
+          className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 disabled:opacity-50"
         >
           <Save className="w-5 h-5 mr-2" />
           {isLoading ? "Saving..." : "Save Partner"}
@@ -143,7 +143,7 @@ export default function PartnerForm() {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
                 placeholder="e.g. Godrej Properties"
               />
             </div>
@@ -157,7 +157,7 @@ export default function PartnerForm() {
                 name="website"
                 value={formData.website}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
                 placeholder="https://..."
               />
             </div>
@@ -184,7 +184,7 @@ export default function PartnerForm() {
                 name="order"
                 value={formData.order}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
               />
               <p className="text-xs text-gray-500">
                 Lower numbers appear first. Use 0 for default.
@@ -198,7 +198,7 @@ export default function PartnerForm() {
                 id="active"
                 checked={formData.active}
                 onChange={handleChange}
-                className="w-5 h-5 text-blue-600 rounded mr-3"
+                className="w-5 h-5 text-indigo-600 rounded mr-3 focus:ring-indigo-500"
               />
               <label
                 htmlFor="active"

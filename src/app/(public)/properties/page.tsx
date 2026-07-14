@@ -39,10 +39,10 @@ export default async function PropertiesPage({
     <div className="bg-gray-50 min-h-screen pb-24">
       {/* Header */}
       <div className="bg-white border-b border-gray-100 py-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-50/50 -skew-x-12 translate-x-24" />
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-primary/5 to-transparent -skew-x-12 translate-x-24" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <h1 className="text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
-            Properties for <span className="text-blue-600">Sale & Rent</span>
+            Properties for <span className="gradient-text">Sale & Rent</span>
           </h1>
           <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
             Discover your next investment or dream home in the heart of Mumbai.

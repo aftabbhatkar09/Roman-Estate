@@ -73,10 +73,10 @@ export default function PropertiesClient({
     <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col lg:flex-row gap-12">
       {/* Sidebar Filters */}
       <aside className="w-full lg:w-80 shrink-0 space-y-6">
-        <div className="bg-white p-8 rounded-[2rem] shadow-premium border border-gray-100 space-y-8 sticky top-28">
+        <div className="bg-white p-8 rounded-[2rem] shadow-card border border-gray-100 space-y-8 sticky top-28">
           <div className="flex items-center justify-between">
             <div className="flex items-center text-brand-dark font-black text-xl tracking-tight">
-              <SlidersHorizontal className="w-5 h-5 mr-3 text-brand-gold" />
+              <SlidersHorizontal className="w-5 h-5 mr-3 text-brand-primary" />
               Refine Search
             </div>
           </div>
@@ -87,11 +87,11 @@ export default function PropertiesClient({
               Location or Project
             </label>
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-gold" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-primary" />
               <input
                 type="text"
                 placeholder="Where would you like to live?"
-                className="w-full pl-11 pr-4 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:border-brand-gold/30 transition-all font-medium"
+                className="w-full pl-11 pr-4 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
                 value={filter.search}
                 onChange={(e) =>
                   setFilter({ ...filter, search: e.target.value })
@@ -112,8 +112,8 @@ export default function PropertiesClient({
                   onClick={() => setFilter({ ...filter, type: t })}
                   className={`px-4 py-3 rounded-xl text-xs font-bold transition-all border ${
                     filter.type === t
-                      ? "bg-brand-dark text-white border-brand-dark shadow-lg"
-                      : "border-gray-100 text-gray-500 hover:border-brand-gold/50 hover:text-brand-gold bg-gray-50/50"
+                      ? "bg-gradient-to-r from-brand-primary to-brand-accent text-white border-transparent shadow-lg shadow-brand-primary/20"
+                      : "border-gray-100 text-gray-500 hover:border-brand-primary/50 hover:text-brand-primary bg-gray-50/50"
                   }`}
                 >
                   {t}
@@ -134,7 +134,7 @@ export default function PropertiesClient({
                   onClick={() => setFilter({ ...filter, status })}
                   className={`w-full text-left px-5 py-3.5 rounded-xl text-sm font-bold transition-all ${
                     filter.status === status
-                      ? "bg-brand-gold text-white shadow-lg shadow-brand-gold/20"
+                      ? "bg-gradient-to-r from-brand-primary to-brand-accent text-white shadow-lg shadow-brand-primary/20"
                       : "text-gray-500 hover:bg-gray-100 bg-gray-50/50"
                   }`}
                 >
@@ -157,7 +157,7 @@ export default function PropertiesClient({
                 onChange={(e) =>
                   setFilter({ ...filter, minPrice: e.target.value })
                 }
-                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-gold/30 transition-all font-medium"
+                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
               />
               <input
                 type="number"
@@ -166,7 +166,7 @@ export default function PropertiesClient({
                 onChange={(e) =>
                   setFilter({ ...filter, maxPrice: e.target.value })
                 }
-                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-gold/30 transition-all font-medium"
+                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
               />
             </div>
           </div>
@@ -192,7 +192,7 @@ export default function PropertiesClient({
             </h2>
             <p className="text-gray-400 text-sm font-medium mt-1">
               Showing{" "}
-              <span className="text-brand-gold font-bold">
+              <span className="text-brand-primary font-bold">
                 {filteredProperties.length}
               </span>{" "}
               exclusive listings in Mumbai
@@ -202,7 +202,7 @@ export default function PropertiesClient({
 
         {filteredProperties.length === 0 ? (
           <div className="bg-white p-20 rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm">
-            <div className="w-32 h-32 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
+            <div className="w-32 h-32 bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 rounded-full flex items-center justify-center mx-auto">
               <Search className="w-16 h-16 text-gray-200" />
             </div>
             <div className="max-w-md mx-auto">
@@ -210,7 +210,7 @@ export default function PropertiesClient({
                 No matching properties
               </h3>
               <p className="text-gray-400 font-medium leading-relaxed">
-                We couldn't find any listings matching your current criteria.
+                We couldn&apos;t find any listings matching your current criteria.
                 Try broadening your search or resetting the filters.
               </p>
             </div>
@@ -243,13 +243,13 @@ export default function PropertiesClient({
                       {property.type}
                     </span>
                     {property.featured && (
-                      <span className="bg-brand-gold text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                      <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
                         Featured
                       </span>
                     )}
                   </div>
                   <div className="absolute bottom-5 left-5">
-                    <span className="bg-brand-gold text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg">
+                    <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg shadow-brand-primary/30">
                       ₹{property.price?.toLocaleString()}
                     </span>
                   </div>
@@ -262,15 +262,15 @@ export default function PropertiesClient({
 
                 <div className="p-8 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2 text-brand-gold text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                    <div className="flex items-center gap-2 text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-2">
                       <Star className="w-3 h-3 fill-current" />
                       Premium Listing
                     </div>
-                    <h4 className="text-2xl font-bold text-brand-dark group-hover/item:text-brand-gold transition-colors line-clamp-1 mb-2">
+                    <h4 className="text-2xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors line-clamp-1 mb-2">
                       {property.title}
                     </h4>
                     <div className="flex items-center text-gray-500 text-sm mb-6">
-                      <MapPin className="w-4 h-4 mr-1.5 text-brand-gold shrink-0" />
+                      <MapPin className="w-4 h-4 mr-1.5 text-brand-primary shrink-0" />
                       <span className="line-clamp-1">
                         {property.location?.address ||
                           property.location?.city ||
@@ -283,26 +283,26 @@ export default function PropertiesClient({
                   <div className="pt-6 border-t border-gray-100 flex justify-between items-center">
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-1.5 text-gray-600">
-                        <BedDouble className="w-4 h-4 text-brand-gold" />
+                        <BedDouble className="w-4 h-4 text-brand-primary" />
                         <span className="text-sm font-semibold">
                           {property.bedrooms || 0}
                         </span>
                       </div>
                       <div className="flex items-center gap-1.5 text-gray-600">
-                        <Bath className="w-4 h-4 text-brand-gold" />
+                        <Bath className="w-4 h-4 text-brand-primary" />
                         <span className="text-sm font-semibold">
                           {property.bathrooms || 2}
                         </span>
                       </div>
                       <div className="flex items-center gap-1.5 text-gray-600">
-                        <Square className="w-4 h-4 text-brand-gold" />
+                        <Square className="w-4 h-4 text-brand-primary" />
                         <span className="text-sm font-semibold">
                           {property.size || 0}{" "}
                           <span className="text-[10px] uppercase">Sq.Ft</span>
                         </span>
                       </div>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-gray-300 group-hover/item:text-brand-gold group-hover/item:translate-x-1 transition-all" />
+                    <ArrowRight className="w-5 h-5 text-gray-300 group-hover/item:text-brand-primary group-hover/item:translate-x-1 transition-all" />
                   </div>
                 </div>
               </Link>

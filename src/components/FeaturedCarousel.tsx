@@ -59,18 +59,18 @@ export default function FeaturedCarousel({
   return (
     <div className="relative group">
       {/* Navigation Buttons */}
-      <div className="absolute -top-20 right-0 flex gap-3">
+      <div className="absolute -top-16 right-0 flex gap-3">
         <button
           onClick={() => scroll("left")}
-          className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all duration-300"
+          className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-5 h-5" />
         </button>
         <button
           onClick={() => scroll("right")}
-          className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all duration-300"
+          className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-5 h-5" />
         </button>
       </div>
 
@@ -90,7 +90,7 @@ export default function FeaturedCarousel({
               href={`/properties/${property._id}`}
               className="premium-card h-full group/card flex flex-col"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[4/3] overflow-hidden image-hover-zoom">
                 <Image
                   src={
                     property.images && property.images.length > 0
@@ -108,7 +108,7 @@ export default function FeaturedCarousel({
                   </span>
                 </div>
                 <div className="absolute bottom-5 left-5">
-                  <span className="bg-brand-gold text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg">
+                  <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg">
                     ₹{property.price?.toLocaleString()}
                   </span>
                 </div>
@@ -121,15 +121,15 @@ export default function FeaturedCarousel({
 
               <div className="p-8 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 text-brand-gold text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                  <div className="flex items-center gap-2 text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-2">
                     <Star className="w-3 h-3 fill-current" />
                     Premium Collection
                   </div>
-                  <h4 className="text-2xl font-bold text-brand-dark group-hover/card:text-brand-gold transition-colors line-clamp-1 mb-2">
+                  <h4 className="text-2xl font-bold text-brand-dark group-hover/card:text-brand-primary transition-colors line-clamp-1 mb-2">
                     {property.title}
                   </h4>
                   <div className="flex items-center text-gray-500 text-sm mb-6">
-                    <MapPin className="w-4 h-4 mr-1.5 text-brand-gold shrink-0" />
+                    <MapPin className="w-4 h-4 mr-1.5 text-brand-primary shrink-0" />
                     <span className="line-clamp-1">
                       {property.location?.address ||
                         property.location?.city ||
@@ -142,15 +142,15 @@ export default function FeaturedCarousel({
                 <div className="pt-6 border-t border-gray-100 flex justify-between items-center">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1.5 text-gray-600">
-                      <BedDouble className="w-4 h-4 text-brand-gold" />
+                      <BedDouble className="w-4 h-4 text-brand-primary" />
                       <span className="text-sm font-semibold">{property.bedrooms || 0}</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-gray-600">
-                      <Bath className="w-4 h-4 text-brand-gold" />
+                      <Bath className="w-4 h-4 text-brand-primary" />
                       <span className="text-sm font-semibold">{property.bathrooms || 2}</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-gray-600">
-                      <Square className="w-4 h-4 text-brand-gold" />
+                      <Square className="w-4 h-4 text-brand-primary" />
                       <span className="text-sm font-semibold">{property.size || 0} <span className="text-[10px] uppercase">Sq.Ft</span></span>
                     </div>
                   </div>
@@ -166,9 +166,9 @@ export default function FeaturedCarousel({
         {properties.map((_, index) => (
           <button
             key={index}
-            className={`h-1 rounded-full transition-all duration-500 ${
+            className={`h-1.5 rounded-full transition-all duration-500 ${
               activeIndex === index
-                ? "w-12 bg-brand-gold"
+                ? "w-12 bg-gradient-to-r from-brand-primary to-brand-accent"
                 : "w-4 bg-gray-200 hover:bg-gray-300"
             }`}
             aria-label={`Go to slide ${index + 1}`}

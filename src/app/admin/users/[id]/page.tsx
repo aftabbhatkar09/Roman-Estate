@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Save, Loader2, Eye, EyeOff } from "lucide-react";
 
-const FIELD = "w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm";
+const FIELD = "w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-sm";
 const LABEL = "block text-sm font-semibold text-gray-700 mb-1.5";
 const CARD  = "bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-6";
 
@@ -52,7 +52,7 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
     }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><Loader2 className="w-8 h-8 animate-spin text-indigo-600" /></div>;
 
   return (
     <div className="max-w-xl mx-auto space-y-6 pb-12">
@@ -67,7 +67,7 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
           </div>
         </div>
         <button onClick={handleSubmit} disabled={saving}
-          className="bg-blue-600 text-white px-6 py-2.5 rounded-lg flex items-center hover:bg-blue-700 disabled:bg-blue-300 transition-colors font-medium text-sm">
+          className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 disabled:opacity-50 transition-all shadow-lg shadow-indigo-500/20 font-medium text-sm">
           <Save className="w-4 h-4 mr-2" />
           {saving ? "Saving…" : "Update User"}
         </button>
@@ -108,7 +108,7 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
         <div className="flex items-center gap-3">
           <input type="checkbox" id="active" checked={form.active}
             onChange={(e) => set("active", e.target.checked)}
-            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+            className="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
           <label htmlFor="active" className="text-sm font-semibold text-gray-700">
             Active <span className="text-gray-400 font-normal">(inactive users cannot log in)</span>
           </label>

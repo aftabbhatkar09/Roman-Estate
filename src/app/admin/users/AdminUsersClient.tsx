@@ -42,7 +42,6 @@ export default function AdminUsersClient({
   const [deleting, setDeleting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Sync local state whenever the server re-fetches (e.g. after router.refresh())
   useEffect(() => {
     startTransition(() => setUsers(initialUsers));
   }, [initialUsers]);
@@ -106,7 +105,6 @@ export default function AdminUsersClient({
         title={deleteModal.user?.name ?? ""}
       />
 
-      {/* Error banner */}
       {errorMsg && (
         <div className="flex items-center justify-between gap-3 bg-red-50 border border-red-100 text-red-700 px-4 py-3 rounded-xl text-sm font-medium">
           <div className="flex items-center gap-2">
@@ -131,14 +129,14 @@ export default function AdminUsersClient({
         </div>
         <Link
           href="/admin/users/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-700 transition-colors font-medium text-sm"
+          className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 font-medium text-sm"
         >
           <Plus className="w-5 h-5 mr-2" />
           Add User
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <table className="w-full text-left">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
@@ -177,7 +175,7 @@ export default function AdminUsersClient({
                 >
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
                         {user.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
@@ -192,8 +190,8 @@ export default function AdminUsersClient({
                     <span
                       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${
                         user.role === "super_admin"
-                          ? "bg-[#800000]/10 text-[#800000]"
-                          : "bg-blue-50 text-blue-700"
+                          ? "bg-indigo-50 text-indigo-700"
+                          : "bg-cyan-50 text-cyan-700"
                       }`}
                     >
                       {user.role === "super_admin" ? (
@@ -236,7 +234,7 @@ export default function AdminUsersClient({
                   <td className="px-6 py-4 text-right space-x-1">
                     <Link
                       href={`/admin/users/${user._id}`}
-                      className="inline-flex p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      className="inline-flex p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
                     >
                       <Edit className="w-4 h-4" />
                     </Link>

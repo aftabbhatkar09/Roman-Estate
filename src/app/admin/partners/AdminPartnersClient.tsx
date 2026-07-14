@@ -59,14 +59,14 @@ export default function AdminPartnersClient({
         <h2 className="text-2xl font-bold text-gray-800">Manage Partners</h2>
         <Link
           href="/admin/partners/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-700 transition-colors"
+          className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 font-medium text-sm"
         >
           <Plus className="w-5 h-5 mr-2" />
           Add New Partner
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <table className="w-full text-left">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
@@ -117,7 +117,7 @@ export default function AdminPartnersClient({
                         href={partner.website}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-xs text-blue-500 hover:underline"
+                        className="text-xs text-indigo-500 hover:underline"
                       >
                         {partner.website}
                       </a>
@@ -140,7 +140,7 @@ export default function AdminPartnersClient({
                   <td className="px-6 py-4 text-right space-x-2">
                     <Link
                       href={`/admin/partners/${partner._id}`}
-                      className="inline-flex p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      className="inline-flex p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
                     >
                       <Edit className="w-5 h-5" />
                     </Link>

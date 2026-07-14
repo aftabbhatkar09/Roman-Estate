@@ -51,11 +51,10 @@ function SidebarContent({
 
   return (
     <>
-      {/* Logo */}
       <div className="p-6 border-b border-gray-100 shrink-0">
         <div className="flex flex-col leading-none">
           <span className="text-2xl font-black tracking-tight text-gray-900" style={{ fontFamily: "Georgia, serif" }}>
-            Roman<span className="text-[#800000]">.</span>
+            Roman<span className="text-[#6366f1]">.</span>
           </span>
           <span className="text-[9px] font-bold text-gray-400 tracking-[0.25em] uppercase mt-0.5">
             Admin Panel
@@ -63,12 +62,11 @@ function SidebarContent({
         </div>
       </div>
 
-      {/* Role badge */}
       <div className="px-4 pt-4 pb-2 shrink-0">
         <div className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold ${
           role === "super_admin"
-            ? "bg-[#800000]/10 text-[#800000]"
-            : "bg-blue-50 text-blue-700"
+            ? "bg-indigo-50 text-indigo-700"
+            : "bg-cyan-50 text-cyan-700"
         }`}>
           {role === "super_admin"
             ? <ShieldCheck className="w-3.5 h-3.5" />
@@ -78,7 +76,6 @@ function SidebarContent({
         </div>
       </div>
 
-      {/* Nav */}
       <nav className="flex-1 px-4 py-2 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
           const isActive = item.href === "/admin"
@@ -92,7 +89,7 @@ function SidebarContent({
               onClick={onClose}
               className={`flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-all ${
                 isActive
-                  ? "bg-[#800000] text-white shadow-lg shadow-[#800000]/20"
+                  ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25"
                   : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
               }`}
             >
@@ -103,7 +100,6 @@ function SidebarContent({
         })}
       </nav>
 
-      {/* Bottom: user info + logout */}
       <div className="p-4 border-t border-gray-100 shrink-0 space-y-1">
         <div className="px-4 py-2">
           <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Signed in as</p>
@@ -154,8 +150,7 @@ export default function AdminLayoutClient({
     )?.name ?? "Admin";
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Desktop sidebar */}
+    <div className="flex min-h-screen bg-[#fafbfc]">
       <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col shrink-0">
         <SidebarContent
           pathname={pathname}
@@ -166,12 +161,11 @@ export default function AdminLayoutClient({
         />
       </aside>
 
-      {/* Mobile sidebar overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 md:hidden" onClick={() => setMobileOpen(false)}>
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
           <aside
-            className="absolute left-0 top-0 h-full w-72 bg-white flex flex-col shadow-2xl"
+            className="absolute left-0 top-0 h-full w-72 bg-white flex flex-col shadow-2xl animate-in slide-in-from-left duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             <SidebarContent
@@ -186,9 +180,7 @@ export default function AdminLayoutClient({
         </div>
       )}
 
-      {/* Main content */}
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        {/* Header */}
         <header className="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 md:px-8 shrink-0">
           <div className="flex items-center gap-3">
             <button
@@ -200,7 +192,6 @@ export default function AdminLayoutClient({
             <h1 className="text-lg font-bold text-gray-900">{currentPage}</h1>
           </div>
 
-          {/* Avatar dropdown */}
           <div className="relative">
             <button
               onClick={() => setDropdownOpen((v) => !v)}
@@ -209,7 +200,7 @@ export default function AdminLayoutClient({
               <span className="text-sm font-medium text-gray-600 hidden sm:block">
                 {role === "super_admin" ? "Super Admin" : "Administrator"}
               </span>
-              <div className="w-8 h-8 rounded-full bg-[#800000] flex items-center justify-center text-white font-bold text-sm shadow-sm shrink-0">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm shrink-0">
                 {email.charAt(0).toUpperCase()}
               </div>
             </button>
@@ -223,8 +214,8 @@ export default function AdminLayoutClient({
                     <p className="text-sm font-semibold text-gray-900 truncate mt-0.5">{email}</p>
                     <span className={`inline-block mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full ${
                       role === "super_admin"
-                        ? "bg-[#800000]/10 text-[#800000]"
-                        : "bg-blue-50 text-blue-700"
+                        ? "bg-indigo-50 text-indigo-700"
+                        : "bg-cyan-50 text-cyan-700"
                     }`}>
                       {role === "super_admin" ? "Super Admin" : "Admin"}
                     </span>
