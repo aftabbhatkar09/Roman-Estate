@@ -114,7 +114,7 @@ export default function AdminInquiriesClient({
             return (
               <div
                 key={inquiry._id}
-                className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+                className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
               >
                 <div
                   className={`absolute left-0 top-0 w-1.5 h-full ${BORDER_STYLES[status]}`}
@@ -132,7 +132,7 @@ export default function AdminInquiriesClient({
                         </h3>
                         <div className="flex items-center text-gray-400 text-xs font-bold uppercase tracking-wider mt-1">
                           <Calendar className="w-3.5 h-3.5 mr-1.5 text-indigo-500" />
-                          {new Date(inquiry.createdAt).toLocaleString()}
+                          {new Date(inquiry.createdAt).toLocaleString('en-IN')}
                         </div>
                       </div>
                     </div>
@@ -162,7 +162,7 @@ export default function AdminInquiriesClient({
                     </div>
                   </div>
 
-                  <div className="md:w-52 flex flex-col justify-between items-end gap-4">
+                  <div className="w-full md:w-52 flex flex-col justify-between items-end gap-4">
                     <div
                       className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${STATUS_STYLES[status]}`}
                     >

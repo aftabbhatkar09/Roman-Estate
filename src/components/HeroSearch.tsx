@@ -22,7 +22,7 @@ export default function HeroSearch() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="glass-morphism p-2.5 rounded-[2rem] shadow-2xl shadow-brand-primary/10 flex flex-col md:flex-row items-center gap-2">
-        <div className="flex-1 w-full flex items-center px-6 py-4 rounded-[1.5rem] hover:bg-white/50 transition-colors">
+        <div className="flex-1 w-full flex items-center px-4 py-3 sm:px-5 sm:py-3.5 md:px-6 md:py-4 rounded-[1.5rem] hover:bg-white/50 transition-colors">
           <MapPin className="w-5 h-5 text-brand-primary mr-3 shrink-0" />
           <input
             type="text"
@@ -36,7 +36,7 @@ export default function HeroSearch() {
 
         <div className="hidden md:block w-px h-10 bg-gradient-to-b from-transparent via-brand-primary/20 to-transparent" />
 
-        <div className="w-full md:w-56 flex items-center px-6 py-4 rounded-[1.5rem] hover:bg-white/50 transition-colors">
+        <div className="w-full md:w-56 flex items-center px-4 py-3 sm:px-5 sm:py-3.5 md:px-6 md:py-4 rounded-[1.5rem] hover:bg-white/50 transition-colors">
           <HomeIcon className="w-5 h-5 text-brand-primary mr-3 shrink-0" />
           <select
             value={type}

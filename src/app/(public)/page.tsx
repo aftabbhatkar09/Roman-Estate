@@ -85,7 +85,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/30 via-brand-dark/80 to-brand-accent/20 z-10" />
           <Image
-            src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=2000"
+            src="/bg.jpg"
             alt="Luxury Mumbai Home"
             fill
             sizes="100vw"
@@ -95,16 +95,16 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent z-10" />
         </div>
 
-        <div className="relative z-20 max-w-7xl mx-auto px-4 text-center text-white space-y-12 py-20">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 text-center text-white space-y-8 md:space-y-12 py-16 md:py-20">
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
             <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white text-xs font-bold uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
               Mumbai&apos;s Premier Real Estate
             </span>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
               Elevating Your <br />
               <span className="gradient-text">Lifestyle Experience</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed">
               Discover a curated collection of Mumbai&apos;s most exclusive properties, 
               crafted for those who demand nothing less than perfection.
             </p>
@@ -124,7 +124,7 @@ export default async function HomePage() {
 
       {/* Stats Section */}
       <section className="relative z-30 -mt-16 max-w-6xl mx-auto w-full px-4">
-        <div className="bg-white rounded-[2rem] shadow-2xl p-8 md:p-12 grid grid-cols-2 lg:grid-cols-4 gap-8 border border-gray-100">
+        <div className="bg-white rounded-[2rem] shadow-2xl p-6 sm:p-8 md:p-12 grid grid-cols-2 lg:grid-cols-4 gap-8 border border-gray-100">
           {[
             { label: "Premium Properties", value: "1,200+", icon: Building2 },
             { label: "Happy Homeowners", value: "850+", icon: Users },
@@ -135,7 +135,7 @@ export default async function HomePage() {
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-4 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:rotate-6 transition-all duration-300">
                 <stat.icon className="w-6 h-6 text-brand-primary group-hover:text-white transition-colors" />
               </div>
-              <p className="text-4xl font-black text-brand-dark mb-1">{stat.value}</p>
+              <p className="text-3xl sm:text-4xl font-black text-brand-dark mb-1">{stat.value}</p>
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
                 {stat.label}
               </p>
@@ -145,15 +145,15 @@ export default async function HomePage() {
       </section>
 
       {/* Featured Properties Section */}
-      <section className="py-32 bg-white">
+      <section className="py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 md:flex-row md:justify-between md:items-end mb-12 md:mb-20">
             <div className="space-y-4 max-w-xl">
               <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                 Curated Selection
               </span>
-              <h2 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight">
-                Masterpieces of <br />Mumbai Architecture
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-dark leading-tight">
+                Masterpieces of <br className="hidden sm:block" />Mumbai Architecture
               </h2>
             </div>
             <Link
@@ -169,28 +169,28 @@ export default async function HomePage() {
       </section>
 
       {/* Investment Benefits / Why Choose Us */}
-      <section className="py-32 bg-brand-dark overflow-hidden relative">
+      <section className="py-20 md:py-32 bg-brand-dark overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-primary/5 to-transparent -skew-x-12 transform translate-x-1/2" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
             <div className="relative aspect-square">
               <div className="absolute inset-4 border-2 border-brand-primary/30 rounded-[3rem] -rotate-3" />
               <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-[3rem] rotate-3" />
               <Image
-                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1000"
+                src="/bg2.jpg"
                 alt="Our Expertise"
                 fill
                 className="relative z-10 rounded-[3rem] object-cover shadow-2xl"
               />
-              <div className="absolute -bottom-10 -right-10 glass-morphism p-10 rounded-[2rem] shadow-2xl z-20">
-                <p className="text-5xl font-black gradient-text mb-1">30+</p>
+              <div className="absolute -bottom-10 -right-10 glass-morphism p-6 sm:p-10 rounded-[2rem] shadow-2xl z-20">
+                <p className="text-3xl sm:text-5xl font-black gradient-text mb-1">30+</p>
                 <p className="text-xs text-brand-dark font-bold uppercase tracking-widest">
                   Years of Trust
                 </p>
               </div>
             </div>
 
-            <div className="space-y-10">
+            <div className="space-y-8 md:space-y-10">
               <div className="space-y-6">
                 <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                   Why Roman Estate
@@ -232,13 +232,13 @@ export default async function HomePage() {
       </section>
 
       {/* Latest Listings Grid */}
-      <section className="py-32 bg-gray-50">
+      <section className="py-20 md:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center space-y-4 mb-20">
             <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
               Latest Additions
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-brand-dark">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-dark">
               Newly Unveiled Properties
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto text-lg">
@@ -247,7 +247,7 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
             {latestProperties.map((property: any) => (
               <Link
                 href={`/properties/${property._id}`}
@@ -275,7 +275,7 @@ export default async function HomePage() {
                   </div>
                 </div>
 
-                <div className="p-8 flex-1 flex flex-col">
+                <div className="p-6 sm:p-8 flex-1 flex flex-col">
                   <h4 className="text-xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors mb-2">
                     {property.title}
                   </h4>
@@ -286,7 +286,7 @@ export default async function HomePage() {
                   
                   <div className="mt-auto pt-6 border-t border-gray-100 flex justify-between items-center">
                     <p className="text-xl font-black text-brand-dark">
-                      ₹{property.price?.toLocaleString()}
+                      ₹{property.price?.toLocaleString('en-IN')}
                     </p>
                     <span className="text-brand-primary font-bold text-sm flex items-center gap-1 group/btn">
                       View Details 
@@ -310,14 +310,14 @@ export default async function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 bg-white">
+      <section className="py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="space-y-8">
               <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                 Testimonials
               </span>
-              <h2 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-dark leading-tight">
                 What Our Elite <br />Clients Say
               </h2>
               <p className="text-lg text-gray-500 leading-relaxed">
@@ -357,13 +357,13 @@ export default async function HomePage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-32 bg-gray-50">
+      <section className="py-20 md:py-32 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
               Common Questions
             </span>
-            <h2 className="text-4xl font-black text-brand-dark">
+            <h2 className="text-3xl sm:text-4xl font-black text-brand-dark">
               Everything You Need to Know
             </h2>
           </div>
@@ -392,14 +392,14 @@ export default async function HomePage() {
       </section>
 
       {/* Partners Section */}
-      <section className="py-32 bg-white">
+      <section className="py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
             <div className="space-y-4">
               <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                 Our Network
               </span>
-              <h2 className="text-4xl md:text-5xl font-black text-brand-dark">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-dark">
                 Trusted by Industry Titans
               </h2>
             </div>

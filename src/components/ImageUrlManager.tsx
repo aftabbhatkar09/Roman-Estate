@@ -14,11 +14,13 @@ import {
 interface ImageUrlManagerProps {
   images: string[];
   onChange: (images: string[]) => void;
+  folder?: string;
 }
 
 export default function ImageUrlManager({
   images,
   onChange,
+  folder = "properties",
 }: ImageUrlManagerProps) {
   const [urlInput, setUrlInput] = useState("");
   const [urlError, setUrlError] = useState("");
@@ -38,6 +40,7 @@ export default function ImageUrlManager({
     try {
       const body = new FormData();
       files.forEach((f) => body.append("files", f));
+      body.append("folder", folder);
 
       const res = await fetch("/api/upload", { method: "POST", body });
       const json = await res.json();

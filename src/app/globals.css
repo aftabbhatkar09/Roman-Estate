@@ -52,9 +52,13 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
 }
 
 @layer base {
@@ -217,4 +221,18 @@ input:focus, textarea:focus, select:focus {
 .section-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* Partner carousel continuous scroll */
+@keyframes partner-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-partner-scroll {
+  animation: partner-scroll 30s linear infinite;
 }

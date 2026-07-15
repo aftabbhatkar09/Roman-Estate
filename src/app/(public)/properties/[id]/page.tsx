@@ -56,12 +56,12 @@ export default async function PropertyDetailPage({
   if (!property) notFound();
 
   return (
-    <div className="bg-white min-h-screen pb-24">
+    <div className="bg-white min-h-screen pb-24 mt-20 md:mt-24">
       {/* Hero Gallery */}
       <PropertyGallery images={property.images} title={property.title} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           {/* Left Column: Details */}
           <div className="lg:col-span-8 space-y-16">
             {/* Title & Price Header */}
@@ -94,7 +94,7 @@ export default async function PropertyDetailPage({
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light p-10 rounded-[2.5rem] shadow-2xl text-center md:text-right min-w-[280px] relative overflow-hidden group">
+              <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light p-6 sm:p-8 md:p-10 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl text-center md:text-right w-full md:min-w-[280px] relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 rounded-full -mr-12 -mt-12 transition-transform duration-700 group-hover:scale-150" />
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-2 relative z-10">
                   Valuation
@@ -106,7 +106,7 @@ export default async function PropertyDetailPage({
             </div>
 
             {/* Key Specs */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               {[
                 {
                   icon: Bed,
@@ -134,7 +134,7 @@ export default async function PropertyDetailPage({
               ].map((spec, i) => (
                 <div
                   key={i}
-                  className="bg-gray-50/50 p-8 rounded-[2rem] border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-card transition-all duration-500"
+                  className="bg-gray-50/50 p-5 sm:p-6 md:p-8 rounded-[2rem] border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-card transition-all duration-500"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-6 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <spec.icon className="w-6 h-6 text-brand-primary group-hover:text-white" />
@@ -198,7 +198,7 @@ export default async function PropertyDetailPage({
 
           {/* Right Column: Sidebar */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden group sticky top-28">
+            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-10 text-white shadow-2xl relative overflow-hidden group sticky top-28">
               <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
 
               <div className="relative z-10 space-y-8">
@@ -245,7 +245,7 @@ export default async function PropertyDetailPage({
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 p-10 rounded-[3rem] border border-brand-primary/10 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 p-6 sm:p-8 md:p-10 rounded-[2rem] sm:rounded-[3rem] border border-brand-primary/10 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 rounded-full -mr-10 -mt-10" />
               <h4 className="font-black text-brand-dark mb-4 flex items-center gap-3">
                 <TrendingUp className="w-5 h-5 text-brand-primary" />

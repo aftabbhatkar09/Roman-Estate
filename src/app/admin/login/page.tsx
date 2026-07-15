@@ -54,6 +54,7 @@ function LoginForm() {
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder="admin@romanestate.com"
           className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 transition-all text-gray-900 font-medium placeholder:text-gray-400"
+          suppressHydrationWarning
         />
       </div>
 

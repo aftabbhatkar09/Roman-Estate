@@ -56,7 +56,7 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
 
   return (
     <div className="max-w-xl mx-auto space-y-6 pb-12">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Link href="/admin/users" className="p-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
             <ArrowLeft className="w-5 h-5" />

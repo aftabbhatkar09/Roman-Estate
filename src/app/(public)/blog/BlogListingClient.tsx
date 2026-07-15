@@ -17,13 +17,13 @@ export default function BlogListingClient({ initialBlogs }: BlogListingClientPro
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-24">
+    <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 md:py-24">
       {/* Header Section */}
       <div className="text-center space-y-6 mb-20">
         <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-brand-primary/10 to-brand-accent/10 text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] border border-brand-primary/20">
           Insights & Perspectives
         </span>
-        <h1 className="text-4xl md:text-6xl font-black text-brand-dark tracking-tight leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-brand-dark tracking-tight leading-tight">
           Roman Estate <span className="gradient-text">Journal</span>
         </h1>
         <p className="text-gray-500 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
@@ -38,7 +38,7 @@ export default function BlogListingClient({ initialBlogs }: BlogListingClientPro
             <input 
               type="text" 
               placeholder="Search the archive..." 
-              className="w-full pl-14 pr-6 py-5 bg-white border border-gray-100 rounded-3xl shadow-card outline-none focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all text-brand-dark font-bold placeholder:text-gray-300"
+              className="w-full pl-12 sm:pl-14 pr-6 py-4 sm:py-5 bg-white border border-gray-100 rounded-3xl shadow-card outline-none focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all text-brand-dark font-bold placeholder:text-gray-300"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -47,7 +47,7 @@ export default function BlogListingClient({ initialBlogs }: BlogListingClientPro
       </div>
 
       {filteredBlogs.length === 0 ? (
-        <div className="bg-white p-24 rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm max-w-3xl mx-auto">
+        <div className="bg-white p-12 sm:p-16 md:p-24 rounded-[2rem] sm:rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm max-w-3xl mx-auto">
           <div className="w-32 h-32 bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 rounded-full flex items-center justify-center mx-auto">
             <FileText className="w-16 h-16 text-gray-200" />
           </div>
@@ -63,7 +63,7 @@ export default function BlogListingClient({ initialBlogs }: BlogListingClientPro
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
           {filteredBlogs.map((blog) => (
             <Link 
               href={`/blog/${blog.slug}`}
@@ -86,7 +86,7 @@ export default function BlogListingClient({ initialBlogs }: BlogListingClientPro
                 </div>
               </div>
               
-              <div className="p-10 flex-1 flex flex-col">
+              <div className="p-6 sm:p-8 md:p-10 flex-1 flex flex-col">
                 <div className="flex items-center gap-6 mb-6">
                   <div className="flex items-center text-[10px] font-black text-gray-400 uppercase tracking-widest">
                     <Calendar className="w-4 h-4 mr-2 text-brand-primary" />

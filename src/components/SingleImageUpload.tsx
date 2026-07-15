@@ -10,6 +10,7 @@ interface SingleImageUploadProps {
   hint?: string;
   previewClass?: string;
   objectFit?: "object-cover" | "object-contain";
+  folder?: string;
 }
 
 export default function SingleImageUpload({
@@ -19,6 +20,7 @@ export default function SingleImageUpload({
   hint,
   previewClass = "aspect-video",
   objectFit = "object-cover",
+  folder = "general",
 }: SingleImageUploadProps) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -33,6 +35,7 @@ export default function SingleImageUpload({
     try {
       const body = new FormData();
       body.append("files", file);
+      body.append("folder", folder);
       const res = await fetch("/api/upload", { method: "POST", body });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Upload failed");

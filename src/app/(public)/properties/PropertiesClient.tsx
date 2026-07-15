@@ -70,10 +70,10 @@ export default function PropertiesClient({
     });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col lg:flex-row gap-12">
+    <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12 md:py-16 flex flex-col lg:flex-row gap-8 md:gap-12">
       {/* Sidebar Filters */}
       <aside className="w-full lg:w-80 shrink-0 space-y-6">
-        <div className="bg-white p-8 rounded-[2rem] shadow-card border border-gray-100 space-y-8 sticky top-28">
+        <div className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-card border border-gray-100 space-y-8 sticky top-28">
           <div className="flex items-center justify-between">
             <div className="flex items-center text-brand-dark font-black text-xl tracking-tight">
               <SlidersHorizontal className="w-5 h-5 mr-3 text-brand-primary" />
@@ -185,9 +185,9 @@ export default function PropertiesClient({
       {/* Property Grid */}
       <div className="flex-1 min-w-0">
         {/* Results Header */}
-        <div className="flex items-center justify-between mb-10 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+        <div className="flex items-center justify-between mb-10 bg-white p-4 sm:p-6 rounded-3xl border border-gray-100 shadow-sm">
           <div>
-            <h2 className="text-2xl font-black text-brand-dark tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-brand-dark tracking-tight">
               Property Collection
             </h2>
             <p className="text-gray-400 text-sm font-medium mt-1">
@@ -201,12 +201,12 @@ export default function PropertiesClient({
         </div>
 
         {filteredProperties.length === 0 ? (
-          <div className="bg-white p-20 rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm">
+          <div className="bg-white p-12 sm:p-16 md:p-20 rounded-[2rem] sm:rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm">
             <div className="w-32 h-32 bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 rounded-full flex items-center justify-center mx-auto">
               <Search className="w-16 h-16 text-gray-200" />
             </div>
             <div className="max-w-md mx-auto">
-              <h3 className="text-3xl font-black text-brand-dark mb-3 tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-black text-brand-dark mb-3 tracking-tight">
                 No matching properties
               </h3>
               <p className="text-gray-400 font-medium leading-relaxed">
@@ -219,7 +219,7 @@ export default function PropertiesClient({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             {filteredProperties.map((property) => (
               <Link
                 href={`/properties/${property._id}`}
@@ -251,7 +251,7 @@ export default function PropertiesClient({
                   </div>
                   <div className="absolute bottom-5 left-5">
                     <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg shadow-brand-primary/30">
-                      ₹{property.price?.toLocaleString()}
+                      ₹{property.price?.toLocaleString('en-IN')}
                     </span>
                   </div>
                   <div className="absolute top-5 right-5">
@@ -261,13 +261,13 @@ export default function PropertiesClient({
                   </div>
                 </div>
 
-                <div className="p-8 flex-1 flex flex-col justify-between">
+                <div className="p-5 sm:p-6 md:p-8 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2 text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-2">
                       <Star className="w-3 h-3 fill-current" />
                       Premium Listing
                     </div>
-                    <h4 className="text-2xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors line-clamp-1 mb-2">
+                    <h4 className="text-xl sm:text-2xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors line-clamp-1 mb-2">
                       {property.title}
                     </h4>
                     <div className="flex items-center text-gray-500 text-sm mb-6">

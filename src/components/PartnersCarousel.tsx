@@ -1,7 +1,6 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React from "react";
 import ImageWithFallback from "@/components/ImageWithFallback";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export interface Partner {
   _id: string;
@@ -17,46 +16,6 @@ export default function PartnersCarousel({
 }: {
   partners: Partner[];
 }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo =
-        direction === "left"
-          ? scrollLeft - clientWidth / 2
-          : scrollLeft + clientWidth / 2;
-      scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
-    }
-  };
-
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      const parent = scrollRef.current;
-      const viewCenter = parent.scrollLeft + parent.clientWidth / 2;
-
-      let closestIndex = 0;
-      let minDistance = Infinity;
-
-      Array.from(parent.children).forEach((childNode, index) => {
-        const child = childNode as HTMLElement;
-        if (child.tagName === "STYLE") return;
-
-        const childCenter =
-          child.offsetLeft - parent.offsetLeft + child.clientWidth / 2;
-        const distance = Math.abs(viewCenter - childCenter);
-
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestIndex = index;
-        }
-      });
-
-      setActiveIndex(closestIndex);
-    }
-  };
-
   if (!partners || partners.length === 0) {
     return (
       <div className="flex justify-center items-center h-32 text-gray-500">
@@ -65,37 +24,22 @@ export default function PartnersCarousel({
     );
   }
 
-  return (
-    <div className="relative group max-w-7xl mx-auto">
-      {/* Navigation */}
-      <div className="absolute -top-16 right-0 flex gap-2">
-        <button
-          onClick={() => scroll("left")}
-          className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button
-          onClick={() => scroll("right")}
-          className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
-      </div>
+  const items = [...partners, ...partners];
 
-      {/* Carousel Container */}
-      <div
-        ref={scrollRef}
-        onScroll={handleScroll}
-        className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-4 no-scrollbar"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-      >
-        {partners.map((partner) => (
+  return (
+    <div className="relative max-w-7xl mx-auto overflow-hidden py-4 group/carousel">
+      {/* Gradient masks for fade effect */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+      {/* Scrolling track */}
+      <div className="flex w-max animate-partner-scroll group-hover/carousel:[animation-play-state:paused]">
+        {items.map((partner, i) => (
           <div
-            key={partner._id}
-            className="min-w-[180px] md:min-w-[220px] snap-center shrink-0"
+            key={`${partner._id}-${i}`}
+            className="min-w-[180px] md:min-w-[220px] shrink-0 px-3"
           >
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 h-28 flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/5 transition-all duration-500 cursor-pointer">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 h-28 flex items-center justify-center sm:grayscale sm:opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/5 transition-all duration-500 cursor-pointer">
               <div className="relative w-full h-full">
                 <ImageWithFallback
                   src={partner.logo}
@@ -106,21 +50,6 @@ export default function PartnersCarousel({
               </div>
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* Pagination Progress */}
-      <div className="flex justify-center items-center gap-2 mt-4">
-        {partners.map((_, index) => (
-          <button
-            key={index}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
-              activeIndex === index
-                ? "w-8 bg-gradient-to-r from-brand-primary to-brand-accent"
-                : "w-2 bg-gray-200"
-            }`}
-            aria-label={`Go to partner slide ${index + 1}`}
-          />
         ))}
       </div>
     </div>

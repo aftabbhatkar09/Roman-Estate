@@ -39,10 +39,10 @@ export default function PropertyGallery({
           <div className="absolute top-6 left-6 z-20">
             <Link
               href="/properties"
-              className="glass-morphism px-5 py-2.5 rounded-2xl font-bold hover:bg-white transition-all flex items-center gap-2 text-sm shadow-xl"
+              className="glass-morphism px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 rounded-2xl font-bold hover:bg-white transition-all flex items-center gap-2 text-sm shadow-xl"
             >
               <ArrowLeft className="w-4 h-4 text-brand-primary" /> 
-              <span className="text-brand-dark">Return to Collection</span>
+              <span className="text-brand-dark hidden sm:inline">Return to Collection</span>
             </Link>
           </div>
 
@@ -66,7 +66,7 @@ export default function PropertyGallery({
 
           <button
             onClick={() => setLightboxOpen(true)}
-            className="absolute bottom-8 left-8 glass-morphism px-6 py-3 rounded-2xl font-bold text-sm hover:bg-white transition-all shadow-xl flex items-center gap-2 text-brand-dark"
+            className="absolute bottom-8 left-8 glass-morphism px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 rounded-2xl font-bold text-sm hover:bg-white transition-all shadow-xl flex items-center gap-2 text-brand-dark"
           >
             <Maximize2 className="w-4 h-4 text-brand-primary" />
             Expand Gallery
@@ -111,7 +111,7 @@ export default function PropertyGallery({
             </button>
           </div>
           
-          <div className="flex-1 relative flex items-center justify-center px-20">
+          <div className="flex-1 relative flex items-center justify-center px-4 sm:px-8 md:px-16 lg:px-20">
             <ImageWithFallback
               src={allImages[activeIdx]}
               alt={title}
@@ -120,19 +120,19 @@ export default function PropertyGallery({
             />
             <button 
               onClick={prev} 
-              className="absolute left-8 w-16 h-16 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center text-white transition-all border border-white/10"
+              className="absolute left-2 sm:left-4 md:left-8 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center text-white transition-all border border-white/10"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
             <button 
               onClick={next} 
-              className="absolute right-8 w-16 h-16 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center text-white transition-all border border-white/10"
+              className="absolute right-2 sm:right-4 md:right-8 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center text-white transition-all border border-white/10"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
           </div>
 
-          <div className="px-8 py-10 overflow-x-auto no-scrollbar">
+          <div className="px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 overflow-x-auto no-scrollbar">
             <div className="flex gap-4 justify-center min-w-max mx-auto">
               {allImages.map((img, i) => (
                 <button

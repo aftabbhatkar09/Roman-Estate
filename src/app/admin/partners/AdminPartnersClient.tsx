@@ -55,7 +55,7 @@ export default function AdminPartnersClient({
         title={selectedPartner?.name || ""}
       />
 
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-800">Manage Partners</h2>
         <Link
           href="/admin/partners/new"
@@ -66,8 +66,8 @@ export default function AdminPartnersClient({
         </Link>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <table className="w-full text-left">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
+        <table className="w-full text-left min-w-[500px]">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
               <th className="px-6 py-4 text-sm font-semibold text-gray-600">

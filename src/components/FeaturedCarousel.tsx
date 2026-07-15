@@ -57,34 +57,32 @@ export default function FeaturedCarousel({
   }
 
   return (
-    <div className="relative group">
-      {/* Navigation Buttons */}
-      <div className="absolute -top-16 right-0 flex gap-3">
-        <button
-          onClick={() => scroll("left")}
-          className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button
-          onClick={() => scroll("right")}
-          className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
-      </div>
+    <div className="relative group sm:px-14">
+      {/* Navigation Buttons — overlaid on left/right edges */}
+      <button
+        onClick={() => scroll("left")}
+        className="absolute left-2 top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-gray-200 bg-white/90 backdrop-blur-sm items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg hidden sm:flex"
+      >
+        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+      </button>
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-2 top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-gray-200 bg-white/90 backdrop-blur-sm items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg hidden sm:flex"
+      >
+        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+      </button>
 
       {/* Carousel Container */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 pt-4 px-4 -mx-4 no-scrollbar"
+        className="flex overflow-x-auto snap-x snap-mandatory gap-0 sm:gap-4 pb-10 pt-2 no-scrollbar"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {properties.map((property) => (
           <div
             key={property._id}
-            className="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-center shrink-0"
+            className="min-w-full sm:min-w-[32vw] md:min-w-[24vw] lg:min-w-[18vw] xl:min-w-[15vw] snap-center shrink-0"
           >
             <Link
               href={`/properties/${property._id}`}
@@ -99,61 +97,52 @@ export default function FeaturedCarousel({
                   }
                   alt={property.title || "Property"}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 65vw, (max-width: 768px) 32vw, (max-width: 1024px) 24vw, 18vw"
                   style={{ objectFit: 'cover', objectPosition: 'center' }}
                   className="group-hover/card:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute top-5 left-5 flex gap-2">
-                  <span className="glass-morphism px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-brand-dark">
+                <div className="absolute top-2 left-2">
+                  <span className="glass-morphism px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest text-brand-dark">
                     Featured
                   </span>
                 </div>
-                <div className="absolute bottom-5 left-5">
-                  <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg">
-                    ₹{property.price?.toLocaleString()}
+                <div className="absolute bottom-2 left-2">
+                  <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-2.5 py-0.5 rounded-md text-[10px] font-bold shadow-lg">
+                    ₹{property.price?.toLocaleString('en-IN')}
                   </span>
                 </div>
-                <div className="absolute top-5 right-5">
-                  <span className="bg-brand-dark/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                <div className="absolute top-2 right-2">
+                  <span className="bg-brand-dark/80 backdrop-blur-md text-white px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest">
                     {property.status || "For Sale"}
                   </span>
                 </div>
               </div>
 
-              <div className="p-8 flex-1 flex flex-col justify-between">
+              <div className="p-3 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-2">
-                    <Star className="w-3 h-3 fill-current" />
-                    Premium Collection
-                  </div>
-                  <h4 className="text-2xl font-bold text-brand-dark group-hover/card:text-brand-primary transition-colors line-clamp-1 mb-2">
+                  <h4 className="text-sm font-bold text-brand-dark group-hover/card:text-brand-primary transition-colors line-clamp-1 mb-1">
                     {property.title}
                   </h4>
-                  <div className="flex items-center text-gray-500 text-sm mb-6">
-                    <MapPin className="w-4 h-4 mr-1.5 text-brand-primary shrink-0" />
+                  <div className="flex items-center text-gray-500 text-[11px] mb-3">
+                    <MapPin className="w-3 h-3 mr-0.5 text-brand-primary shrink-0" />
                     <span className="line-clamp-1">
-                      {property.location?.address ||
-                        property.location?.city ||
-                        property.location?.type ||
-                        "Mumbai"}
+                      {property.location?.city || "Mumbai"}
                     </span>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-gray-100 flex justify-between items-center">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1.5 text-gray-600">
-                      <BedDouble className="w-4 h-4 text-brand-primary" />
-                      <span className="text-sm font-semibold">{property.bedrooms || 0}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-gray-600">
-                      <Bath className="w-4 h-4 text-brand-primary" />
-                      <span className="text-sm font-semibold">{property.bathrooms || 2}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-gray-600">
-                      <Square className="w-4 h-4 text-brand-primary" />
-                      <span className="text-sm font-semibold">{property.size || 0} <span className="text-[10px] uppercase">Sq.Ft</span></span>
-                    </div>
+                <div className="pt-2.5 border-t border-gray-100 flex items-center gap-2">
+                  <div className="flex items-center gap-0.5 text-gray-600">
+                    <BedDouble className="w-3 h-3 text-brand-primary" />
+                    <span className="text-[10px] font-semibold">{property.bedrooms || 0}</span>
+                  </div>
+                  <div className="flex items-center gap-0.5 text-gray-600">
+                    <Bath className="w-3 h-3 text-brand-primary" />
+                    <span className="text-[10px] font-semibold">{property.bathrooms || 2}</span>
+                  </div>
+                  <div className="flex items-center gap-0.5 text-gray-600">
+                    <Square className="w-3 h-3 text-brand-primary" />
+                    <span className="text-[10px] font-semibold">{property.size || 0}<span className="text-[8px] uppercase ml-0.5">Sqft</span></span>
                   </div>
                 </div>
               </div>
@@ -163,14 +152,14 @@ export default function FeaturedCarousel({
       </div>
 
       {/* Pagination Progress */}
-      <div className="flex justify-center items-center gap-3 mt-4">
+      <div className="flex justify-center items-center gap-2 mt-2">
         {properties.map((_, index) => (
           <button
             key={index}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
+            className={`h-1 rounded-full transition-all duration-500 ${
               activeIndex === index
-                ? "w-12 bg-gradient-to-r from-brand-primary to-brand-accent"
-                : "w-4 bg-gray-200 hover:bg-gray-300"
+                ? "w-8 bg-gradient-to-r from-brand-primary to-brand-accent"
+                : "w-2 bg-gray-200 hover:bg-gray-300"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

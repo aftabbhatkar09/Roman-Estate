@@ -55,7 +55,7 @@ export default function ContactPage() {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Header */}
-      <section className="relative pt-32 pb-24 bg-brand-dark overflow-hidden">
+      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 bg-brand-dark overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <Image
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
@@ -71,21 +71,21 @@ export default function ContactPage() {
           <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white text-[10px] font-black uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
             Get in Touch
           </span>
-          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1]">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1]">
             How Can We <br />
             <span className="gradient-text">
               Assist You?
             </span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
             Our advisors are ready to help you navigate Mumbai&apos;s premium real
             estate landscape.
           </p>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           {/* Left: Contact Info */}
           <div className="lg:col-span-5 space-y-12">
             <div className="space-y-8">
@@ -137,7 +137,7 @@ export default function ContactPage() {
             </div>
 
             {/* Social Cards */}
-            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[3rem] p-12 text-white relative overflow-hidden group shadow-2xl">
+            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-10 md:p-12 text-white relative overflow-hidden group shadow-2xl">
               <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
               <div className="relative z-10 space-y-8">
                 <div className="space-y-4">
@@ -166,7 +166,7 @@ export default function ContactPage() {
 
           {/* Right: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-[3rem] shadow-card border border-gray-100 p-10 md:p-16 relative overflow-hidden">
+            <div className="bg-white rounded-[2rem] sm:rounded-[3rem] shadow-card border border-gray-100 p-6 sm:p-8 md:p-12 lg:p-16 relative overflow-hidden">
               {submitted ? (
                 <div className="text-center py-16 space-y-10">
                   <div className="w-24 h-24 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-full flex items-center justify-center mx-auto shadow-xl">
@@ -313,7 +313,7 @@ export default function ContactPage() {
 
       {/* Map Section */}
       <div className="max-w-7xl mx-auto px-4 pb-32">
-        <div className="h-[600px] bg-gray-50 rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
+        <div className="h-[400px] sm:h-[500px] md:h-[600px] bg-gray-50 rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
           <Image
             src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=2000"
             alt="Office Location"
@@ -321,7 +321,7 @@ export default function ContactPage() {
             className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 to-transparent" />
-          <div className="absolute bottom-16 left-16 glass-morphism p-12 rounded-[3rem] shadow-2xl border border-white/20 transform group-hover:-translate-y-2 transition-transform duration-500">
+          <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 md:bottom-16 md:left-16 glass-morphism p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[3rem] shadow-2xl border border-white/20 transform group-hover:-translate-y-2 transition-transform duration-500">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-3 h-3 bg-gradient-to-r from-brand-primary to-brand-accent rounded-full animate-pulse" />
               <span className="text-brand-dark font-black uppercase tracking-[0.2em] text-[10px]">

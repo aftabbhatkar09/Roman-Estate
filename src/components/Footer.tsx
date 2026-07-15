@@ -15,10 +15,10 @@ export default function Footer() {
     <footer className="bg-brand-dark text-gray-300">
       {/* Top CTA Banner */}
       <div className="gradient-animate">
-        <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
                 Ready to find your masterpiece?
               </h3>
               <p className="text-white/80 text-lg">
@@ -38,8 +38,8 @@ export default function Footer() {
       </div>
 
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+      <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 md:gap-16">
           {/* Brand */}
           <div className="space-y-8">
             <div className="flex flex-col leading-none">
@@ -171,9 +171,9 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
+        <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
           <p>&copy; {new Date().getFullYear()} Roman Estate. All rights reserved.</p>
-          <div className="flex gap-8">
+          <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8">
             <a href="#" className="hover:text-white transition-colors">
               Privacy Policy
             </a>

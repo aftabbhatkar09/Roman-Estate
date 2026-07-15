@@ -102,7 +102,7 @@ export default function PartnerForm() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 pb-24">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center space-x-4">
           <Link
             href="/admin/partners"
@@ -172,6 +172,7 @@ export default function PartnerForm() {
                 previewClass="h-36"
                 objectFit="object-contain"
                 hint="For best results use a PNG with a transparent background."
+                folder="partners"
               />
             </div>
 

@@ -85,7 +85,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
                 ))}
               </div>
 
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight">
                 {blog.title}
               </h1>
 
@@ -124,7 +124,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
       </div>
 
       {/* Article Content */}
-      <div className="max-w-7xl mx-auto px-4 mt-24 flex flex-col lg:flex-row gap-20">
+      <div className="max-w-7xl mx-auto px-4 mt-12 sm:mt-16 md:mt-24 flex flex-col lg:flex-row gap-12 lg:gap-20">
         <div className="lg:w-2/3">
           <div className="prose prose-xl max-w-none text-gray-500 font-medium leading-relaxed prose-headings:text-brand-dark prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-primary prose-strong:text-brand-dark prose-blockquote:border-brand-primary prose-blockquote:bg-gray-50 prose-blockquote:p-8 prose-blockquote:rounded-3xl prose-blockquote:italic prose-blockquote:font-bold prose-blockquote:text-brand-dark">
             {blog.content.split("\n").map((para: string, i: number) =>
@@ -139,7 +139,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
           </div>
 
           {/* Social Share */}
-          <div className="mt-24 pt-12 border-t border-gray-100 flex flex-wrap items-center justify-between gap-8">
+          <div className="mt-24 pt-12 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4 sm:gap-6 md:gap-8">
             <div className="space-y-1">
               <h4 className="text-xl font-black text-brand-dark tracking-tight">Share this perspective</h4>
               <p className="text-sm text-gray-400 font-medium">Circulate this insight within your professional network.</p>
@@ -148,7 +148,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
               {['Facebook', 'Twitter', 'LinkedIn'].map((social, i) => (
                 <button
                   key={i}
-                  className="px-6 py-3 rounded-2xl border border-gray-100 font-black text-xs uppercase tracking-widest text-brand-dark hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent hover:text-white hover:border-transparent transition-all duration-300"
+                  className="px-4 py-2.5 sm:px-5 sm:py-3 md:px-6 rounded-2xl border border-gray-100 font-black text-xs uppercase tracking-widest text-brand-dark hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent hover:text-white hover:border-transparent transition-all duration-300"
                 >
                   {social}
                 </button>
@@ -182,7 +182,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light p-12 rounded-[3.5rem] text-white shadow-2xl relative overflow-hidden group">
+          <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light p-8 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3rem] md:rounded-[3.5rem] text-white shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
             <div className="relative z-10 space-y-8">
               <div className="space-y-4">

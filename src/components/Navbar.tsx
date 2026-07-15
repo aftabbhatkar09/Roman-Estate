@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, User } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -47,13 +48,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="flex flex-col leading-none">
-              <span className="text-2xl font-black tracking-tight text-brand-dark">
-                ROMAN
-                <span className="text-brand-primary">.</span>
-              </span>
-              <span className="text-[10px] font-bold text-gray-400 tracking-[0.3em] uppercase -mt-0.5">
-                ESTATE
-              </span>
+              <Image src="/logo_transparent.svg" alt="Roman Estate Logo" height={60} width={60} />
             </div>
           </Link>
 

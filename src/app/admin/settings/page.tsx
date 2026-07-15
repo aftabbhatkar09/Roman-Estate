@@ -28,13 +28,13 @@ export default function SettingsPage() {
         <p className="text-gray-500">Configure your administrative preferences and system options.</p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-full md:w-64 space-y-2">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+        <div className="w-full md:w-64 flex md:flex-col gap-2 overflow-x-auto no-scrollbar md:overflow-visible shrink-0">
           {tabs.map((tab) => (
             <button
               key={tab.name}
               onClick={() => setActiveTab(tab.name)}
-              className={`w-full flex items-center px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+              className={`w-full md:w-full flex items-center px-4 py-3 rounded-xl text-sm font-bold transition-all shrink-0 ${
                 activeTab === tab.name
                   ? 'bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25'
                   : 'text-gray-500 hover:bg-white hover:text-gray-900'
@@ -47,7 +47,7 @@ export default function SettingsPage() {
         </div>
 
         <div className="flex-1 space-y-6">
-          <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm space-y-8">
+          <div className="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-sm space-y-8">
             <div className="flex justify-between items-center pb-6 border-b border-gray-50">
               <h2 className="text-xl font-bold text-gray-900 flex items-center">
                 <ShieldCheck className="w-5 h-5 mr-3 text-indigo-600" />

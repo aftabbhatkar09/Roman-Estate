@@ -22,7 +22,7 @@ export default function AboutPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-24 bg-brand-dark overflow-hidden">
+      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 bg-brand-dark overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <Image 
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000"
@@ -38,11 +38,11 @@ export default function AboutPage() {
           <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white text-[10px] font-black uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
             Our Legacy
           </span>
-          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1]">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1]">
             Redefining <br />
             <span className="gradient-text">Mumbai Luxury</span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
             Since 1994, Roman Estate has been the definitive choice for those seeking 
             unparalleled excellence in the Mumbai real estate market.
           </p>
@@ -50,9 +50,9 @@ export default function AboutPage() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-32 overflow-hidden">
+      <section className="py-20 md:py-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
             <div className="relative">
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-brand-primary/5 rounded-full blur-3xl" />
               <div className="relative z-10 space-y-8">
@@ -94,7 +94,7 @@ export default function AboutPage() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
-              <div className="absolute bottom-12 left-12 right-12 glass-morphism p-10 rounded-[2.5rem] border border-white/20">
+              <div className="absolute bottom-12 left-12 right-12 glass-morphism p-6 sm:p-8 md:p-10 rounded-[2.5rem] border border-white/20">
                 <p className="text-white text-lg font-bold italic leading-relaxed">
                   &ldquo;Excellence is not an act, but a habit. In the world of luxury real estate, 
                   it is the only standard that matters.&rdquo;
@@ -113,10 +113,10 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 bg-gradient-to-br from-brand-dark via-brand-dark-light to-brand-dark relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-gradient-to-br from-brand-dark via-brand-dark-light to-brand-dark relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/5 to-brand-accent/5" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
             {[
               { label: 'Properties Sold', val: '2.5k+' },
               { label: 'Client Satisfaction', val: '99%' },
@@ -124,7 +124,7 @@ export default function AboutPage() {
               { label: 'Global Network', val: '12+' }
             ].map((stat, i) => (
               <div key={i} className="text-center space-y-2">
-                <p className="text-5xl md:text-6xl font-black gradient-text tracking-tight">{stat.val}</p>
+                <p className="text-4xl sm:text-5xl md:text-6xl font-black gradient-text tracking-tight">{stat.val}</p>
                 <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.3em]">{stat.label}</p>
               </div>
             ))}
@@ -133,18 +133,18 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-32 bg-gray-50">
+      <section className="py-20 md:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center space-y-4 mb-20">
             <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">The Professionals</span>
-            <h2 className="text-4xl md:text-5xl font-black text-brand-dark tracking-tight">Meet Our Principal Advisors</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-dark tracking-tight">Meet Our Principal Advisors</h2>
             <p className="text-gray-500 max-w-2xl mx-auto font-medium text-lg">
               Our team consists of industry veterans with unparalleled knowledge 
                of Mumbai&apos;s luxury property landscape.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {[
               { name: 'Sameer Khan', role: 'VP, Luxury Acquisitions', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400' },
               { name: 'Ananya Iyer', role: 'Director, Client Relations', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400' },
@@ -170,14 +170,14 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-32 bg-white">
+      <section className="py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-brand-dark rounded-[4rem] p-12 md:p-24 relative overflow-hidden shadow-2xl">
+          <div className="bg-brand-dark rounded-[2rem] sm:rounded-[4rem] p-8 sm:p-12 md:p-24 relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-primary/5 to-transparent -skew-x-12 transform translate-x-1/2" />
             
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <div className="space-y-8">
-                <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
                   Why Discerning Clients <br />Choose Us
                 </h2>
                 <div className="space-y-6">
