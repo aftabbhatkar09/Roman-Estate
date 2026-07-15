@@ -76,17 +76,17 @@ export default function FeaturedCarousel({
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex overflow-x-auto snap-x snap-mandatory gap-0 sm:gap-4 pb-10 pt-2 no-scrollbar"
+        className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-10 pt-2 no-scrollbar items-stretch"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {properties.map((property) => (
           <div
             key={property._id}
-            className="min-w-full sm:min-w-[32vw] md:min-w-[24vw] lg:min-w-[18vw] xl:min-w-[15vw] snap-center shrink-0"
+            className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.3333%-16px)] min-[1400px]:w-[calc(25%-18px)] snap-center shrink-0 flex flex-col"
           >
             <Link
               href={`/properties/${property._id}`}
-              className="premium-card h-full group/card flex flex-col"
+              className="premium-card flex-1 group/card flex flex-col"
             >
               <div className="relative aspect-[4/3] overflow-hidden image-hover-zoom">
                 <ImageWithFallback
@@ -97,7 +97,7 @@ export default function FeaturedCarousel({
                   }
                   alt={property.title || "Property"}
                   fill
-                  sizes="(max-width: 640px) 65vw, (max-width: 768px) 32vw, (max-width: 1024px) 24vw, 18vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1400px) 33vw, 25vw"
                   style={{ objectFit: 'cover', objectPosition: 'center' }}
                   className="group-hover/card:scale-110 transition-transform duration-700"
                 />
