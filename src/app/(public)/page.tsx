@@ -168,6 +168,24 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Partners Section */}
+      <section className="py-20 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
+            <div className="space-y-4">
+              <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
+                Our Network
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-dark">
+                Trusted by Industry Titans
+              </h2>
+            </div>
+          </div>
+
+          <PartnersCarousel partners={partners} />
+        </div>
+      </section>
+
       {/* Investment Benefits / Why Choose Us */}
       <section className="py-20 md:py-32 bg-brand-dark overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-primary/5 to-transparent -skew-x-12 transform translate-x-1/2" />
@@ -391,23 +409,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
-            <div className="space-y-4">
-              <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
-                Our Network
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-dark">
-                Trusted by Industry Titans
-              </h2>
-            </div>
-          </div>
-
-          <PartnersCarousel partners={partners} />
-        </div>
-      </section>
+      
     </div>
   );
 }
