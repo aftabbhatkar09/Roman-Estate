@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Mail,
   Phone,
@@ -22,7 +23,8 @@ export default function Footer() {
                 Ready to find your masterpiece?
               </h3>
               <p className="text-white/80 text-lg">
-                Explore Mumbai&apos;s most exclusive collection of premium properties.
+                Explore Mumbai&apos;s most exclusive collection of premium
+                properties.
               </p>
             </div>
             <div className="flex gap-4 flex-wrap justify-center">
@@ -43,12 +45,31 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-8">
             <div className="flex flex-col leading-none">
-              <span className="text-3xl font-black tracking-tight text-white">
-                ROMAN<span className="text-brand-primary">.</span>
-              </span>
-              <span className="text-[10px] font-bold text-gray-500 tracking-[0.3em] uppercase mt-1">
-                ESTATE
-              </span>
+              <Link href="/" className="flex items-center gap-2 group">
+                <div className="flex items-center justify-between gap-2 leading-none">
+                  <Image
+                    src="/images/logo3.png"
+                    alt="Roman Estate Logo"
+                    height={60}
+                    width={60}
+                  />
+                  <div className="flex flex-col items-center justify-center font-serif text-black uppercase select-none mt-1">
+                    <span className="text-white text-[10px] sm:text-[11px] tracking-[0.5em] ml-[0.5em] mb-0.5 font-medium">
+                      The
+                    </span>
+                    <span className="text-white text-2xl sm:text-3xl tracking-widest font-normal leading-none">
+                      Roman
+                    </span>
+                    <div className="flex items-center justify-center gap-2 mt-1.5 w-full">
+                      <div className="h-px w-5 sm:w-8 bg-[#C2A365]"></div>
+                      <span className="text-[9px] sm:text-[10px] tracking-[0.5em] ml-[0.5em] font-medium text-white">
+                        Estate
+                      </span>
+                      <div className="h-1px w-5 sm:w-8 bg-[#C2A365]"></div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </div>
             <p className="text-base leading-relaxed text-gray-400 max-w-xs">
               Redefining luxury real estate in Mumbai for over three decades.
@@ -172,7 +193,9 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Roman Estate. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Roman Estate. All rights reserved.
+          </p>
           <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8">
             <a href="#" className="hover:text-white transition-colors">
               Privacy Policy
