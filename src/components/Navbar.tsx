@@ -48,27 +48,28 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="flex items-center justify-between gap-2 leading-none">
+          <Link href="/" className="flex items-center gap-1 sm:gap-2 group shrink-0 min-w-0">
+            <div className="flex items-center gap-1 sm:gap-2 leading-none">
               <Image
                 src="/images/logo3.png"
                 alt="Roman Estate Logo"
-                height={60}
-                width={60}
+                height={48}
+                width={48}
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-[60px] md:h-[60px]"
               />
               <div className="flex flex-col items-center justify-center font-serif text-black uppercase select-none mt-1">
-                <span className="text-[10px] sm:text-[11px] tracking-[0.5em] ml-[0.5em] mb-0.5 font-medium">
+                <span className="text-[8px] sm:text-[10px] md:text-[11px] tracking-[0.5em] ml-[0.5em] mb-0.5 font-medium">
                   The
                 </span>
-                <span className="text-2xl sm:text-3xl tracking-widest font-normal leading-none">
+                <span className="text-xl sm:text-2xl md:text-3xl tracking-widest font-normal leading-none">
                   Roman
                 </span>
-                <div className="flex items-center justify-center gap-2 mt-1.5 w-full">
-                  <div className="h-1px w-5 sm:w-8 bg-[#C2A365]"></div>
-                  <span className="text-[9px] sm:text-[10px] tracking-[0.5em] ml-[0.5em] font-medium text-gray-800">
+                <div className="flex items-center justify-center gap-1 sm:gap-2 mt-1 w-full">
+                  <div className="h-px w-3 sm:w-5 md:w-8 bg-[#C2A365]"></div>
+                  <span className="text-[7px] sm:text-[9px] md:text-[10px] tracking-[0.5em] ml-[0.5em] font-medium text-gray-800">
                     Estate
                   </span>
-                  <div className="h-px w-5 sm:w-8 bg-[#C2A365]"></div>
+                  <div className="h-px w-3 sm:w-5 md:w-8 bg-[#C2A365]"></div>
                 </div>
               </div>
             </div>

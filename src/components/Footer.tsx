@@ -16,13 +16,13 @@ export default function Footer() {
     <footer className="bg-brand-dark text-gray-300">
       {/* Top CTA Banner */}
       <div className="gradient-animate">
-        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="max-w-7xl mx-auto px-4 py-10 sm:py-12 md:py-16">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
             <div className="text-center md:text-left">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-3">
                 Ready to find your masterpiece?
               </h3>
-              <p className="text-white/80 text-lg">
+              <p className="text-white/80 text-base sm:text-lg">
                 Explore Mumbai&apos;s most exclusive collection of premium
                 properties.
               </p>
@@ -30,9 +30,9 @@ export default function Footer() {
             <div className="flex gap-4 flex-wrap justify-center">
               <Link
                 href="/properties"
-                className="bg-white text-brand-primary px-10 py-4 rounded-full font-bold hover:bg-white/90 transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2"
+                className="bg-white text-brand-primary px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold hover:bg-white/90 transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2 text-sm sm:text-base"
               >
-                Browse Properties <ArrowRight className="w-5 h-5" />
+                Browse Properties <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
             </div>
           </div>
@@ -40,38 +40,39 @@ export default function Footer() {
       </div>
 
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 md:gap-16">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:py-12 md:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-16">
           {/* Brand */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8 sm:col-span-2 lg:col-span-1">
             <div className="flex flex-col leading-none">
               <Link href="/" className="flex items-center gap-2 group">
-                <div className="flex items-center justify-between gap-2 leading-none">
+                <div className="flex items-center gap-2 leading-none">
                   <Image
                     src="/images/logo3.png"
                     alt="Roman Estate Logo"
-                    height={60}
-                    width={60}
+                    height={48}
+                    width={48}
+                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-[60px] md:h-[60px]"
                   />
                   <div className="flex flex-col items-center justify-center font-serif text-black uppercase select-none mt-1">
-                    <span className="text-white text-[10px] sm:text-[11px] tracking-[0.5em] ml-[0.5em] mb-0.5 font-medium">
+                    <span className="text-white text-[8px] sm:text-[10px] md:text-[11px] tracking-[0.5em] ml-[0.5em] mb-0.5 font-medium">
                       The
                     </span>
-                    <span className="text-white text-2xl sm:text-3xl tracking-widest font-normal leading-none">
+                    <span className="text-white text-xl sm:text-2xl md:text-3xl tracking-widest font-normal leading-none">
                       Roman
                     </span>
-                    <div className="flex items-center justify-center gap-2 mt-1.5 w-full">
-                      <div className="h-px w-5 sm:w-8 bg-[#C2A365]"></div>
-                      <span className="text-[9px] sm:text-[10px] tracking-[0.5em] ml-[0.5em] font-medium text-white">
+                    <div className="flex items-center justify-center gap-1 sm:gap-2 mt-1 w-full">
+                      <div className="h-px w-3 sm:w-5 md:w-8 bg-[#C2A365]"></div>
+                      <span className="text-[7px] sm:text-[9px] md:text-[10px] tracking-[0.5em] ml-[0.5em] font-medium text-white">
                         Estate
                       </span>
-                      <div className="h-1px w-5 sm:w-8 bg-[#C2A365]"></div>
+                      <div className="h-px w-3 sm:w-5 md:w-8 bg-[#C2A365]"></div>
                     </div>
                   </div>
                 </div>
               </Link>
             </div>
-            <p className="text-base leading-relaxed text-gray-400 max-w-xs">
+            <p className="text-sm sm:text-base leading-relaxed text-gray-400 max-w-xs">
               Redefining luxury real estate in Mumbai for over three decades.
               Excellence in every square foot.
             </p>
@@ -96,10 +97,10 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-[0.2em]">
+            <h4 className="text-white font-bold mb-4 sm:mb-6 md:mb-8 text-xs sm:text-sm uppercase tracking-[0.2em]">
               Navigation
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4">
               {[
                 { label: "Home", href: "/" },
                 { label: "Properties", href: "/properties" },
@@ -109,7 +110,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-brand-primary transition-colors flex items-center gap-2 group text-base"
+                    className="text-gray-400 hover:text-brand-primary transition-colors flex items-center gap-2 group text-sm sm:text-base"
                   >
                     <span className="w-1.5 h-1.5 bg-brand-primary rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
                     {link.label}
@@ -121,10 +122,10 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-[0.2em]">
+            <h4 className="text-white font-bold mb-4 sm:mb-6 md:mb-8 text-xs sm:text-sm uppercase tracking-[0.2em]">
               Expertise
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4">
               {[
                 "Luxury Consulting",
                 "Property Acquisition",
@@ -134,9 +135,9 @@ export default function Footer() {
               ].map((s) => (
                 <li
                   key={s}
-                  className="text-gray-400 flex items-center gap-2 text-base"
+                  className="text-gray-400 flex items-center gap-2 text-sm sm:text-base"
                 >
-                  <span className="w-1.5 h-1.5 bg-brand-primary/30 rounded-full" />
+                  <span className="w-1.5 h-1.5 bg-brand-primary/30 rounded-full shrink-0" />
                   {s}
                 </li>
               ))}
@@ -145,15 +146,15 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-[0.2em]">
+            <h4 className="text-white font-bold mb-4 sm:mb-6 md:mb-8 text-xs sm:text-sm uppercase tracking-[0.2em]">
               Get in Touch
             </h4>
-            <ul className="space-y-6">
-              <li className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                  <MapPin className="w-5 h-5 text-brand-primary" />
+            <ul className="space-y-4 sm:space-y-6">
+              <li className="flex items-start gap-3 sm:gap-4">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                 </div>
-                <span className="text-gray-400 text-base leading-relaxed">
+                <span className="text-gray-400 text-sm sm:text-base leading-relaxed">
                   Opera House, Charni Road,
                   <br />
                   Mumbai, Maharashtra 400004
@@ -162,12 +163,12 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:+919876543210"
-                  className="flex items-center gap-4 group transition-colors"
+                  className="flex items-center gap-3 sm:gap-4 group transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-brand-primary group-hover:bg-brand-primary/10 transition-all">
-                    <Phone className="w-5 h-5 text-brand-primary" />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-brand-primary group-hover:bg-brand-primary/10 transition-all">
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                   </div>
-                  <span className="text-gray-400 group-hover:text-white text-base">
+                  <span className="text-gray-400 group-hover:text-white text-sm sm:text-base">
                     +91 98765 43210
                   </span>
                 </a>
@@ -175,12 +176,12 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:info@romanestate.com"
-                  className="flex items-center gap-4 group transition-colors"
+                  className="flex items-center gap-3 sm:gap-4 group transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-brand-primary group-hover:bg-brand-primary/10 transition-all">
-                    <Mail className="w-5 h-5 text-brand-primary" />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-brand-primary group-hover:bg-brand-primary/10 transition-all">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                   </div>
-                  <span className="text-gray-400 group-hover:text-white text-base">
+                  <span className="text-gray-400 group-hover:text-white text-sm sm:text-base">
                     info@romanestate.com
                   </span>
                 </a>

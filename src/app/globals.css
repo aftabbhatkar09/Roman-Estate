@@ -48,12 +48,27 @@
   }
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100dvh;
 }
 
 img, video {
@@ -61,10 +76,46 @@ img, video {
   height: auto;
 }
 
+img {
+  display: block;
+}
+
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     @apply tracking-tight;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
+}
+
+p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+input, textarea, select, button {
+  font-family: inherit;
+}
+
+/* Prevent overflow on all containers */
+.max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-xl, .max-w-lg {
+  width: 100%;
+}
+
+/* Responsive container padding */
+[class*="max-w-"] {
+  padding-left: max(env(safe-area-inset-left), 1rem);
+  padding-right: max(env(safe-area-inset-right), 1rem);
+}
+
+/* Ensure sections don't overflow */
+section {
+  overflow: hidden;
+}
+
+/* Fix button text on mobile */
+button, a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Modern glass morphism */

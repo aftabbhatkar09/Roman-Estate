@@ -12,6 +12,7 @@ import {
   Camera,
   Briefcase,
   ArrowRight,
+  Building2,
 } from "lucide-react";
 import Image from "next/image";
 import { useSubmitInquiryMutation } from "@/lib/redux/slices/apiSlice";
@@ -21,6 +22,7 @@ export default function ContactPage() {
     name: "",
     email: "",
     phone: "",
+    requirementType: "Buying",
     message: "",
     _honeypot: "",
   });
@@ -44,6 +46,7 @@ export default function ContactPage() {
         name: "",
         email: "",
         phone: "",
+        requirementType: "Buying",
         message: "",
         _honeypot: "",
       });
@@ -67,28 +70,28 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 via-brand-dark/90 to-brand-accent/10" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-dark" />
 
-        <div className="max-w-7xl mx-auto px-4 relative z-10 text-center space-y-6">
-          <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white text-[10px] font-black uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
+        <div className="max-w-7xl mx-auto px-4 relative z-10 text-center space-y-4 sm:space-y-6">
+          <span className="inline-block px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
             Get in Touch
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[1.1]">
             How Can We <br />
             <span className="gradient-text">
               Assist You?
             </span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed px-2 sm:px-0">
             Our advisors are ready to help you navigate Mumbai&apos;s premium real
             estate landscape.
           </p>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+      <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-20">
           {/* Left: Contact Info */}
-          <div className="lg:col-span-5 space-y-12">
-            <div className="space-y-8">
+          <div className="lg:col-span-5 space-y-8 sm:space-y-12">
+            <div className="space-y-6 sm:space-y-8">
               {[
                 {
                   icon: Phone,
@@ -115,20 +118,20 @@ export default function ContactPage() {
                   iconColor: "text-brand-primary",
                 },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-6 group">
+                <div key={i} className="flex items-start gap-4 sm:gap-6 group">
                   <div
-                    className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500`}
+                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500`}
                   >
-                    <item.icon className={`w-6 h-6 ${item.iconColor}`} />
+                    <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${item.iconColor}`} />
                   </div>
-                  <div className="space-y-1">
-                    <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+                  <div className="space-y-1 min-w-0">
+                    <h3 className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
                       {item.title}
                     </h3>
-                    <p className="text-xl font-black text-brand-dark">
+                    <p className="text-base sm:text-lg md:text-xl font-black text-brand-dark break-words">
                       {item.content}
                     </p>
-                    <p className="text-sm text-gray-500 font-medium">
+                    <p className="text-xs sm:text-sm text-gray-500 font-medium">
                       {item.sub}
                     </p>
                   </div>
@@ -137,26 +140,26 @@ export default function ContactPage() {
             </div>
 
             {/* Social Cards */}
-            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-10 md:p-12 text-white relative overflow-hidden group shadow-2xl">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
-              <div className="relative z-10 space-y-8">
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-black tracking-tight flex items-center gap-3">
-                    <Globe className="w-6 h-6 text-brand-primary-light" />
+            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-10 lg:p-12 text-white relative overflow-hidden group shadow-2xl">
+              <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 group-hover:scale-150 transition-transform duration-1000" />
+              <div className="relative z-10 space-y-6 sm:space-y-8">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-3">
+                    <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary-light shrink-0" />
                     Digital Presence
                   </h3>
-                  <p className="text-gray-400 font-medium leading-relaxed">
+                  <p className="text-gray-400 font-medium leading-relaxed text-sm sm:text-base">
                     Join our exclusive community for real-time market insights
                     and off-market opportunities.
                   </p>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-3 sm:gap-4">
                   {[Camera, Briefcase, Send].map((Icon, i) => (
                     <button
                       key={i}
-                      className="w-12 h-12 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center transition-all border border-white/10 group/icon"
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center transition-all border border-white/10 group/icon"
                     >
-                      <Icon className="w-5 h-5 text-white" />
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </button>
                   ))}
                 </div>
@@ -166,46 +169,46 @@ export default function ContactPage() {
 
           {/* Right: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-[2rem] sm:rounded-[3rem] shadow-card border border-gray-100 p-6 sm:p-8 md:p-12 lg:p-16 relative overflow-hidden">
+            <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-card border border-gray-100 p-5 sm:p-6 md:p-10 lg:p-16 relative overflow-hidden">
               {submitted ? (
-                <div className="text-center py-16 space-y-10">
-                  <div className="w-24 h-24 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-full flex items-center justify-center mx-auto shadow-xl">
-                    <CheckCircle2 className="w-12 h-12 text-brand-primary" />
+                <div className="text-center py-10 sm:py-16 space-y-6 sm:space-y-10">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-full flex items-center justify-center mx-auto shadow-xl">
+                    <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12 text-brand-primary" />
                   </div>
-                  <div className="space-y-4">
-                    <h2 className="text-4xl font-black text-brand-dark tracking-tight">
+                  <div className="space-y-3 sm:space-y-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark tracking-tight">
                       Transmission Received
                     </h2>
-                    <p className="text-gray-500 text-lg font-medium leading-relaxed max-w-sm mx-auto">
+                    <p className="text-gray-500 text-base sm:text-lg font-medium leading-relaxed max-w-sm mx-auto">
                       Thank you for your interest. A senior advisor will reach
                       out to you within the next business day.
                     </p>
                   </div>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="premium-button-outline"
+                    className="premium-button-outline text-sm sm:text-base"
                   >
                     Send Another Message
                   </button>
                 </div>
               ) : (
-                <div className="space-y-12">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center">
-                        <MessageSquare className="w-5 h-5 text-brand-primary" />
+                <div className="space-y-8 sm:space-y-12">
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center shrink-0">
+                        <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                       </div>
-                      <h2 className="text-3xl font-black text-brand-dark tracking-tight">
+                      <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
                         Direct Inquiry
                       </h2>
                     </div>
-                    <p className="text-gray-500 font-medium leading-relaxed">
+                    <p className="text-gray-500 font-medium leading-relaxed text-sm sm:text-base">
                       Please provide your details and requirements below.
                       Confidentiality is our priority.
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-8">
+                  <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-8">
                     <input
                       type="text"
                       name="_honeypot"
@@ -218,15 +221,15 @@ export default function ContactPage() {
                       }
                     />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                      <div className="space-y-2 sm:space-y-3">
+                        <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
                           Full Name
                         </label>
                         <input
                           type="text"
                           required
-                          className="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark"
+                          className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
                           placeholder="Ex: Alexander Roman"
                           value={formData.name}
                           onChange={(e) =>
@@ -234,14 +237,14 @@ export default function ContactPage() {
                           }
                         />
                       </div>
-                      <div className="space-y-3">
-                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
+                      <div className="space-y-2 sm:space-y-3">
+                        <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
                           Email Address
                         </label>
                         <input
                           type="email"
                           required
-                          className="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark"
+                          className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
                           placeholder="alex@domain.com"
                           value={formData.email}
                           onChange={(e) =>
@@ -251,14 +254,14 @@ export default function ContactPage() {
                       </div>
                     </div>
 
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
+                    <div className="space-y-2 sm:space-y-3">
+                      <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
                         Mobile Number
                       </label>
                       <input
                         type="tel"
                         required
-                        className="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark"
+                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
                         placeholder="+91 00000 00000"
                         value={formData.phone}
                         onChange={(e) =>
@@ -267,14 +270,38 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
+                    <div className="space-y-2 sm:space-y-3">
+                      <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
+                        <Building2 className="w-3 h-3" /> Requirement Type
+                      </label>
+                      <div className="flex gap-2 sm:gap-3">
+                        {(["Buying", "Selling", "Renting"] as const).map((type) => (
+                          <button
+                            key={type}
+                            type="button"
+                            onClick={() =>
+                              setFormData({ ...formData, requirementType: type })
+                            }
+                            className={`flex-1 px-3 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold border transition-all ${
+                              formData.requirementType === type
+                                ? "bg-gradient-to-r from-brand-primary to-brand-accent text-white border-transparent shadow-lg shadow-brand-primary/25"
+                                : "bg-white text-gray-500 border-gray-200 hover:border-brand-primary/30"
+                            }`}
+                          >
+                            {type}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 sm:space-y-3">
+                      <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
                         Brief Inquiry
                       </label>
                       <textarea
                         required
-                        rows={5}
-                        className="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all resize-none font-bold text-brand-dark"
+                        rows={4}
+                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all resize-none font-bold text-brand-dark text-sm sm:text-base"
                         placeholder="What are you looking for?"
                         value={formData.message}
                         onChange={(e) =>
@@ -284,7 +311,7 @@ export default function ContactPage() {
                     </div>
 
                     {error && (
-                      <div className="bg-red-50 text-red-600 px-6 py-4 rounded-2xl text-sm font-bold border border-red-100">
+                      <div className="bg-red-50 text-red-600 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold border border-red-100">
                         {error}
                       </div>
                     )}
@@ -292,14 +319,14 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full premium-button-primary py-5 text-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 group/btn"
+                      className="w-full premium-button-primary py-3.5 sm:py-5 text-base sm:text-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 group/btn"
                     >
                       {loading ? (
-                        <Loader2 className="w-6 h-6 animate-spin" />
+                        <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 animate-spin" />
                       ) : (
                         <>
                           Send Message{" "}
-                          <ArrowRight className="w-5 h-5 ml-3 group-hover/btn:translate-x-1 transition-transform" />
+                          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3 group-hover/btn:translate-x-1 transition-transform" />
                         </>
                       )}
                     </button>
@@ -312,8 +339,8 @@ export default function ContactPage() {
       </div>
 
       {/* Map Section */}
-      <div className="max-w-7xl mx-auto px-4 pb-32">
-        <div className="h-[400px] sm:h-[500px] md:h-[600px] bg-gray-50 rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
+      <div className="max-w-7xl mx-auto px-4 pb-20 sm:pb-24 md:pb-32">
+        <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-gray-50 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
           <Image
             src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=2000"
             alt="Office Location"
@@ -321,21 +348,21 @@ export default function ContactPage() {
             className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 to-transparent" />
-          <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 md:bottom-16 md:left-16 glass-morphism p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[3rem] shadow-2xl border border-white/20 transform group-hover:-translate-y-2 transition-transform duration-500">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-3 h-3 bg-gradient-to-r from-brand-primary to-brand-accent rounded-full animate-pulse" />
-              <span className="text-brand-dark font-black uppercase tracking-[0.2em] text-[10px]">
+          <div className="absolute bottom-3 sm:bottom-6 md:bottom-10 lg:bottom-16 left-3 sm:left-6 md:left-10 lg:left-16 right-3 sm:right-auto glass-morphism p-4 sm:p-6 md:p-8 lg:p-12 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-2xl border border-white/20 transform group-hover:-translate-y-2 transition-transform duration-500">
+            <div className="flex items-center gap-2 sm:gap-4 mb-3 sm:mb-6">
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-brand-primary to-brand-accent rounded-full animate-pulse shrink-0" />
+              <span className="text-brand-dark font-black uppercase tracking-[0.2em] text-[8px] sm:text-[10px]">
                 Headquarters
               </span>
             </div>
-            <h3 className="text-3xl font-black text-brand-dark mb-2 tracking-tight">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-brand-dark mb-1 sm:mb-2 tracking-tight">
               Visit Us in Mumbai
             </h3>
-            <p className="text-gray-500 font-medium leading-relaxed max-w-xs">
+            <p className="text-gray-500 font-medium leading-relaxed max-w-[200px] sm:max-w-xs text-xs sm:text-sm md:text-base">
               Opera House, Charni Road, Mumbai, Maharashtra 400004
             </p>
-            <button className="mt-8 premium-button-primary !py-3 !px-8 text-sm flex items-center gap-2">
-              Open in Maps <ArrowRight className="w-4 h-4" />
+            <button className="mt-4 sm:mt-6 md:mt-8 premium-button-primary !py-2 sm:!py-3 !px-5 sm:!px-6 md:!px-8 text-[11px] sm:text-sm flex items-center gap-2">
+              Open in Maps <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </button>
           </div>
         </div>

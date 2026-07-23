@@ -150,8 +150,9 @@ export default function AdminLayoutClient({
     )?.name ?? "Admin";
 
   return (
-    <div className="flex min-h-screen bg-[#fafbfc]">
-      <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col shrink-0">
+    <div className="flex h-screen bg-[#fafbfc] overflow-hidden">
+      {/* Desktop Sidebar — fixed */}
+      <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col shrink-0 fixed left-0 top-0 z-30 h-screen">
         <SidebarContent
           pathname={pathname}
           role={role}
@@ -161,6 +162,7 @@ export default function AdminLayoutClient({
         />
       </aside>
 
+      {/* Mobile Sidebar — overlay drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 md:hidden" onClick={() => setMobileOpen(false)}>
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
@@ -180,8 +182,10 @@ export default function AdminLayoutClient({
         </div>
       )}
 
-      <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <header className="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 sm:px-6 md:px-8 shrink-0">
+      {/* Main area — offset for fixed sidebar */}
+      <main className="flex-1 flex flex-col min-w-0 md:ml-64 h-screen">
+        {/* Header — sticky */}
+        <header className="shrink-0 bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 sm:px-6 md:px-8 sticky top-0 z-20">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileOpen((v) => !v)}
@@ -234,6 +238,7 @@ export default function AdminLayoutClient({
           </div>
         </header>
 
+        {/* Only this scrolls */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8">{children}</div>
       </main>
     </div>

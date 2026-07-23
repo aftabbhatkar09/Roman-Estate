@@ -70,13 +70,13 @@ export default function PropertiesClient({
     });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12 md:py-16 flex flex-col lg:flex-row gap-8 md:gap-12">
+    <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-16 flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12">
       {/* Sidebar Filters */}
       <aside className="w-full lg:w-80 shrink-0 space-y-6">
-        <div className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-card border border-gray-100 space-y-8 sticky top-28">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] shadow-card border border-gray-100 space-y-6 sm:space-y-8 sticky top-28">
           <div className="flex items-center justify-between">
-            <div className="flex items-center text-brand-dark font-black text-xl tracking-tight">
-              <SlidersHorizontal className="w-5 h-5 mr-3 text-brand-primary" />
+            <div className="flex items-center text-brand-dark font-black text-lg sm:text-xl tracking-tight">
+              <SlidersHorizontal className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-brand-primary" />
               Refine Search
             </div>
           </div>

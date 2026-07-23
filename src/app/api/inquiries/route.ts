@@ -13,8 +13,12 @@ export async function POST(request: Request) {
     }
 
     // Basic validation
-    if (!data.name || !data.email || !data.phone || !data.message) {
+    if (!data.name || !data.email || !data.phone || !data.requirementType || !data.message) {
       return NextResponse.json({ error: 'Please fill all required fields' }, { status: 400 });
+    }
+
+    if (!['Buying', 'Selling', 'Renting'].includes(data.requirementType)) {
+      return NextResponse.json({ error: 'Invalid requirement type' }, { status: 400 });
     }
 
     const inquiry = await Inquiry.create(data);

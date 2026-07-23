@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Mail, Phone, Calendar, MessageSquare, Trash2 } from "lucide-react";
+import { Mail, Phone, Calendar, MessageSquare, Trash2, Building2 } from "lucide-react";
 import {
   useUpdateInquiryStatusMutation,
   useDeleteInquiryMutation,
@@ -150,6 +150,21 @@ export default function AdminInquiriesClient({
                           {inquiry.phone}
                         </span>
                       </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                        !inquiry.requirementType
+                          ? 'bg-gray-100 text-gray-500'
+                          : inquiry.requirementType === 'Buying'
+                          ? 'bg-green-100 text-green-700'
+                          : inquiry.requirementType === 'Selling'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'bg-amber-100 text-amber-700'
+                      }`}>
+                        <Building2 className="w-3 h-3 inline mr-1 -mt-0.5" />
+                        {inquiry.requirementType || 'Not specified'}
+                      </span>
                     </div>
 
                     <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100/50">

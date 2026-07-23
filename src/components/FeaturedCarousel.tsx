@@ -76,13 +76,13 @@ export default function FeaturedCarousel({
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-10 pt-2 no-scrollbar items-stretch"
+        className="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-6 pb-6 sm:pb-10 pt-2 no-scrollbar items-stretch -mx-1 sm:mx-0 px-1 sm:px-0"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {properties.map((property) => (
           <div
             key={property._id}
-            className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.3333%-16px)] min-[1400px]:w-[calc(25%-18px)] snap-center shrink-0 flex flex-col"
+            className="w-[85vw] sm:w-[75vw] md:w-[calc(50%-12px)] lg:w-[calc(33.3333%-16px)] min-[1400px]:w-[calc(25%-18px)] snap-center shrink-0 flex flex-col"
           >
             <Link
               href={`/properties/${property._id}`}
@@ -107,7 +107,7 @@ export default function FeaturedCarousel({
                   </span>
                 </div>
                 <div className="absolute bottom-2 left-2">
-                  <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-2.5 py-0.5 rounded-md text-[10px] font-bold shadow-lg">
+                  <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold shadow-lg whitespace-nowrap">
                     ₹{property.price?.toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -118,31 +118,31 @@ export default function FeaturedCarousel({
                 </div>
               </div>
 
-              <div className="p-3 flex-1 flex flex-col justify-between">
+              <div className="p-2.5 sm:p-3 flex-1 flex flex-col justify-between">
                 <div>
-                  <h4 className="text-sm font-bold text-brand-dark group-hover/card:text-brand-primary transition-colors line-clamp-1 mb-1">
+                  <h4 className="text-xs sm:text-sm font-bold text-brand-dark group-hover/card:text-brand-primary transition-colors line-clamp-1 mb-1">
                     {property.title}
                   </h4>
-                  <div className="flex items-center text-gray-500 text-[11px] mb-3">
-                    <MapPin className="w-3 h-3 mr-0.5 text-brand-primary shrink-0" />
+                  <div className="flex items-center text-gray-500 text-[10px] sm:text-[11px] mb-2 sm:mb-3">
+                    <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-0.5 text-brand-primary shrink-0" />
                     <span className="line-clamp-1">
                       {property.location?.city || "Mumbai"}
                     </span>
                   </div>
                 </div>
 
-                <div className="pt-2.5 border-t border-gray-100 flex items-center gap-2">
+                <div className="pt-2 sm:pt-2.5 border-t border-gray-100 flex items-center gap-2 sm:gap-2">
                   <div className="flex items-center gap-0.5 text-gray-600">
-                    <BedDouble className="w-3 h-3 text-brand-primary" />
-                    <span className="text-[10px] font-semibold">{property.bedrooms || 0}</span>
+                    <BedDouble className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-brand-primary" />
+                    <span className="text-[9px] sm:text-[10px] font-semibold">{property.bedrooms || 0}</span>
                   </div>
                   <div className="flex items-center gap-0.5 text-gray-600">
-                    <Bath className="w-3 h-3 text-brand-primary" />
-                    <span className="text-[10px] font-semibold">{property.bathrooms || 2}</span>
+                    <Bath className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-brand-primary" />
+                    <span className="text-[9px] sm:text-[10px] font-semibold">{property.bathrooms || 2}</span>
                   </div>
                   <div className="flex items-center gap-0.5 text-gray-600">
-                    <Square className="w-3 h-3 text-brand-primary" />
-                    <span className="text-[10px] font-semibold">{property.size || 0}<span className="text-[8px] uppercase ml-0.5">Sqft</span></span>
+                    <Square className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-brand-primary" />
+                    <span className="text-[9px] sm:text-[10px] font-semibold">{property.size || 0}<span className="text-[7px] sm:text-[8px] uppercase ml-0.5">Sqft</span></span>
                   </div>
                 </div>
               </div>
