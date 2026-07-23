@@ -86,7 +86,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="relative aspect-[4/5] max-h-[600px] rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl max-w-md mx-auto lg:max-w-none">
+            <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-full min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl">
               <Image 
                 src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?auto=format&fit=crop&q=80&w=1000"
                 alt="Architecture"

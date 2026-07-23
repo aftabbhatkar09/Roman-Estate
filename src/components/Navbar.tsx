@@ -135,94 +135,96 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Fullscreen Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 bg-white z-[100] md:hidden transition-all duration-300 flex flex-col ${
-          isOpen
-            ? "opacity-100 pointer-events-auto scale-100"
-            : "opacity-0 pointer-events-none scale-95"
-        }`}
-      >
-        {/* Mobile menu header with full branding and close button */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0 bg-white">
-          <Link
-            href="/"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-2 leading-none"
+      {/* Mobile Drawer Overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] md:hidden" onClick={() => setIsOpen(false)}>
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+          <aside
+            className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"
+            onClick={(e) => e.stopPropagation()}
           >
-            <Image
-              src="/images/logo3.png"
-              alt="Roman Estate Logo"
-              height={40}
-              width={40}
-              className="w-10 h-10"
-            />
-            <div className="flex flex-col items-center justify-center font-serif text-black uppercase select-none">
-              <span className="text-[8px] tracking-[0.4em] mb-0.5 font-medium">
-                The
-              </span>
-              <span className="text-lg tracking-widest font-normal leading-none">
-                Roman
-              </span>
-              <span className="text-[7px] tracking-[0.4em] font-medium text-gray-800">
-                Estate
-              </span>
-            </div>
-          </Link>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 transition-colors"
-            aria-label="Close menu"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Mobile Nav Links */}
-        <div className="flex-1 px-6 py-8 space-y-2 overflow-y-auto bg-white">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
+            {/* Mobile menu header with full branding and close button */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0 bg-white">
               <Link
-                key={link.name}
-                href={link.href}
+                href="/"
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center justify-between py-4 px-5 rounded-2xl text-xl font-bold transition-all ${
-                  isActive
-                    ? "bg-brand-primary/10 text-brand-primary font-black"
-                    : "text-brand-dark hover:bg-gray-50 hover:text-brand-primary"
-                }`}
+                className="flex items-center gap-2 leading-none"
               >
-                <span>{link.name}</span>
-                {isActive && (
-                  <div className="w-2.5 h-2.5 rounded-full bg-brand-primary shadow-sm" />
-                )}
+                <Image
+                  src="/images/logo3.png"
+                  alt="Roman Estate Logo"
+                  height={40}
+                  width={40}
+                  className="w-10 h-10"
+                />
+                <div className="flex flex-col items-center justify-center font-serif text-black uppercase select-none">
+                  <span className="text-[8px] tracking-[0.4em] mb-0.5 font-medium">
+                    The
+                  </span>
+                  <span className="text-lg tracking-widest font-normal leading-none">
+                    Roman
+                  </span>
+                  <span className="text-[7px] tracking-[0.4em] font-medium text-gray-800">
+                    Estate
+                  </span>
+                </div>
               </Link>
-            );
-          })}
-        </div>
-
-        {/* Mobile CTAs Footer */}
-        <div className="p-6 border-t border-gray-100 space-y-3 bg-gray-50/70 shrink-0">
-          <a
-            href="tel:+919876543210"
-            className="flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white border border-gray-200 text-base font-bold text-gray-800 shadow-sm"
-          >
-            <div className="w-8 h-8 rounded-xl bg-brand-primary/10 flex items-center justify-center">
-              <Phone className="w-4 h-4 text-brand-primary" />
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
-            +91 98765 43210
-          </a>
-          <Link
-            href="/admin"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center justify-center gap-2 w-full premium-button-primary py-3.5 text-base font-bold"
-          >
-            <User className="w-5 h-5" />
-            Admin Panel
-          </Link>
+
+            {/* Mobile Nav Links */}
+            <div className="flex-1 px-6 py-8 space-y-2 overflow-y-auto bg-white">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center justify-between py-4 px-5 rounded-2xl text-xl font-bold transition-all ${
+                      isActive
+                        ? "bg-brand-primary/10 text-brand-primary font-black"
+                        : "text-brand-dark hover:bg-gray-50 hover:text-brand-primary"
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    {isActive && (
+                      <div className="w-2.5 h-2.5 rounded-full bg-brand-primary shadow-sm" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Mobile CTAs Footer */}
+            <div className="p-6 border-t border-gray-100 space-y-3 bg-gray-50/70 shrink-0">
+              <a
+                href="tel:+919876543210"
+                className="flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white border border-gray-200 text-base font-bold text-gray-800 shadow-sm"
+              >
+                <div className="w-8 h-8 rounded-xl bg-brand-primary/10 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-brand-primary" />
+                </div>
+                +91 98765 43210
+              </a>
+              <Link
+                href="/admin"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-center gap-2 w-full premium-button-primary py-3.5 text-base font-bold"
+              >
+                <User className="w-5 h-5" />
+                Admin Panel
+              </Link>
+            </div>
+          </aside>
         </div>
-      </div>
+      )}
     </>
   );
 }
