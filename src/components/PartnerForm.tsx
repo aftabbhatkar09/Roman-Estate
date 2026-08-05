@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { useRouter, useParams } from "next/navigation";
 import SingleImageUpload from "@/components/SingleImageUpload";
 import {
@@ -37,16 +37,21 @@ export default function PartnerForm() {
 
   useEffect(() => {
     if (isEditing && existingPartner) {
-      setFormData({
-        name: existingPartner.name || "",
-        logo: existingPartner.logo || "",
-        website: existingPartner.website || "",
-        order: existingPartner.order || 0,
-        active:
-          existingPartner.active !== undefined ? existingPartner.active : true,
+      startTransition(() => {
+        setFormData({
+          name: existingPartner.name || "",
+          logo: existingPartner.logo || "",
+          website: existingPartner.website || "",
+          order: existingPartner.order || 0,
+          active:
+            existingPartner.active !== undefined
+              ? existingPartner.active
+              : true,
+        });
       });
     }
-  }, [isEditing, existingPartner]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [existingPartner]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -117,7 +122,7 @@ export default function PartnerForm() {
         <button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 disabled:opacity-50"
+          className="bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 disabled:opacity-50"
         >
           <Save className="w-5 h-5 mr-2" />
           {isLoading ? "Saving..." : "Save Partner"}

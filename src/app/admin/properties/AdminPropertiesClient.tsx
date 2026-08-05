@@ -1,21 +1,36 @@
-'use client';
-import { useState } from 'react';
-import Link from 'next/link';
-import { Plus, Edit, Trash2 } from 'lucide-react';
-import { useDeletePropertyMutation } from '@/lib/redux/slices/apiSlice';
-import DeleteModal from '@/components/DeleteModal';
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import { Plus, Edit, Trash2 } from "lucide-react";
+import { useDeletePropertyMutation } from "@/lib/redux/slices/apiSlice";
+import DeleteModal from "@/components/DeleteModal";
 
-interface AdminPropertiesClientProps {
-  initialProperties: any[];
+interface Property {
+  _id: string;
+  title: string;
+  type: string;
+  status: string;
+  price: number;
+  location: { address?: string; area: string; city: string };
+  bedrooms: number;
+  createdAt?: string | Date;
 }
 
-export default function AdminPropertiesClient({ initialProperties }: AdminPropertiesClientProps) {
-  const [properties, setProperties] = useState<any[]>(initialProperties);
+interface AdminPropertiesClientProps {
+  initialProperties: Property[];
+}
+
+export default function AdminPropertiesClient({
+  initialProperties,
+}: AdminPropertiesClientProps) {
+  const [properties, setProperties] = useState<Property[]>(initialProperties);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState<any>(null);
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(
+    null,
+  );
   const [deleteProperty] = useDeletePropertyMutation();
 
-  const openDeleteModal = (property: any) => {
+  const openDeleteModal = (property: Property) => {
     setSelectedProperty(property);
     setIsModalOpen(true);
   };
@@ -25,12 +40,12 @@ export default function AdminPropertiesClient({ initialProperties }: AdminProper
 
     try {
       await deleteProperty(selectedProperty._id).unwrap();
-      setProperties(properties.filter(p => p._id !== selectedProperty._id));
+      setProperties(properties.filter((p) => p._id !== selectedProperty._id));
       setIsModalOpen(false);
       setSelectedProperty(null);
     } catch (error) {
-      console.error('Error deleting property:', error);
-      alert('Failed to delete property');
+      console.error("Error deleting property:", error);
+      alert("Failed to delete property");
     }
   };
 
@@ -40,14 +55,14 @@ export default function AdminPropertiesClient({ initialProperties }: AdminProper
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleDelete}
-        title={selectedProperty?.title || ''}
+        title={selectedProperty?.title || ""}
       />
 
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-800">Manage Properties</h2>
         <Link
           href="/admin/properties/new"
-          className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 font-medium text-sm"
+          className="bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 font-medium text-sm"
         >
           <Plus className="w-5 h-5 mr-2" />
           Add Property
@@ -55,40 +70,64 @@ export default function AdminPropertiesClient({ initialProperties }: AdminProper
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
-        <table className="w-full text-left min-w-[600px]">
+        <table className="w-full text-left min-w-150">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Property</th>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Location</th>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Price</th>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Status</th>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600 text-right">Actions</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-600">
+                Property
+              </th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-600">
+                Location
+              </th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-600">
+                Price
+              </th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-600">
+                Status
+              </th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-600 text-right">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {properties.length === 0 ? (
               <tr>
-                <td className="px-6 py-8 text-center text-gray-500 italic" colSpan={5}>
+                <td
+                  className="px-6 py-8 text-center text-gray-500 italic"
+                  colSpan={5}
+                >
                   No properties found. Start by adding your first listing!
                 </td>
               </tr>
             ) : (
               properties.map((property) => (
-                <tr key={property._id} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={property._id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
                   <td className="px-6 py-4">
-                    <div className="font-medium text-gray-900">{property.title}</div>
-                    <div className="text-xs text-gray-500">{property.type} • {property.bedrooms} BHK</div>
+                    <div className="font-medium text-gray-900">
+                      {property.title}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {property.type} • {property.bedrooms} BHK
+                    </div>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-600">
                     {property.location.area}, {property.location.city}
                   </td>
                   <td className="px-6 py-4 text-sm font-semibold text-indigo-600">
-                    ₹{property.price.toLocaleString('en-IN')}
+                    ₹{property.price.toLocaleString("en-IN")}
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                      property.status === 'For Sale' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        property.status === "For Sale"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-orange-100 text-orange-700"
+                      }`}
+                    >
                       {property.status}
                     </span>
                   </td>

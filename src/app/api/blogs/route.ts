@@ -10,9 +10,16 @@ export async function GET() {
     await connectDB();
     const blogs = await Blog.find({}).sort({ createdAt: -1 });
     return NextResponse.json(blogs);
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const err = error as {
+      message?: string;
+      errors?: Record<string, { message: string }>;
+    };
     console.error("Blog GET Error:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message || "Failed to fetch blogs" },
+      { status: 500 },
+    );
   }
 }
 
@@ -36,17 +43,24 @@ export async function POST(request: Request) {
       { message: "Blog created successfully", blog },
       { status: 201 },
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const err = error as {
+      message?: string;
+      errors?: Record<string, { message: string }>;
+    };
     console.error("Blog POST Error:", error);
     return NextResponse.json(
       {
-        error: error.message || "Failed to create blog",
-        details: error.errors
-          ? Object.keys(error.errors).map((key) => ({
-              field: key,
-              message: error.errors[key].message,
-            }))
-          : null,
+        error: err.message || "Failed to create blog",
+        details:
+          err.errors && typeof err.errors === "object"
+            ? Object.keys(err.errors).map((key) => ({
+                field: key,
+                message:
+                  (err.errors as Record<string, { message?: string }>)[key]
+                    ?.message || "",
+              }))
+            : null,
       },
       { status: 500 },
     );

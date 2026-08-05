@@ -1,6 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Mail, Phone, Calendar, MessageSquare, Trash2, Building2 } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  Calendar,
+  MessageSquare,
+  Trash2,
+  Building2,
+} from "lucide-react";
 import {
   useUpdateInquiryStatusMutation,
   useDeleteInquiryMutation,
@@ -22,18 +29,33 @@ const BORDER_STYLES: Record<Status, string> = {
   Resolved: "bg-green-500",
 };
 
+interface InquiryItem {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  requirementType: string;
+  message: string;
+  status: Status;
+  createdAt: string | Date;
+  propertyId?: {
+    _id: string;
+    title: string;
+  };
+}
+
 export default function AdminInquiriesClient({
   initialInquiries,
 }: {
-  initialInquiries: any[];
+  initialInquiries: InquiryItem[];
 }) {
-  const [inquiries, setInquiries] = useState<any[]>(initialInquiries);
+  const [inquiries, setInquiries] = useState<InquiryItem[]>(initialInquiries);
   const [updateStatus] = useUpdateInquiryStatusMutation();
   const [deleteInquiry] = useDeleteInquiryMutation();
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [deleteModal, setDeleteModal] = useState<{
     open: boolean;
-    inquiry: any | null;
+    inquiry: InquiryItem | null;
   }>({ open: false, inquiry: null });
 
   const handleStatusChange = async (id: string, newStatus: Status) => {
@@ -53,12 +75,11 @@ export default function AdminInquiriesClient({
   };
 
   const handleDelete = async () => {
-    if (!deleteModal.inquiry) return;
+    const inquiry = deleteModal.inquiry;
+    if (!inquiry) return;
     try {
-      await deleteInquiry(deleteModal.inquiry._id).unwrap();
-      setInquiries((prev) =>
-        prev.filter((inq) => inq._id !== deleteModal.inquiry._id),
-      );
+      await deleteInquiry(inquiry._id).unwrap();
+      setInquiries((prev) => prev.filter((inq) => inq._id !== inquiry._id));
       setDeleteModal({ open: false, inquiry: null });
     } catch {
       alert("Failed to delete inquiry");
@@ -132,7 +153,7 @@ export default function AdminInquiriesClient({
                         </h3>
                         <div className="flex items-center text-gray-400 text-xs font-bold uppercase tracking-wider mt-1">
                           <Calendar className="w-3.5 h-3.5 mr-1.5 text-indigo-500" />
-                          {new Date(inquiry.createdAt).toLocaleString('en-IN')}
+                          {new Date(inquiry.createdAt).toLocaleString("en-IN")}
                         </div>
                       </div>
                     </div>
@@ -153,17 +174,19 @@ export default function AdminInquiriesClient({
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
-                        !inquiry.requirementType
-                          ? 'bg-gray-100 text-gray-500'
-                          : inquiry.requirementType === 'Buying'
-                          ? 'bg-green-100 text-green-700'
-                          : inquiry.requirementType === 'Selling'
-                          ? 'bg-blue-100 text-blue-700'
-                          : 'bg-amber-100 text-amber-700'
-                      }`}>
+                      <span
+                        className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                          !inquiry.requirementType
+                            ? "bg-gray-100 text-gray-500"
+                            : inquiry.requirementType === "Buying"
+                              ? "bg-green-100 text-green-700"
+                              : inquiry.requirementType === "Selling"
+                                ? "bg-blue-100 text-blue-700"
+                                : "bg-amber-100 text-amber-700"
+                        }`}
+                      >
                         <Building2 className="w-3 h-3 inline mr-1 -mt-0.5" />
-                        {inquiry.requirementType || 'Not specified'}
+                        {inquiry.requirementType || "Not specified"}
                       </span>
                     </div>
 
@@ -199,7 +222,7 @@ export default function AdminInquiriesClient({
                       ))}
                       <a
                         href={`mailto:${inquiry.email}`}
-                        className="block w-full text-center bg-gradient-to-r from-[#0f172a] to-[#1e293b] text-white py-3 rounded-xl text-sm font-bold hover:from-[#1e293b] hover:to-[#0f172a] transition-all shadow-lg shadow-gray-900/10 active:scale-95"
+                        className="block w-full text-center bg-linear-to-r from-brand-dark to-brand-dark-light text-white py-3 rounded-xl text-sm font-bold hover:from-brand-dark-light hover:to-brand-dark transition-all shadow-lg shadow-gray-900/10 active:scale-95"
                       >
                         Reply by Email
                       </a>

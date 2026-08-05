@@ -1,5 +1,54 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+// ─── Response Types ────────────────────────────────────────────────────────────
+
+export interface BlogData {
+  _id: string;
+  title: string;
+  slug: string;
+  content: string;
+  author: string;
+  excerpt: string;
+  image: string;
+  tags: string[];
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PropertyData {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  location: { address: string; area: string; city: string };
+  type: string;
+  status: string;
+  bedrooms: number;
+  bathrooms: number;
+  size: number;
+  images: string[];
+  amenities: string[];
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PartnerData {
+  _id: string;
+  name: string;
+  logo: string;
+  website: string;
+  order: number;
+  active: boolean;
+}
+
+interface MutationResponse {
+  message: string;
+}
+
+// ─── API Slice ────────────────────────────────────────────────────────────────
+
 // RTK Query API Slice — single source of truth for all client-side API calls
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -7,7 +56,7 @@ export const apiSlice = createApi({
   tagTypes: ["Property", "Blog", "Inquiry", "Partner"],
   endpoints: (builder) => ({
     // ─── Properties ───────────────────────────────────────
-    createProperty: builder.mutation<any, any>({
+    createProperty: builder.mutation<MutationResponse, Record<string, unknown>>({
       query: (data) => ({
         url: "/properties",
         method: "POST",
@@ -16,7 +65,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Property"],
     }),
 
-    updateProperty: builder.mutation<any, { id: string; data: any }>({
+    updateProperty: builder.mutation<MutationResponse, { id: string; data: Record<string, unknown> }>({
       query: ({ id, data }) => ({
         url: `/properties/${id}`,
         method: "PUT",
@@ -25,7 +74,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Property"],
     }),
 
-    deleteProperty: builder.mutation<any, string>({
+    deleteProperty: builder.mutation<MutationResponse, string>({
       query: (id) => ({
         url: `/properties/${id}`,
         method: "DELETE",
@@ -33,13 +82,13 @@ export const apiSlice = createApi({
       invalidatesTags: ["Property"],
     }),
 
-    getPropertyById: builder.query<any, string>({
+    getPropertyById: builder.query<PropertyData, string>({
       query: (id) => `/properties/${id}`,
       providesTags: ["Property"],
     }),
 
     // ─── Blogs ────────────────────────────────────────────
-    createBlog: builder.mutation<any, any>({
+    createBlog: builder.mutation<MutationResponse, Record<string, unknown>>({
       query: (data) => ({
         url: "/blogs",
         method: "POST",
@@ -48,7 +97,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Blog"],
     }),
 
-    updateBlog: builder.mutation<any, { id: string; data: any }>({
+    updateBlog: builder.mutation<MutationResponse, { id: string; data: Record<string, unknown> }>({
       query: ({ id, data }) => ({
         url: `/blogs/${id}`,
         method: "PUT",
@@ -57,7 +106,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Blog"],
     }),
 
-    deleteBlog: builder.mutation<any, string>({
+    deleteBlog: builder.mutation<MutationResponse, string>({
       query: (id) => ({
         url: `/blogs/${id}`,
         method: "DELETE",
@@ -65,13 +114,13 @@ export const apiSlice = createApi({
       invalidatesTags: ["Blog"],
     }),
 
-    getBlogById: builder.query<any, string>({
+    getBlogById: builder.query<BlogData, string>({
       query: (id) => `/blogs/${id}`,
       providesTags: ["Blog"],
     }),
 
     // ─── Inquiries ────────────────────────────────────────
-    submitInquiry: builder.mutation<any, any>({
+    submitInquiry: builder.mutation<MutationResponse, Record<string, unknown>>({
       query: (data) => ({
         url: "/inquiries",
         method: "POST",
@@ -80,7 +129,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Inquiry"],
     }),
 
-    updateInquiryStatus: builder.mutation<any, { id: string; status: string }>({
+    updateInquiryStatus: builder.mutation<MutationResponse, { id: string; status: string }>({
       query: ({ id, status }) => ({
         url: `/inquiries/${id}`,
         method: "PATCH",
@@ -89,7 +138,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Inquiry"],
     }),
 
-    deleteInquiry: builder.mutation<any, string>({
+    deleteInquiry: builder.mutation<MutationResponse, string>({
       query: (id) => ({
         url: `/inquiries/${id}`,
         method: "DELETE",
@@ -98,7 +147,7 @@ export const apiSlice = createApi({
     }),
 
     // ─── Partners ────────────────────────────────────────
-    createPartner: builder.mutation<any, any>({
+    createPartner: builder.mutation<MutationResponse, Record<string, unknown>>({
       query: (data) => ({
         url: "/partners",
         method: "POST",
@@ -107,7 +156,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Partner"],
     }),
 
-    updatePartner: builder.mutation<any, { id: string; data: any }>({
+    updatePartner: builder.mutation<MutationResponse, { id: string; data: Record<string, unknown> }>({
       query: ({ id, data }) => ({
         url: `/partners/${id}`,
         method: "PUT",
@@ -116,7 +165,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Partner"],
     }),
 
-    deletePartner: builder.mutation<any, string>({
+    deletePartner: builder.mutation<MutationResponse, string>({
       query: (id) => ({
         url: `/partners/${id}`,
         method: "DELETE",
@@ -124,7 +173,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Partner"],
     }),
 
-    getPartnerById: builder.query<any, string>({
+    getPartnerById: builder.query<PartnerData, string>({
       query: (id) => `/partners/${id}`,
       providesTags: ["Partner"],
     }),

@@ -161,7 +161,7 @@ export default function ImageUrlManager({
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-sm shadow-indigo-500/20"
+              className="flex items-center gap-2 bg-linear-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-sm shadow-indigo-500/20"
             >
               <Upload className="w-4 h-4" />
               Choose Files from Device
@@ -258,7 +258,7 @@ export default function ImageUrlManager({
                 />
 
                 {idx === 0 && (
-                  <div className="absolute top-2 left-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow">
+                  <div className="absolute top-2 left-2 bg-linear-to-r from-indigo-600 to-indigo-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow">
                     <Star className="w-2.5 h-2.5 fill-current" /> Primary
                   </div>
                 )}
@@ -298,8 +298,8 @@ export default function ImageUrlManager({
 
           <p className="text-xs text-gray-400 flex items-center gap-1.5">
             <Star className="w-3 h-3 text-indigo-500 fill-current" />
-            The first (indigo-bordered) image is the primary display image. Hover
-            to change.
+            The first (indigo-bordered) image is the primary display image.
+            Hover to change.
           </p>
         </div>
       )}

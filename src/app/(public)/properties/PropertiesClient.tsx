@@ -3,7 +3,6 @@ import { useState } from "react";
 import {
   Search,
   MapPin,
-  Home,
   Star,
   SlidersHorizontal,
   X,
@@ -15,8 +14,28 @@ import {
 import ImageWithFallback from "@/components/ImageWithFallback";
 import Link from "next/link";
 
+interface PropertyItem {
+  _id: string;
+  title: string;
+  description?: string;
+  price: number;
+  location: {
+    address?: string;
+    area: string;
+    city: string;
+  };
+  type: string;
+  status: string;
+  bedrooms: number;
+  bathrooms: number;
+  size: number;
+  images: string[];
+  amenities?: string[];
+  featured?: boolean;
+}
+
 interface PropertiesClientProps {
-  initialProperties: any[];
+  initialProperties: PropertyItem[];
   initialSearch?: string;
   initialType?: string;
   initialStatus?: string;
@@ -73,7 +92,7 @@ export default function PropertiesClient({
     <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-16 flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12">
       {/* Sidebar Filters */}
       <aside className="w-full lg:w-80 shrink-0 space-y-6">
-        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] shadow-card border border-gray-100 space-y-6 sm:space-y-8 sticky top-28">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-3xl sm:rounded-4xl shadow-card border border-gray-100 space-y-6 sm:space-y-8 sticky top-28">
           <div className="flex items-center justify-between">
             <div className="flex items-center text-brand-dark font-black text-lg sm:text-xl tracking-tight">
               <SlidersHorizontal className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-brand-primary" />
@@ -106,13 +125,13 @@ export default function PropertiesClient({
               Property Type
             </label>
             <div className="grid grid-cols-2 gap-2">
-              {["All", "Apartment", "Villa", "Commercial", "Plot"].map((t) => (
+              {["All", "Apartment", "Commercial"].map((t) => (
                 <button
                   key={t}
                   onClick={() => setFilter({ ...filter, type: t })}
                   className={`px-4 py-3 rounded-xl text-xs font-bold transition-all border ${
                     filter.type === t
-                      ? "bg-gradient-to-r from-brand-primary to-brand-accent text-white border-transparent shadow-lg shadow-brand-primary/20"
+                      ? "bg-linear-to-r from-brand-primary to-brand-accent text-white border-transparent shadow-lg shadow-brand-primary/20"
                       : "border-gray-100 text-gray-500 hover:border-brand-primary/50 hover:text-brand-primary bg-gray-50/50"
                   }`}
                 >
@@ -134,7 +153,7 @@ export default function PropertiesClient({
                   onClick={() => setFilter({ ...filter, status })}
                   className={`w-full text-left px-5 py-3.5 rounded-xl text-sm font-bold transition-all ${
                     filter.status === status
-                      ? "bg-gradient-to-r from-brand-primary to-brand-accent text-white shadow-lg shadow-brand-primary/20"
+                      ? "bg-linear-to-r from-brand-primary to-brand-accent text-white shadow-lg shadow-brand-primary/20"
                       : "text-gray-500 hover:bg-gray-100 bg-gray-50/50"
                   }`}
                 >
@@ -201,8 +220,8 @@ export default function PropertiesClient({
         </div>
 
         {filteredProperties.length === 0 ? (
-          <div className="bg-white p-12 sm:p-16 md:p-20 rounded-[2rem] sm:rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm">
-            <div className="w-32 h-32 bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 rounded-full flex items-center justify-center mx-auto">
+          <div className="bg-white p-12 sm:p-16 md:p-20 rounded-4xl sm:rounded-[3rem] text-center space-y-8 border border-dashed border-gray-200 shadow-sm">
+            <div className="w-32 h-32 bg-linear-to-br from-brand-primary/5 to-brand-accent/5 rounded-full flex items-center justify-center mx-auto">
               <Search className="w-16 h-16 text-gray-200" />
             </div>
             <div className="max-w-md mx-auto">
@@ -210,8 +229,8 @@ export default function PropertiesClient({
                 No matching properties
               </h3>
               <p className="text-gray-400 font-medium leading-relaxed">
-                We couldn&apos;t find any listings matching your current criteria.
-                Try broadening your search or resetting the filters.
+                We couldn&apos;t find any listings matching your current
+                criteria. Try broadening your search or resetting the filters.
               </p>
             </div>
             <button onClick={clearFilters} className="premium-button-primary">
@@ -226,7 +245,7 @@ export default function PropertiesClient({
                 key={property._id}
                 className="premium-card group/item bg-white flex flex-col h-full"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-4/3 overflow-hidden">
                   <ImageWithFallback
                     src={
                       property.images && property.images.length > 0
@@ -236,7 +255,7 @@ export default function PropertiesClient({
                     alt={property.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    style={{ objectFit: "cover", objectPosition: "center" }}
                     className="group-hover/item:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute top-5 left-5 flex gap-2">
@@ -244,14 +263,14 @@ export default function PropertiesClient({
                       {property.type}
                     </span>
                     {property.featured && (
-                      <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                      <span className="bg-linear-to-r from-brand-primary to-brand-accent text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
                         Featured
                       </span>
                     )}
                   </div>
                   <div className="absolute bottom-5 left-5">
-                    <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg shadow-brand-primary/30">
-                      ₹{property.price?.toLocaleString('en-IN')}
+                    <span className="bg-linear-to-r from-brand-primary to-brand-accent text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg shadow-brand-primary/30">
+                      ₹{property.price?.toLocaleString("en-IN")}
                     </span>
                   </div>
                   <div className="absolute top-5 right-5">
@@ -275,7 +294,7 @@ export default function PropertiesClient({
                       <span className="line-clamp-1">
                         {property.location?.address ||
                           property.location?.city ||
-                          property.location?.type ||
+                          property.location?.area ||
                           "Mumbai"}
                       </span>
                     </div>

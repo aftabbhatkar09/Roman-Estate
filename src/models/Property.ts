@@ -9,7 +9,7 @@ export interface IProperty extends Document {
     area: string;
     city: string;
   };
-  type: 'Apartment' | 'Villa' | 'Commercial' | 'Plot';
+  type: 'Apartment' | 'Commercial';
   status: 'For Sale' | 'For Rent';
   bedrooms: number;
   bathrooms: number;
@@ -33,7 +33,7 @@ const PropertySchema: Schema = new Schema(
     },
     type: {
       type: String,
-      enum: ['Apartment', 'Villa', 'Commercial', 'Plot'],
+      enum: ['Apartment', 'Commercial'],
       required: true,
     },
     status: {

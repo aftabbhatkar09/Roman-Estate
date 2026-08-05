@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Luxury Properties in Mumbai | Roman Estate",
   description:
-    "Explore our curated selection of luxury apartments, villas, and commercial spaces in Mumbai. Find your next investment or dream home.",
+    "Explore luxury homes in Mumbai and premium commercial properties with Roman Estate — your trusted real estate channel partner for new launch projects and residential projects in Mumbai.",
 };
 
 export const dynamic = "force-dynamic";
@@ -39,7 +39,7 @@ export default async function PropertiesPage({
     <div className="bg-gray-50 min-h-screen pb-24">
       {/* Header */}
       <div className="bg-white border-b border-gray-100 pt-28 sm:pt-32 pb-12 sm:pb-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-primary/5 to-transparent -skew-x-12 translate-x-24" />
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-brand-primary/5 to-transparent -skew-x-12 translate-x-24" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
             Properties for <span className="gradient-text">Sale & Rent</span>

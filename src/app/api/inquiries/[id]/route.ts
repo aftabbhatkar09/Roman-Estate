@@ -20,8 +20,9 @@ export async function PATCH(request: NextRequest, context: Params) {
       return NextResponse.json({ error: "Inquiry not found" }, { status: 404 });
     }
     return NextResponse.json({ message: "Inquiry updated", inquiry });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -34,7 +35,8 @@ export async function DELETE(request: NextRequest, context: Params) {
       return NextResponse.json({ error: "Inquiry not found" }, { status: 404 });
     }
     return NextResponse.json({ message: "Inquiry deleted successfully" });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

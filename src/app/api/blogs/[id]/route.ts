@@ -20,8 +20,9 @@ export async function GET(request: NextRequest, context: Params) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
     return NextResponse.json(blog);
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -44,8 +45,9 @@ export async function PUT(request: NextRequest, context: Params) {
       revalidatePath(`/blog/${blog.slug}`);
     }
     return NextResponse.json({ message: "Blog updated successfully", blog });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -63,7 +65,8 @@ export async function DELETE(request: NextRequest, context: Params) {
       revalidatePath(`/blog/${blog.slug}`);
     }
     return NextResponse.json({ message: "Blog deleted successfully" });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

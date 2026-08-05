@@ -99,7 +99,7 @@ function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all shadow-lg shadow-indigo-500/25 active:scale-[0.98]"
+        className="w-full bg-linear-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all shadow-lg shadow-indigo-500/25 active:scale-[0.98]"
       >
         {loading ? (
           <>
@@ -117,11 +117,11 @@ function LoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#1e1b4b] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-brand-dark via-brand-dark-light to-[#1e1b4b] flex items-center justify-center p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-cyan-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="w-full max-w-md relative z-10">
@@ -132,7 +132,7 @@ export default function AdminLoginPage() {
                 className="text-4xl font-black tracking-tight text-white"
                 style={{ fontFamily: "Georgia, serif" }}
               >
-                Roman<span className="text-[#6366f1]">.</span>
+                Roman<span className="text-brand-primary">.</span>
               </span>
               <span className="text-[11px] font-bold text-gray-500 tracking-[0.3em] uppercase mt-1">
                 Estate
@@ -145,9 +145,9 @@ export default function AdminLoginPage() {
         </div>
 
         <div className="bg-white rounded-3xl shadow-2xl shadow-black/40 overflow-hidden">
-          <div className="bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-indigo-900 px-8 py-6">
+          <div className="bg-linear-to-r from-brand-dark via-brand-dark-light to-indigo-900 px-8 py-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 bg-linear-to-br from-brand-primary to-brand-accent rounded-xl flex items-center justify-center shadow-lg">
                 <ShieldCheck className="w-5 h-5 text-white" />
               </div>
               <div>

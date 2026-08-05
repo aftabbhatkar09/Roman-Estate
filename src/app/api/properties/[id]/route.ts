@@ -24,8 +24,9 @@ export async function GET(request: NextRequest, context: Params) {
       );
     }
     return NextResponse.json(property);
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -53,8 +54,9 @@ export async function PUT(request: NextRequest, context: Params) {
       message: "Property updated successfully",
       property,
     });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -73,7 +75,8 @@ export async function DELETE(request: NextRequest, context: Params) {
     revalidatePath("/properties");
     revalidatePath("/admin/properties");
     return NextResponse.json({ message: "Property deleted successfully" });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

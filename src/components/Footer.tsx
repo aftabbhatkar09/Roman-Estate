@@ -52,7 +52,7 @@ export default function Footer() {
                     alt="Roman Estate Logo"
                     height={48}
                     width={48}
-                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-[60px] md:h-[60px]"
+                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-15 md:h-15"
                   />
                   <div className="flex flex-col items-center justify-center font-serif text-black uppercase select-none mt-1">
                     <span className="text-white text-[8px] sm:text-[10px] md:text-[11px] tracking-[0.5em] ml-[0.5em] mb-0.5 font-medium">
@@ -188,6 +188,22 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* Quote */}
+      <div className="border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:py-10 md:py-12 text-center">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+            <div className="h-px w-8 sm:w-12 bg-[#C2A365]/60" />
+            <span className="text-[10px] sm:text-xs text-[#C2A365] uppercase tracking-[0.3em] font-bold">
+              Our Promise
+            </span>
+            <div className="h-px w-8 sm:w-12 bg-[#C2A365]/60" />
+          </div>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-white/90 tracking-wide">
+            Building Relationships Beyond Real Estate.
+          </p>
         </div>
       </div>
 

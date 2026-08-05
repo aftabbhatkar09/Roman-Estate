@@ -29,15 +29,15 @@ export default function PartnersCarousel({
   return (
     <div className="relative max-w-7xl mx-auto overflow-hidden py-4 group/carousel">
       {/* Gradient masks for fade effect */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-linear-to-r from-white to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-linear-to-l from-white to-transparent z-10 pointer-events-none" />
 
       {/* Scrolling track */}
       <div className="flex w-max animate-partner-scroll group-hover/carousel:[animation-play-state:paused]">
         {items.map((partner, i) => (
           <div
             key={`${partner._id}-${i}`}
-            className="min-w-[180px] md:min-w-[220px] shrink-0 px-3"
+            className="min-w-45 md:min-w-55 shrink-0 px-3"
           >
             <div className="bg-white border border-gray-100 rounded-2xl p-6 h-28 flex items-center justify-center sm:grayscale sm:opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/5 transition-all duration-500 cursor-pointer">
               <div className="relative w-full h-full">

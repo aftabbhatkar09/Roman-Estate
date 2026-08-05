@@ -49,14 +49,17 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-1 sm:gap-2 group shrink-0 min-w-0">
+            <Link
+              href="/"
+              className="flex items-center gap-1 sm:gap-2 group shrink-0 min-w-0"
+            >
               <div className="flex items-center gap-1 sm:gap-2 leading-none">
                 <Image
                   src="/images/logo3.png"
                   alt="Roman Estate Logo"
                   height={48}
                   width={48}
-                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-[60px] md:h-[60px]"
+                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-15 md:h-15"
                 />
                 <div className="flex flex-col items-center justify-center font-serif text-black uppercase select-none mt-1">
                   <span className="text-[8px] sm:text-[10px] md:text-[11px] tracking-[0.5em] ml-[0.5em] mb-0.5 font-medium">
@@ -137,7 +140,10 @@ export default function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-[100] md:hidden" onClick={() => setIsOpen(false)}>
+        <div
+          className="fixed inset-0 z-100 md:hidden"
+          onClick={() => setIsOpen(false)}
+        >
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
           <aside
             className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"

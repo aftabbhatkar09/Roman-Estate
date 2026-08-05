@@ -2,12 +2,36 @@
 import React, { useRef, useState } from "react";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import Link from "next/link";
-import { MapPin, Star, ChevronLeft, ChevronRight, BedDouble, Square, Bath } from "lucide-react";
+import {
+  MapPin,
+  ChevronLeft,
+  ChevronRight,
+  BedDouble,
+  Square,
+  Bath,
+} from "lucide-react";
+
+interface FeaturedProperty {
+  _id: string;
+  title: string;
+  price: number;
+  location: {
+    address?: string;
+    area: string;
+    city: string;
+  };
+  bedrooms: number;
+  bathrooms: number;
+  size: number;
+  images: string[];
+  type?: string;
+  status?: string;
+}
 
 export default function FeaturedCarousel({
   properties,
 }: {
-  properties: any[];
+  properties: FeaturedProperty[];
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -31,11 +55,13 @@ export default function FeaturedCarousel({
       let closestIndex = 0;
       let minDistance = Infinity;
 
-      Array.from(parent.children).forEach((child: any, index) => {
+      const parentEl = parent as HTMLElement;
+      Array.from(parent.children).forEach((child: Element, index) => {
         if (child.tagName === "STYLE") return;
 
+        const el = child as HTMLElement;
         const childCenter =
-          child.offsetLeft - parent.offsetLeft + child.clientWidth / 2;
+          el.offsetLeft - parentEl.offsetLeft + el.clientWidth / 2;
         const distance = Math.abs(viewCenter - childCenter);
 
         if (distance < minDistance) {
@@ -88,7 +114,7 @@ export default function FeaturedCarousel({
               href={`/properties/${property._id}`}
               className="premium-card flex-1 group/card flex flex-col"
             >
-              <div className="relative aspect-[4/3] overflow-hidden image-hover-zoom">
+              <div className="relative aspect-4/3 overflow-hidden image-hover-zoom">
                 <ImageWithFallback
                   src={
                     property.images && property.images.length > 0
@@ -98,7 +124,7 @@ export default function FeaturedCarousel({
                   alt={property.title || "Property"}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1400px) 33vw, 25vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  style={{ objectFit: "cover", objectPosition: "center" }}
                   className="group-hover/card:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute top-2 left-2">
@@ -107,8 +133,8 @@ export default function FeaturedCarousel({
                   </span>
                 </div>
                 <div className="absolute bottom-2 left-2">
-                  <span className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold shadow-lg whitespace-nowrap">
-                    ₹{property.price?.toLocaleString('en-IN')}
+                  <span className="bg-linear-to-r from-brand-primary to-brand-accent text-white px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold shadow-lg whitespace-nowrap">
+                    ₹{property.price?.toLocaleString("en-IN")}
                   </span>
                 </div>
                 <div className="absolute top-2 right-2">
@@ -134,15 +160,24 @@ export default function FeaturedCarousel({
                 <div className="pt-2 sm:pt-2.5 border-t border-gray-100 flex items-center gap-2 sm:gap-2">
                   <div className="flex items-center gap-0.5 text-gray-600">
                     <BedDouble className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-brand-primary" />
-                    <span className="text-[9px] sm:text-[10px] font-semibold">{property.bedrooms || 0}</span>
+                    <span className="text-[9px] sm:text-[10px] font-semibold">
+                      {property.bedrooms || 0}
+                    </span>
                   </div>
                   <div className="flex items-center gap-0.5 text-gray-600">
                     <Bath className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-brand-primary" />
-                    <span className="text-[9px] sm:text-[10px] font-semibold">{property.bathrooms || 2}</span>
+                    <span className="text-[9px] sm:text-[10px] font-semibold">
+                      {property.bathrooms || 2}
+                    </span>
                   </div>
                   <div className="flex items-center gap-0.5 text-gray-600">
                     <Square className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-brand-primary" />
-                    <span className="text-[9px] sm:text-[10px] font-semibold">{property.size || 0}<span className="text-[7px] sm:text-[8px] uppercase ml-0.5">Sqft</span></span>
+                    <span className="text-[9px] sm:text-[10px] font-semibold">
+                      {property.size || 0}
+                      <span className="text-[7px] sm:text-[8px] uppercase ml-0.5">
+                        Sqft
+                      </span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -158,7 +193,7 @@ export default function FeaturedCarousel({
             key={index}
             className={`h-1 rounded-full transition-all duration-500 ${
               activeIndex === index
-                ? "w-8 bg-gradient-to-r from-brand-primary to-brand-accent"
+                ? "w-8 bg-linear-to-r from-brand-primary to-brand-accent"
                 : "w-2 bg-gray-200 hover:bg-gray-300"
             }`}
             aria-label={`Go to slide ${index + 1}`}

@@ -2,9 +2,7 @@ import connectDB from "@/lib/mongodb";
 import Property from "@/models/Property";
 import {
   MapPin,
-  Star,
   CheckCircle2,
-  Phone,
   Calendar,
   Ruler,
   Bed,
@@ -68,7 +66,7 @@ export default async function PropertyDetailPage({
             <div className="flex flex-col md:flex-row justify-between items-start gap-6 sm:gap-8 border-b border-gray-100 pb-8 sm:pb-10 md:pb-12">
               <div className="space-y-3 sm:space-y-4">
                 <div className="flex flex-wrap gap-2 sm:gap-3">
-                  <span className="bg-gradient-to-r from-brand-primary/10 to-brand-accent/10 text-brand-primary px-3 sm:px-4 py-1 rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-widest border border-brand-primary/20">
+                  <span className="bg-linear-to-r from-brand-primary/10 to-brand-accent/10 text-brand-primary px-3 sm:px-4 py-1 rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-widest border border-brand-primary/20">
                     {property.type}
                   </span>
                   <span className="bg-brand-dark text-white px-3 sm:px-4 py-1 rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-widest">
@@ -84,20 +82,20 @@ export default async function PropertyDetailPage({
                   {property.title}
                 </h1>
                 <div className="flex items-center text-gray-500 font-medium">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mr-2 sm:mr-4 shrink-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mr-2 sm:mr-4 shrink-0">
                     <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                   </div>
-                  <span className="text-sm sm:text-base md:text-lg break-words">
+                  <span className="text-sm sm:text-base md:text-lg wrap-break-word">
                     {property.location.address}, {property.location.area},{" "}
                     {property.location.city}
                   </span>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-brand-dark via-brand-dark-light to-brand-dark p-4 sm:p-5 md:p-6 rounded-[1.5rem] sm:rounded-[2rem] shadow-xl border border-white/10 shrink-0 relative overflow-hidden group flex items-center gap-4 sm:gap-5 self-start">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 rounded-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-150" />
-                
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center text-white shadow-lg shrink-0 relative z-10">
+              <div className="bg-linear-to-br from-brand-dark via-brand-dark-light to-brand-dark p-4 sm:p-5 md:p-6 rounded-3xl sm:rounded-4xl shadow-xl border border-white/10 shrink-0 relative overflow-hidden group flex items-center gap-4 sm:gap-5 self-start">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-linear-to-br from-brand-primary/20 to-brand-accent/20 rounded-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-150" />
+
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-linear-to-br from-brand-primary to-brand-accent flex items-center justify-center text-white shadow-lg shrink-0 relative z-10">
                   <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
 
@@ -105,7 +103,7 @@ export default async function PropertyDetailPage({
                   <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.25em] text-gray-400 mb-0.5">
                     Valuation
                   </p>
-                  <p className="text-2xl sm:text-3xl md:text-4xl font-black gradient-text tracking-tight whitespace-nowrap">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-black linear-text tracking-tight whitespace-nowrap">
                     ₹{property.price.toLocaleString("en-IN")}
                   </p>
                 </div>
@@ -141,9 +139,9 @@ export default async function PropertyDetailPage({
               ].map((spec, i) => (
                 <div
                   key={i}
-                  className="bg-gray-50/50 p-3 sm:p-4 md:p-5 lg:p-8 rounded-[1rem] sm:rounded-[1.5rem] md:rounded-[2rem] border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-card transition-all duration-500"
+                  className="bg-gray-50/50 p-3 sm:p-4 md:p-5 lg:p-8 rounded-[1rem] sm:rounded-3xl md:rounded-4xl border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-card transition-all duration-500"
                 >
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <spec.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary group-hover:text-white" />
                   </div>
                   <p className="text-[8px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1 sm:mb-2">
@@ -159,7 +157,7 @@ export default async function PropertyDetailPage({
             {/* Description */}
             <div className="space-y-5 sm:space-y-6 md:space-y-8">
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-1 h-8 sm:w-1.5 sm:h-10 bg-gradient-to-b from-brand-primary to-brand-accent rounded-full" />
+                <div className="w-1 h-8 sm:w-1.5 sm:h-10 bg-linear-to-b from-brand-primary to-brand-accent rounded-full" />
                 <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
                   Overview
                 </h2>
@@ -179,7 +177,7 @@ export default async function PropertyDetailPage({
             {property.amenities && property.amenities.length > 0 && (
               <div className="space-y-6 sm:space-y-8 md:space-y-10">
                 <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="w-1 h-8 sm:w-1.5 sm:h-10 bg-gradient-to-b from-brand-primary to-brand-accent rounded-full" />
+                  <div className="w-1 h-8 sm:w-1.5 sm:h-10 bg-linear-to-b from-brand-primary to-brand-accent rounded-full" />
                   <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
                     Exclusive Features
                   </h2>
@@ -190,7 +188,7 @@ export default async function PropertyDetailPage({
                       key={i}
                       className="flex items-center p-3 sm:p-4 md:p-5 bg-white rounded-xl sm:rounded-2xl border border-gray-100 group hover:border-brand-primary/30 hover:shadow-card transition-all duration-500"
                     >
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mr-3 sm:mr-4 shrink-0 group-hover:from-brand-primary group-hover:to-brand-accent transition-colors">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mr-3 sm:mr-4 shrink-0 group-hover:from-brand-primary group-hover:to-brand-accent transition-colors">
                         <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary group-hover:text-white" />
                       </div>
                       <span className="font-bold text-brand-dark text-sm sm:text-base">
@@ -205,8 +203,8 @@ export default async function PropertyDetailPage({
 
           {/* Right Column: Sidebar */}
           <div className="lg:col-span-4 space-y-6 sm:space-y-8">
-            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-5 sm:p-6 md:p-8 lg:p-10 text-white shadow-2xl relative overflow-hidden group sticky top-28">
-              <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 group-hover:scale-150 transition-transform duration-1000" />
+            <div className="bg-linear-to-br from-brand-dark to-brand-dark-light rounded-3xl sm:rounded-4xl md:rounded-[3rem] p-5 sm:p-6 md:p-8 lg:p-10 text-white shadow-2xl overflow-hidden group sticky top-28">
+              <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-linear-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 group-hover:scale-150 transition-transform duration-1000" />
 
               <div className="relative z-10 space-y-5 sm:space-y-6 md:space-y-8">
                 <div>
@@ -236,7 +234,7 @@ export default async function PropertyDetailPage({
                 </div>
 
                 <div className="pt-5 sm:pt-6 md:pt-8 border-t border-white/10 flex items-center gap-4 sm:gap-5">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center font-black text-lg sm:text-xl md:text-2xl shadow-xl shrink-0">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary to-brand-accent flex items-center justify-center font-black text-lg sm:text-xl md:text-2xl shadow-xl shrink-0">
                     RE
                   </div>
                   <div>
@@ -252,8 +250,8 @@ export default async function PropertyDetailPage({
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 p-5 sm:p-6 md:p-8 lg:p-10 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border border-brand-primary/10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 rounded-full -mr-8 sm:-mr-10 -mt-8 sm:-mt-10" />
+            <div className="bg-linear-to-br from-brand-primary/5 to-brand-accent/5 p-5 sm:p-6 md:p-8 lg:p-10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] border border-brand-primary/10 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-linear-to-br from-brand-primary/5 to-brand-accent/5 rounded-full -mr-8 sm:-mr-10 -mt-8 sm:-mt-10" />
               <h4 className="font-black text-brand-dark mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
                 <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary shrink-0" />
                 Market Insight
@@ -271,14 +269,14 @@ export default async function PropertyDetailPage({
               </p>
             </div>
 
-            <div className="bg-gray-50 p-5 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] border border-gray-100">
+            <div className="bg-gray-50 p-5 sm:p-6 md:p-8 rounded-3xl sm:rounded-4xl md:rounded-[2.5rem] border border-gray-100">
               <h4 className="font-black text-brand-dark mb-4 sm:mb-6 text-[10px] sm:text-xs uppercase tracking-[0.2em]">
                 Property Signature
               </h4>
               <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm font-medium">
                 <div className="flex justify-between items-center py-2 sm:py-3 border-b border-gray-100 gap-2">
                   <span className="text-gray-400 shrink-0">Reference ID</span>
-                  <span className="font-black text-brand-dark font-mono text-right break-all max-w-[180px]">
+                  <span className="font-black text-brand-dark font-mono text-right break-all max-w-45">
                     #{property._id?.toString().slice(-8).toUpperCase()}
                   </span>
                 </div>

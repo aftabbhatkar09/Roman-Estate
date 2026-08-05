@@ -50,8 +50,9 @@ export default function ContactPage() {
         message: "",
         _honeypot: "",
       });
-    } catch (err: any) {
-      setError(err.data?.error || "Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      const error = err as { data?: { error?: string } };
+      setError(error.data?.error || "Something went wrong. Please try again.");
     }
   };
 
@@ -67,22 +68,20 @@ export default function ContactPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 via-brand-dark/90 to-brand-accent/10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-dark" />
+        <div className="absolute inset-0 bg-lineaar-to-br from-brand-primary/20 via-brand-dark/90 to-brand-accent/10" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent to-brand-dark" />
 
         <div className="max-w-7xl mx-auto px-4 relative z-10 text-center space-y-4 sm:space-y-6">
-          <span className="inline-block px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
+          <span className="inline-block px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-linear-to-r from-brand-primary to-brand-accent text-white text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
             Get in Touch
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[1.1]">
             How Can We <br />
-            <span className="gradient-text">
-              Assist You?
-            </span>
+            <span className="gradient-text">Assist You?</span>
           </h1>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed px-2 sm:px-0">
-            Our advisors are ready to help you navigate Mumbai&apos;s premium real
-            estate landscape.
+            Our advisors are ready to help you navigate Mumbai&apos;s premium
+            real estate landscape.
           </p>
         </div>
       </section>
@@ -120,15 +119,17 @@ export default function ContactPage() {
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 sm:gap-6 group">
                   <div
-                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500`}
+                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-linear-to-br ${item.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500`}
                   >
-                    <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${item.iconColor}`} />
+                    <item.icon
+                      className={`w-5 h-5 sm:w-6 sm:h-6 ${item.iconColor}`}
+                    />
                   </div>
                   <div className="space-y-1 min-w-0">
                     <h3 className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
                       {item.title}
                     </h3>
-                    <p className="text-base sm:text-lg md:text-xl font-black text-brand-dark break-words">
+                    <p className="text-base sm:text-lg md:text-xl font-black text-brand-dark wrap-break-word">
                       {item.content}
                     </p>
                     <p className="text-xs sm:text-sm text-gray-500 font-medium">
@@ -140,8 +141,8 @@ export default function ContactPage() {
             </div>
 
             {/* Social Cards */}
-            <div className="bg-gradient-to-br from-brand-dark to-brand-dark-light rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-10 lg:p-12 text-white relative overflow-hidden group shadow-2xl">
-              <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 group-hover:scale-150 transition-transform duration-1000" />
+            <div className="bg-linear-to-br from-brand-dark to-brand-dark-light rounded-3xl sm:rounded-4xl md:rounded-[3rem] p-6 sm:p-8 md:p-10 lg:p-12 text-white relative overflow-hidden group shadow-2xl">
+              <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-linear-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 group-hover:scale-150 transition-transform duration-1000" />
               <div className="relative z-10 space-y-6 sm:space-y-8">
                 <div className="space-y-3 sm:space-y-4">
                   <h3 className="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-3">
@@ -157,7 +158,7 @@ export default function ContactPage() {
                   {[Camera, Briefcase, Send].map((Icon, i) => (
                     <button
                       key={i}
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center transition-all border border-white/10 group/icon"
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 hover:bg-linear-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center transition-all border border-white/10 group/icon"
                     >
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </button>
@@ -169,10 +170,10 @@ export default function ContactPage() {
 
           {/* Right: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-card border border-gray-100 p-5 sm:p-6 md:p-10 lg:p-16 relative overflow-hidden">
+            <div className="bg-white rounded-3xl sm:rounded-4xl md:rounded-[3rem] shadow-card border border-gray-100 p-5 sm:p-6 md:p-10 lg:p-16 relative overflow-hidden">
               {submitted ? (
                 <div className="text-center py-10 sm:py-16 space-y-6 sm:space-y-10">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-full flex items-center justify-center mx-auto shadow-xl">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 bg-linear-to-br from-brand-primary/10 to-brand-accent/10 rounded-full flex items-center justify-center mx-auto shadow-xl">
                     <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12 text-brand-primary" />
                   </div>
                   <div className="space-y-3 sm:space-y-4">
@@ -195,7 +196,7 @@ export default function ContactPage() {
                 <div className="space-y-8 sm:space-y-12">
                   <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center gap-3 sm:gap-4">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center shrink-0">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center shrink-0">
                         <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                       </div>
                       <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
@@ -208,7 +209,10 @@ export default function ContactPage() {
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-8">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-5 sm:space-y-8"
+                  >
                     <input
                       type="text"
                       name="_honeypot"
@@ -275,22 +279,27 @@ export default function ContactPage() {
                         <Building2 className="w-3 h-3" /> Requirement Type
                       </label>
                       <div className="flex gap-2 sm:gap-3">
-                        {(["Buying", "Selling", "Renting"] as const).map((type) => (
-                          <button
-                            key={type}
-                            type="button"
-                            onClick={() =>
-                              setFormData({ ...formData, requirementType: type })
-                            }
-                            className={`flex-1 px-3 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold border transition-all ${
-                              formData.requirementType === type
-                                ? "bg-gradient-to-r from-brand-primary to-brand-accent text-white border-transparent shadow-lg shadow-brand-primary/25"
-                                : "bg-white text-gray-500 border-gray-200 hover:border-brand-primary/30"
-                            }`}
-                          >
-                            {type}
-                          </button>
-                        ))}
+                        {(["Buying", "Selling", "Renting"] as const).map(
+                          (type) => (
+                            <button
+                              key={type}
+                              type="button"
+                              onClick={() =>
+                                setFormData({
+                                  ...formData,
+                                  requirementType: type,
+                                })
+                              }
+                              className={`flex-1 px-3 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold border transition-all ${
+                                formData.requirementType === type
+                                  ? "bg-linear-to-r from-brand-primary to-brand-accent text-white border-transparent shadow-lg shadow-brand-primary/25"
+                                  : "bg-white text-gray-500 border-gray-200 hover:border-brand-primary/30"
+                              }`}
+                            >
+                              {type}
+                            </button>
+                          ),
+                        )}
                       </div>
                     </div>
 
@@ -340,17 +349,17 @@ export default function ContactPage() {
 
       {/* Map Section */}
       <div className="max-w-7xl mx-auto px-4 pb-20 sm:pb-24 md:pb-32">
-        <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-gray-50 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
+        <div className="h-75 sm:h-100 md:h-125 lg:h-150 bg-gray-50 rounded-3xl sm:rounded-4xl md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
           <Image
             src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=2000"
             alt="Office Location"
             fill
             className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 to-transparent" />
-          <div className="absolute bottom-3 sm:bottom-6 md:bottom-10 lg:bottom-16 left-3 sm:left-6 md:left-10 lg:left-16 right-3 sm:right-auto glass-morphism p-4 sm:p-6 md:p-8 lg:p-12 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-2xl border border-white/20 transform group-hover:-translate-y-2 transition-transform duration-500">
+          <div className="absolute inset-0 bg-linear-to-t from-brand-dark/60 to-transparent" />
+          <div className="absolute bottom-3 sm:bottom-6 md:bottom-10 lg:bottom-16 left-3 sm:left-6 md:left-10 lg:left-16 right-3 sm:right-auto glass-morphism p-4 sm:p-6 md:p-8 lg:p-12 rounded-3xl sm:rounded-4xl md:rounded-[3rem] shadow-2xl border border-white/20 transform group-hover:-translate-y-2 transition-transform duration-500">
             <div className="flex items-center gap-2 sm:gap-4 mb-3 sm:mb-6">
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-brand-primary to-brand-accent rounded-full animate-pulse shrink-0" />
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-linear-to-r from-brand-primary to-brand-accent rounded-full animate-pulse shrink-0" />
               <span className="text-brand-dark font-black uppercase tracking-[0.2em] text-[8px] sm:text-[10px]">
                 Headquarters
               </span>
@@ -358,10 +367,10 @@ export default function ContactPage() {
             <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-brand-dark mb-1 sm:mb-2 tracking-tight">
               Visit Us in Mumbai
             </h3>
-            <p className="text-gray-500 font-medium leading-relaxed max-w-[200px] sm:max-w-xs text-xs sm:text-sm md:text-base">
+            <p className="text-gray-500 font-medium leading-relaxed max-w-50 sm:max-w-xs text-xs sm:text-sm md:text-base">
               Opera House, Charni Road, Mumbai, Maharashtra 400004
             </p>
-            <button className="mt-4 sm:mt-6 md:mt-8 premium-button-primary !py-2 sm:!py-3 !px-5 sm:!px-6 md:!px-8 text-[11px] sm:text-sm flex items-center gap-2">
+            <button className="mt-4 sm:mt-6 md:mt-8 premium-button-primary py-2! sm:py-3! px-5! sm:px-6! md:px-8! text-[11px] sm:text-sm flex items-center gap-2">
               Open in Maps <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </button>
           </div>

@@ -20,8 +20,9 @@ export async function GET(request: NextRequest, context: Params) {
       return NextResponse.json({ error: "Partner not found" }, { status: 404 });
     }
     return NextResponse.json(partner);
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -43,8 +44,9 @@ export async function PUT(request: NextRequest, context: Params) {
       message: "Partner updated successfully",
       partner,
     });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -59,7 +61,8 @@ export async function DELETE(request: NextRequest, context: Params) {
     revalidatePath("/");
     revalidatePath("/admin/partners");
     return NextResponse.json({ message: "Partner deleted successfully" });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
