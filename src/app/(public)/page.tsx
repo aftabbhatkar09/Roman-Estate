@@ -115,7 +115,7 @@ export default async function HomePage() {
         <div className="relative z-40 max-w-7xl mx-auto px-4 text-center text-white space-y-6 md:space-y-12 py-12 sm:py-16 md:py-20">
           <div className="space-y-4 sm:space-y-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
             <span className="inline-block px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-linear-to-r from-brand-primary to-brand-accent text-white text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] shadow-lg shadow-brand-primary/25">
-              Helping You Make Every Square Foot Count.
+              Your Trusted Partner in Every Square Foot.
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
               Experience Real Estate <br className="hidden sm:block" />
