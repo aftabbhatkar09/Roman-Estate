@@ -3,6 +3,7 @@ import Blog from "@/models/Blog";
 import { Calendar, ArrowLeft, Tag, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import ImageWithFallback from "@/components/ImageWithFallback";
+import ShareButtons from "@/components/ShareButtons";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -156,16 +157,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
                 Circulate this insight within your professional network.
               </p>
             </div>
-            <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-              {["Facebook", "Twitter", "LinkedIn"].map((social, i) => (
-                <button
-                  key={i}
-                  className="px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 rounded-xl sm:rounded-2xl border border-gray-100 font-black text-[9px] sm:text-[10px] md:text-xs uppercase tracking-widest text-brand-dark hover:bg-linear-to-br hover:from-brand-primary hover:to-brand-accent hover:text-white hover:border-transparent transition-all duration-300"
-                >
-                  {social}
-                </button>
-              ))}
-            </div>
+            <ShareButtons title={blog.title} />
           </div>
         </div>
 

@@ -66,7 +66,78 @@ export default function AdminPartnersClient({
         </Link>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
+      {/* Mobile: card list */}
+      <div className="md:hidden space-y-3">
+        {partners.length === 0 ? (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-8 text-center text-gray-500 italic">
+            No partners found. Add your first partner!
+          </div>
+        ) : (
+          partners.map((partner) => (
+            <div
+              key={partner._id}
+              className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 space-y-3"
+            >
+              <div className="flex items-start gap-3">
+                <div className="relative w-14 h-14 bg-gray-100 rounded p-1 shrink-0">
+                  <ImageWithFallback
+                    src={partner.logo}
+                    alt={partner.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="font-medium text-gray-900">
+                      {partner.name}
+                    </div>
+                    <span
+                      className={`shrink-0 px-2 py-1 text-xs font-medium rounded-full ${
+                        partner.active
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {partner.active ? "Active" : "Inactive"}
+                    </span>
+                  </div>
+                  {partner.website && (
+                    <a
+                      href={partner.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs text-indigo-500 hover:underline break-all"
+                    >
+                      {partner.website}
+                    </a>
+                  )}
+                  <div className="text-xs text-gray-500 mt-1">
+                    Order: {partner.order || 0}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-end gap-1 pt-2 border-t border-gray-100">
+                <Link
+                  href={`/admin/partners/${partner._id}`}
+                  className="inline-flex p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                >
+                  <Edit className="w-4 h-4" />
+                </Link>
+                <button
+                  onClick={() => openDeleteModal(partner)}
+                  className="inline-flex p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop: table */}
+      <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
         <table className="w-full text-left min-w-125">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>

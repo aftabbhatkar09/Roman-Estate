@@ -137,7 +137,8 @@ export default function EditProperty({
           </div>
         </div>
         <button
-          onClick={handleSubmit}
+          type="submit"
+          form="property-form"
           disabled={saving}
           className="bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 disabled:opacity-50 transition-all shadow-lg shadow-indigo-500/20 font-medium"
         >
@@ -152,7 +153,7 @@ export default function EditProperty({
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form id="property-form" onSubmit={handleSubmit} className="space-y-6">
         <div className={SECTION_CLASS}>
           <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
             Basic Information

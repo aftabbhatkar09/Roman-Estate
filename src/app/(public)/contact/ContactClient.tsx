@@ -68,7 +68,7 @@ export default function ContactPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-lineaar-to-br from-brand-primary/20 via-brand-dark/90 to-brand-accent/10" />
+        <div className="absolute inset-0 bg-linear-to-br from-brand-primary/20 via-brand-dark/90 to-brand-accent/10" />
         <div className="absolute inset-0 bg-linear-to-b from-transparent to-brand-dark" />
 
         <div className="max-w-7xl mx-auto px-4 relative z-10 text-center space-y-4 sm:space-y-6">
@@ -155,13 +155,19 @@ export default function ContactPage() {
                   </p>
                 </div>
                 <div className="flex gap-3 sm:gap-4">
-                  {[Camera, Briefcase, Send].map((Icon, i) => (
-                    <button
-                      key={i}
+                  {[
+                    { icon: Camera, label: "Instagram" },
+                    { icon: Briefcase, label: "LinkedIn" },
+                    { icon: Send, label: "Twitter" },
+                  ].map(({ icon: Icon, label }) => (
+                    <a
+                      key={label}
+                      href="#"
+                      aria-label={label}
                       className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 hover:bg-linear-to-br hover:from-brand-primary hover:to-brand-accent flex items-center justify-center transition-all border border-white/10 group/icon"
                     >
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                    </button>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -370,9 +376,14 @@ export default function ContactPage() {
             <p className="text-gray-500 font-medium leading-relaxed max-w-50 sm:max-w-xs text-xs sm:text-sm md:text-base">
               Opera House, Charni Road, Mumbai, Maharashtra 400004
             </p>
-            <button className="mt-4 sm:mt-6 md:mt-8 premium-button-primary py-2! sm:py-3! px-5! sm:px-6! md:px-8! text-[11px] sm:text-sm flex items-center gap-2">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Opera+House,+Charni+Road,+Mumbai,+Maharashtra+400004"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 sm:mt-6 md:mt-8 premium-button-primary py-2! sm:py-3! px-5! sm:px-6! md:px-8! text-[11px] sm:text-sm flex items-center gap-2 w-fit"
+            >
               Open in Maps <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-            </button>
+            </a>
           </div>
         </div>
       </div>

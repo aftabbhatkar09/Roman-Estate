@@ -133,6 +133,7 @@ export default function PropertyGallery({
           <button
             key={i}
             onClick={() => setActiveIdx(i)}
+            aria-label={`View photo ${i + 1}`}
             className={`relative w-20 sm:w-24 h-14 sm:h-16 shrink-0 rounded-xl overflow-hidden transition-all duration-300 ${
               activeIdx === i
                 ? "ring-2 ring-brand-primary ring-offset-1 border-2 border-brand-primary scale-105 shadow-md"
@@ -199,6 +200,7 @@ export default function PropertyGallery({
                 <button
                   key={i}
                   onClick={() => setActiveIdx(i)}
+                  aria-label={`View photo ${i + 1}`}
                   className={`relative w-16 h-10 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-lg sm:rounded-xl overflow-hidden transition-all duration-300 ${
                     i === activeIdx
                       ? "ring-2 ring-brand-primary scale-105 sm:scale-110 shadow-2xl"

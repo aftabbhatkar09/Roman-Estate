@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import { revalidatePath } from "next/cache";
+import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,11 @@ type Params = {
 
 export async function GET(request: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const blog = await Blog.findById(id);
@@ -28,6 +34,11 @@ export async function GET(request: NextRequest, context: Params) {
 
 export async function PUT(request: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const data = await request.json();
@@ -53,6 +64,11 @@ export async function PUT(request: NextRequest, context: Params) {
 
 export async function DELETE(request: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const blog = await Blog.findByIdAndDelete(id);

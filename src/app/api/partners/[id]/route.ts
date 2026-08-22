@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Partner from "@/models/Partner";
 import { revalidatePath } from "next/cache";
+import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
@@ -28,6 +29,11 @@ export async function GET(request: NextRequest, context: Params) {
 
 export async function PUT(request: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const data = await request.json();
@@ -52,6 +58,11 @@ export async function PUT(request: NextRequest, context: Params) {
 
 export async function DELETE(request: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const partner = await Partner.findByIdAndDelete(id);

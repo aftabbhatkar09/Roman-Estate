@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Inquiry from "@/models/Inquiry";
+import { getSession } from "@/lib/session";
 
 export async function POST(request: Request) {
   try {
@@ -64,6 +65,11 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     await connectDB();
     const inquiries = await Inquiry.find({}).sort({ createdAt: -1 });
     return NextResponse.json(inquiries);

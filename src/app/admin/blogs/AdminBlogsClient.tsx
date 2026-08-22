@@ -65,7 +65,62 @@ export default function AdminBlogsClient({
         </Link>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
+      {/* Mobile: card list */}
+      <div className="md:hidden space-y-3">
+        {blogs.length === 0 ? (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-8 text-center text-gray-500 italic">
+            No blog posts found. Share your first insight!
+          </div>
+        ) : (
+          blogs.map((blog) => (
+            <div
+              key={blog._id}
+              className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 space-y-3"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="font-medium text-gray-900">{blog.title}</div>
+                  <div className="text-xs text-gray-500 truncate">
+                    {blog.excerpt}
+                  </div>
+                </div>
+                <span
+                  className={`shrink-0 px-2 py-1 text-xs font-medium rounded-full ${
+                    blog.published
+                      ? "bg-green-100 text-green-700"
+                      : "bg-yellow-100 text-yellow-700"
+                  }`}
+                >
+                  {blog.published ? "Published" : "Draft"}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-xs text-gray-500 pt-2 border-t border-gray-100">
+                <span>
+                  {blog.author} •{" "}
+                  {new Date(blog.createdAt).toLocaleDateString("en-GB")}
+                </span>
+                <div className="flex items-center gap-1">
+                  <Link
+                    href={`/admin/blogs/${blog._id}`}
+                    className="inline-flex p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                  >
+                    <Edit className="w-4 h-4" />
+                  </Link>
+                  <button
+                    onClick={() => openDeleteModal(blog)}
+                    className="inline-flex p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop: table */}
+      <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
         <table className="w-full text-left min-w-150">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
@@ -114,7 +169,7 @@ export default function AdminBlogsClient({
                     {blog.author}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-600">
-                    {new Date(blog.createdAt).toLocaleDateString()}
+                    {new Date(blog.createdAt).toLocaleDateString("en-GB")}
                   </td>
                   <td className="px-6 py-4">
                     <span

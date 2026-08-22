@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHash } from "crypto";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { createSession, type Role } from "@/lib/session";
-
-function hashPassword(plain: string): string {
-  return createHash("sha256").update(plain).digest("hex");
-}
+import { verifyPassword, hashPassword } from "@/lib/password";
 
 const delay = () => new Promise((r) => setTimeout(r, 400));
 
@@ -39,12 +35,21 @@ export async function POST(request: NextRequest) {
       active: true,
     });
 
-    if (!dbUser || dbUser.password !== hashPassword(password)) {
+    const { valid, needsRehash } = dbUser
+      ? verifyPassword(password, dbUser.password)
+      : { valid: false, needsRehash: false };
+
+    if (!dbUser || !valid) {
       await delay();
       return NextResponse.json(
         { error: "Invalid email or password." },
         { status: 401 },
       );
+    }
+
+    if (needsRehash) {
+      dbUser.password = hashPassword(password);
+      await dbUser.save();
     }
 
     await createSession(dbUser.email, dbUser.role as Role);

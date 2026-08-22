@@ -104,7 +104,8 @@ export default function EditUserPage({
           </div>
         </div>
         <button
-          onClick={handleSubmit}
+          type="submit"
+          form="user-form"
           disabled={saving}
           className="bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 disabled:opacity-50 transition-all shadow-lg shadow-indigo-500/20 font-medium text-sm"
         >
@@ -119,7 +120,7 @@ export default function EditUserPage({
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className={CARD}>
+      <form id="user-form" onSubmit={handleSubmit} className={CARD}>
         <div>
           <label className={LABEL}>Full Name *</label>
           <input

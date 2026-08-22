@@ -34,12 +34,9 @@ export default function PartnersCarousel({
 
       {/* Scrolling track */}
       <div className="flex w-max animate-partner-scroll group-hover/carousel:[animation-play-state:paused]">
-        {items.map((partner, i) => (
-          <div
-            key={`${partner._id}-${i}`}
-            className="min-w-45 md:min-w-55 shrink-0 px-3"
-          >
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 h-28 flex items-center justify-center sm:grayscale sm:opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/5 transition-all duration-500 cursor-pointer">
+        {items.map((partner, i) => {
+          const card = (
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 h-28 flex items-center justify-center sm:grayscale sm:opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/5 transition-all duration-500">
               <div className="relative w-full h-full">
                 <ImageWithFallback
                   src={partner.logo}
@@ -49,8 +46,29 @@ export default function PartnersCarousel({
                 />
               </div>
             </div>
-          </div>
-        ))}
+          );
+
+          return (
+            <div
+              key={`${partner._id}-${i}`}
+              className="min-w-45 md:min-w-55 shrink-0 px-3"
+            >
+              {partner.website ? (
+                <a
+                  href={partner.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={partner.name}
+                  className="cursor-pointer block"
+                >
+                  {card}
+                </a>
+              ) : (
+                card
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

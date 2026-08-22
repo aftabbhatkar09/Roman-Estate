@@ -75,7 +75,8 @@ export default function NewBlog() {
           <h2 className="text-2xl font-bold text-gray-800">Create New Post</h2>
         </div>
         <button
-          onClick={handleSubmit}
+          type="submit"
+          form="blog-form"
           disabled={isLoading}
           className="bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 disabled:opacity-50 transition-all shadow-lg shadow-indigo-500/20 font-medium"
         >
@@ -90,7 +91,7 @@ export default function NewBlog() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form id="blog-form" onSubmit={handleSubmit} className="space-y-6">
         <div className={SECTION_CLASS}>
           <h3 className="text-base font-bold text-gray-800 pb-2 border-b border-gray-100">
             Post Details

@@ -117,7 +117,7 @@ export default function AboutPage() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-linear-to-t from-brand-dark/40 to-transparent" />
-              <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 left-4 sm:left-6 md:left-12 right-4 sm:right-6 md:right-12 glass-morphism p-4 sm:p-6 md:p-8 lg:p-10 rounded-3xl sm:rounded-4xl md:rounded-[2.5rem] border border-white/20">
+              <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 left-4 sm:left-6 md:left-12 right-4 sm:right-6 md:right-12 dark-glass p-4 sm:p-6 md:p-8 lg:p-10 rounded-3xl sm:rounded-4xl md:rounded-[2.5rem]">
                 <p className="text-white text-sm sm:text-base md:text-lg font-bold italic leading-relaxed">
                   &ldquo;Excellence is not an act, but a habit. In the world of
                   luxury real estate, it is the only standard that

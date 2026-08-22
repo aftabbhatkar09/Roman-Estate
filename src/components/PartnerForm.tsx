@@ -120,7 +120,8 @@ export default function PartnerForm() {
           </h2>
         </div>
         <button
-          onClick={handleSubmit}
+          type="submit"
+          form="partner-form"
           disabled={isLoading}
           className="bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2.5 rounded-xl flex items-center hover:from-indigo-700 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/20 disabled:opacity-50"
         >
@@ -136,7 +137,7 @@ export default function PartnerForm() {
       )}
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form id="partner-form" onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">

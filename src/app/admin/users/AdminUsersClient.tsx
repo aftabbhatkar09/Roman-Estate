@@ -136,7 +136,100 @@ export default function AdminUsersClient({
         </Link>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
+      {/* Mobile: card list */}
+      <div className="md:hidden space-y-3">
+        {users.length === 0 ? (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-8 text-center text-gray-400 italic">
+            No users yet. Add your first user to get started.
+          </div>
+        ) : (
+          users.map((user) => (
+            <div
+              key={user._id}
+              className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 space-y-3"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-linear-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                  {user.name.charAt(0).toUpperCase()}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-gray-900 text-sm truncate">
+                    {user.name}
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">
+                    {user.email}
+                  </p>
+                </div>
+                <span
+                  className={`shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${
+                    user.role === "super_admin"
+                      ? "bg-indigo-50 text-indigo-700"
+                      : "bg-cyan-50 text-cyan-700"
+                  }`}
+                >
+                  {user.role === "super_admin" ? (
+                    <>
+                      <ShieldCheck className="w-3 h-3" /> Super Admin
+                    </>
+                  ) : (
+                    <>
+                      <UserCog className="w-3 h-3" /> Admin
+                    </>
+                  )}
+                </span>
+              </div>
+              <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => toggleActive(user)}
+                    disabled={togglingId === user._id}
+                    className="flex items-center gap-2 text-xs font-semibold disabled:opacity-40 transition-opacity"
+                  >
+                    {user.active ? (
+                      <>
+                        <ToggleRight className="w-5 h-5 text-green-500" />
+                        <span className="text-green-600">Active</span>
+                      </>
+                    ) : (
+                      <>
+                        <ToggleLeft className="w-5 h-5 text-gray-400" />
+                        <span className="text-gray-400">Inactive</span>
+                      </>
+                    )}
+                  </button>
+                  <span className="text-xs text-gray-500">
+                    {new Date(user.createdAt).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Link
+                    href={`/admin/users/${user._id}`}
+                    className="inline-flex p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                  >
+                    <Edit className="w-4 h-4" />
+                  </Link>
+                  {user.role !== "super_admin" && (
+                    <button
+                      onClick={() => setDeleteModal({ open: true, user })}
+                      className="inline-flex p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                      title="Delete user"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop: table */}
+      <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
         <table className="w-full text-left min-w-150">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>

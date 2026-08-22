@@ -8,8 +8,6 @@ import {
   Trophy,
   Globe,
   Building2,
-  Plus,
-  HelpCircle,
   ShieldCheck,
   BadgeCheck,
   HeartHandshake,
@@ -24,6 +22,7 @@ import Partner from "@/models/Partner";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import PartnersCarousel from "@/components/PartnersCarousel";
 import HeroSearch from "@/components/HeroSearch";
+import FaqAccordion from "@/components/FaqAccordion";
 
 interface HomeProperty {
   _id: string;
@@ -144,7 +143,7 @@ export default async function HomePage() {
 
       {/* Stats Section */}
       <section className="relative z-30 -mt-12 sm:-mt-16 max-w-6xl mx-auto w-full px-4">
-        <div className="bg-white rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-12 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 border border-gray-100">
+        <div className="bg-white rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-2xl shadow-brand-primary/10 p-4 sm:p-6 md:p-8 lg:p-12 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 border border-gray-100">
           {[
             { label: "Premium Properties", value: "1,200+", icon: Building2 },
             { label: "Happy Homeowners", value: "850+", icon: Users },
@@ -624,8 +623,8 @@ export default async function HomePage() {
             </h2>
           </div>
 
-          <div className="space-y-3 sm:space-y-4">
-            {[
+          <FaqAccordion
+            faqs={[
               {
                 q: "What areas of Mumbai do you specialize in?",
                 a: "We specialize in South Mumbai, Bandra, Worli, and emerging luxury hubs in the suburbs.",
@@ -638,24 +637,8 @@ export default async function HomePage() {
                 q: "Can you help with property management for NRIs?",
                 a: "Absolutely. We offer comprehensive property management services tailored for NRI investors.",
               },
-            ].map((faq, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100 hover:border-brand-primary/30 transition-all cursor-pointer group shadow-sm hover:shadow-md"
-              >
-                <div className="flex justify-between items-start sm:items-center gap-3">
-                  <h4 className="font-bold text-brand-dark flex items-start sm:items-center gap-2 sm:gap-3 text-sm sm:text-base">
-                    <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary shrink-0 mt-0.5 sm:mt-0" />
-                    {faq.q}
-                  </h4>
-                  <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300 group-hover:text-brand-primary transition-colors shrink-0 mt-0.5 sm:mt-0" />
-                </div>
-                <p className="mt-3 sm:mt-4 text-gray-500 text-xs sm:text-sm leading-relaxed hidden group-hover:block animate-in fade-in slide-in-from-top-2 duration-300">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
+            ]}
+          />
         </div>
       </section>
     </div>

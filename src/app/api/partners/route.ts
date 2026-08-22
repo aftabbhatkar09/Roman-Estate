@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Partner from "@/models/Partner";
 import { revalidatePath } from "next/cache";
+import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     await connectDB();
     const data = await request.json();
 

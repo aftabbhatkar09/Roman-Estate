@@ -191,6 +191,16 @@ export default function FeaturedCarousel({
         {properties.map((_, index) => (
           <button
             key={index}
+            onClick={() => {
+              const parent = scrollRef.current;
+              const child = parent?.children[index] as HTMLElement | undefined;
+              if (parent && child) {
+                parent.scrollTo({
+                  left: child.offsetLeft - parent.offsetLeft,
+                  behavior: "smooth",
+                });
+              }
+            }}
             className={`h-1 rounded-full transition-all duration-500 ${
               activeIndex === index
                 ? "w-8 bg-linear-to-r from-brand-primary to-brand-accent"

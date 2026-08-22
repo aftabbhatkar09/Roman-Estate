@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Inquiry from "@/models/Inquiry";
+import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
@@ -8,6 +9,11 @@ type Params = { params: Promise<{ id: string }> };
 
 export async function PATCH(request: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const data = await request.json();
@@ -28,6 +34,11 @@ export async function PATCH(request: NextRequest, context: Params) {
 
 export async function DELETE(request: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const inquiry = await Inquiry.findByIdAndDelete(id);

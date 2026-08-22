@@ -1,17 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHash } from "crypto";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
+import { getSession } from "@/lib/session";
+import { hashPassword } from "@/lib/password";
 
 export const dynamic = "force-dynamic";
-
-function hashPassword(plain: string): string {
-  return createHash("sha256").update(plain).digest("hex");
-}
 
 // ── GET /api/users ── list all users (password excluded) ─────────────────────
 export async function GET() {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     await connectDB();
     const users = await User.find({})
       .select("-password")
@@ -30,6 +32,17 @@ export async function GET() {
 // Optional:      { role: "super_admin" | "admin" }
 export async function POST(request: NextRequest) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    if (session.role !== "super_admin") {
+      return NextResponse.json(
+        { error: "Only super admins can create users." },
+        { status: 403 },
+      );
+    }
+
     await connectDB();
     const { name, email, password, role } = await request.json();
 

@@ -202,6 +202,7 @@ export default function AdminLayoutClient({
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileOpen((v) => !v)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
               className="md:hidden p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
             >
               {mobileOpen ? (
@@ -216,6 +217,7 @@ export default function AdminLayoutClient({
           <div className="relative">
             <button
               onClick={() => setDropdownOpen((v) => !v)}
+              aria-label="Account menu"
               className="flex items-center gap-2 px-3 py-1.5 rounded-xl hover:bg-gray-100 transition-colors"
             >
               <span className="text-sm font-medium text-gray-600 hidden sm:block">

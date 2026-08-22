@@ -147,7 +147,7 @@ export default async function AdminDashboard() {
                     </p>
                     <p className="text-xs text-gray-500">
                       {inquiry.email} •{" "}
-                      {new Date(inquiry.createdAt).toLocaleDateString()}
+                      {new Date(inquiry.createdAt).toLocaleDateString("en-GB")}
                     </p>
                   </li>
                 ))}

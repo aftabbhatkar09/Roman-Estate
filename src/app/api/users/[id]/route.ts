@@ -1,19 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHash } from "crypto";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
+import { getSession } from "@/lib/session";
+import { hashPassword } from "@/lib/password";
 
 export const dynamic = "force-dynamic";
 
 type Params = { params: Promise<{ id: string }> };
 
-function hashPassword(plain: string): string {
-  return createHash("sha256").update(plain).digest("hex");
-}
-
 // ── GET /api/users/[id] ───────────────────────────────────────────────────────
 export async function GET(_req: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    if (session.role !== "super_admin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const user = await User.findById(id).select("-password").lean();
@@ -33,6 +38,14 @@ export async function GET(_req: NextRequest, context: Params) {
 // Password is re-hashed if included. Omit password to keep existing.
 export async function PUT(request: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    if (session.role !== "super_admin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const { name, email, password, role, active } = await request.json();
@@ -88,6 +101,14 @@ export async function PUT(request: NextRequest, context: Params) {
 // ── DELETE /api/users/[id] ────────────────────────────────────────────────────
 export async function DELETE(_req: NextRequest, context: Params) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    if (session.role !== "super_admin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
     const { id } = await context.params;
     await connectDB();
     const user = await User.findById(id);
