@@ -16,7 +16,7 @@ export async function GET(request: NextRequest, context: Params) {
   try {
     const { id } = await context.params;
     await connectDB();
-    const partner = await Partner.findById(id);
+    const partner = await Partner.findById(id).lean();
     if (!partner) {
       return NextResponse.json({ error: "Partner not found" }, { status: 404 });
     }

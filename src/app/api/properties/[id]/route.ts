@@ -17,7 +17,7 @@ export async function GET(request: NextRequest, context: Params) {
   try {
     const { id } = await context.params;
     await connectDB();
-    const property = await Property.findById(id);
+    const property = await Property.findById(id).lean();
     if (!property) {
       return NextResponse.json(
         { error: "Property not found" },

@@ -21,5 +21,9 @@ const PartnerSchema: Schema = new Schema(
   { timestamps: true },
 );
 
+// Matches the `{ active, order, createdAt }` query/sort used by the
+// homepage partner carousel and the admin partners listing.
+PartnerSchema.index({ active: 1, order: 1, createdAt: -1 });
+
 export default mongoose.models.Partner ||
   mongoose.model<IPartner>("Partner", PartnerSchema);

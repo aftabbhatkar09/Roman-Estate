@@ -17,9 +17,11 @@ export async function uploadImage(
   const result = await cloudinary.uploader.upload(dataUri, {
     folder: `roman-estate/${folder}`,
     resource_type: "image",
-    quality: "auto",
+    // "auto:best" favors visual fidelity over file size — images are the
+    // core product on a real-estate site, so err on the side of clarity.
+    quality: "auto:best",
     fetch_format: "auto",
-    transformation: [{ width: 2000, crop: "limit" }],
+    transformation: [{ width: 2560, crop: "limit" }],
   });
 
   return result.secure_url;

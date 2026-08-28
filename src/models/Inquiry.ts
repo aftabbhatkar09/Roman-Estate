@@ -33,4 +33,7 @@ const InquirySchema: Schema = new Schema(
   { timestamps: true }
 );
 
+// Speeds up the admin inquiries listing, which always sorts newest first.
+InquirySchema.index({ createdAt: -1 });
+
 export default mongoose.models.Inquiry || mongoose.model<IInquiry>('Inquiry', InquirySchema);

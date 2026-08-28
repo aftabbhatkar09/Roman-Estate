@@ -51,4 +51,9 @@ const PropertySchema: Schema = new Schema(
   { timestamps: true }
 );
 
+// Speeds up the public/admin listing queries, which sort by newest first
+// and (on the homepage) filter to featured properties.
+PropertySchema.index({ createdAt: -1 });
+PropertySchema.index({ featured: 1, createdAt: -1 });
+
 export default mongoose.models.Property || mongoose.model<IProperty>('Property', PropertySchema);

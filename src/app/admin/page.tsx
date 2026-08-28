@@ -10,20 +10,19 @@ export const dynamic = "force-dynamic";
 async function getStats() {
   try {
     await connectDB();
-    const [propertyCount, blogCount, inquiryCount] = await Promise.all([
+    const [
+      propertyCount,
+      blogCount,
+      inquiryCount,
+      recentInquiries,
+      recentProperties,
+    ] = await Promise.all([
       Property.countDocuments(),
       Blog.countDocuments(),
       Inquiry.countDocuments(),
+      Inquiry.find({}).sort({ createdAt: -1 }).limit(5).lean(),
+      Property.find({}).sort({ createdAt: -1 }).limit(5).lean(),
     ]);
-
-    const recentInquiries = await Inquiry.find({})
-      .sort({ createdAt: -1 })
-      .limit(5)
-      .lean();
-    const recentProperties = await Property.find({})
-      .sort({ createdAt: -1 })
-      .limit(5)
-      .lean();
 
     return {
       propertyCount,

@@ -14,7 +14,7 @@ export async function GET(request: NextRequest, context: Params) {
   try {
     const { slug } = await context.params;
     await connectDB();
-    const blog = await Blog.findOne({ slug });
+    const blog = await Blog.findOne({ slug }).lean();
     if (!blog) {
       return NextResponse.json(
         { error: "Blog post not found" },

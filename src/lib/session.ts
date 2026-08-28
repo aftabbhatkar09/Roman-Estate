@@ -62,3 +62,52 @@ export async function getSession(): Promise<SessionPayload | null> {
   const token = cookieStore.get(SESSION_COOKIE)?.value;
   return decrypt(token);
 }
+
+// ── Password reset tokens ─────────────────────────────────────────────────
+// Stateless JWTs rather than a DB-tracked table: short-lived (15 min), and
+// self-invalidating on use because they embed a hash of the password that
+// was current when the token was issued — once that password changes (i.e.
+// the token is redeemed, or the password is changed some other way), the
+// embedded hash no longer matches and the token stops working.
+
+interface ResetTokenPayload extends JWTPayload {
+  email: string;
+  purpose: "password-reset";
+  pwHash: string;
+}
+
+export async function createResetToken(
+  email: string,
+  currentPasswordHash: string,
+): Promise<string> {
+  const payload: ResetTokenPayload = {
+    email,
+    purpose: "password-reset",
+    pwHash: currentPasswordHash,
+  };
+  return new SignJWT(payload)
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime("15m")
+    .sign(getEncodedKey());
+}
+
+export async function verifyResetToken(
+  token: string,
+): Promise<{ email: string; pwHash: string } | null> {
+  try {
+    const { payload } = await jwtVerify(token, getEncodedKey(), {
+      algorithms: ["HS256"],
+    });
+    if (
+      payload.purpose !== "password-reset" ||
+      typeof payload.email !== "string" ||
+      typeof payload.pwHash !== "string"
+    ) {
+      return null;
+    }
+    return { email: payload.email, pwHash: payload.pwHash };
+  } catch {
+    return null;
+  }
+}

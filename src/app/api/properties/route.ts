@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     await connectDB();
-    const properties = await Property.find({}).sort({ createdAt: -1 });
+    const properties = await Property.find({}).sort({ createdAt: -1 }).lean();
     return NextResponse.json(properties);
   } catch (error: unknown) {
     const err = error as {

@@ -14,7 +14,7 @@ export async function GET() {
     }
 
     await connectDB();
-    const blogs = await Blog.find({}).sort({ createdAt: -1 });
+    const blogs = await Blog.find({}).sort({ createdAt: -1 }).lean();
     return NextResponse.json(blogs);
   } catch (error: unknown) {
     const err = error as {

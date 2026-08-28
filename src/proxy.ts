@@ -9,12 +9,17 @@ export async function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const isLoginPage = path === "/admin/login";
+  const PUBLIC_ADMIN_PATHS = [
+    "/admin/login",
+    "/admin/forgot-password",
+    "/admin/reset-password",
+  ];
+  const isPublicAdminPage = PUBLIC_ADMIN_PATHS.includes(path);
   const token = req.cookies.get(SESSION_COOKIE)?.value;
   const session = await decrypt(token);
 
   // Not authenticated — redirect to login (preserve intended destination)
-  if (!session && !isLoginPage) {
+  if (!session && !isPublicAdminPage) {
     const loginUrl = new URL("/admin/login", req.nextUrl.origin);
     if (path !== "/admin") {
       loginUrl.searchParams.set("from", path);
@@ -22,8 +27,8 @@ export async function proxy(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Already authenticated — don't let them linger on the login page
-  if (session && isLoginPage) {
+  // Already authenticated — don't let them linger on login/reset pages
+  if (session && isPublicAdminPage) {
     return NextResponse.redirect(new URL("/admin", req.nextUrl.origin));
   }
 

@@ -9,7 +9,9 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     await connectDB();
-    const partners = await Partner.find({}).sort({ order: 1, createdAt: -1 });
+    const partners = await Partner.find({})
+      .sort({ order: 1, createdAt: -1 })
+      .lean();
     return NextResponse.json(partners);
   } catch (error: unknown) {
     console.error("Partner GET Error:", error);

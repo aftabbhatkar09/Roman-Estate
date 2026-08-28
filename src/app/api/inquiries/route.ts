@@ -1,10 +1,20 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Inquiry from "@/models/Inquiry";
 import { getSession } from "@/lib/session";
+import { sendInquiryNotification } from "@/lib/email";
+import { checkRateLimit, rateLimitResponse, getClientIp } from "@/lib/rateLimit";
 
 export async function POST(request: Request) {
   try {
+    // 5 submissions per hour per IP — the honeypot catches simple bots, this
+    // caps how much a scripted flood can do regardless.
+    const ip = getClientIp(request);
+    const rateLimit = await checkRateLimit(`inquiry:${ip}`, 5, 60 * 60 * 1000);
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(rateLimit.retryAfterSeconds);
+    }
+
     await connectDB();
     const data = await request.json();
 
@@ -35,6 +45,18 @@ export async function POST(request: Request) {
     }
 
     const inquiry = await Inquiry.create(data);
+
+    // Notify the team by email without delaying the visitor's response.
+    after(() =>
+      sendInquiryNotification({
+        name: inquiry.name,
+        email: inquiry.email,
+        phone: inquiry.phone,
+        requirementType: inquiry.requirementType,
+        message: inquiry.message,
+      }),
+    );
+
     return NextResponse.json(
       { message: "Inquiry submitted successfully", inquiry },
       { status: 201 },
@@ -71,7 +93,7 @@ export async function GET() {
     }
 
     await connectDB();
-    const inquiries = await Inquiry.find({}).sort({ createdAt: -1 });
+    const inquiries = await Inquiry.find({}).sort({ createdAt: -1 }).lean();
     return NextResponse.json(inquiries);
   } catch (error: unknown) {
     const err = error as { message?: string };
