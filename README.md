@@ -13,11 +13,14 @@ Built with **Next.js 16** (App Router, Turbopack), **TypeScript**, **Tailwind CS
 **Public site**
 - Home, property listings with filters (type, status, budget, location), and detail pages with an image gallery/lightbox
 - Blog with a listing page and individual article pages
-- About and Contact pages, with a contact form that lands in the admin inquiries inbox
+- About and Contact pages, with a contact form that lands in the admin inquiries inbox (and optionally emails the team — see below)
 - Featured properties and partner-brand carousels
+- Social share previews (Open Graph/Twitter cards) — property and blog links show the listing's own photo; other pages use a branded default
+- Scroll-triggered reveal animations and animated stat counters throughout, and rate-limited public forms (login, password reset, contact) backed by MongoDB so limits survive serverless cold starts
 
 **Admin panel** (`/admin`)
 - Cookie-based session auth (JWT via `jose`), with a proxy-level guard on all `/admin` routes
+- Self-service "forgot password" flow — emails a 15-minute, single-use reset link
 - Two roles — `super_admin` and `admin` — with user management restricted to super admins
 - CRUD for properties, blog posts, and partner logos, with Cloudinary-backed image uploads
 - Inquiry management (status tracking, reply, delete)
@@ -61,6 +64,9 @@ Copy `.env.example` to `.env.local` and set:
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Bootstrap super-admin login (bypasses the database) |
 | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name (client-side) |
 | `CLOUDINARY_CLOUD_NAME` / `CLOUDINARY_API_KEY` / `CLOUDINARY_API_SECRET` | Cloudinary server-side credentials |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL, used for the sitemap, robots.txt, and share previews |
+| `RESEND_API_KEY` | Optional — enables email notification when a new inquiry comes in |
+| `NOTIFICATION_EMAIL` / `EMAIL_FROM` | Optional — who receives inquiry emails and the sender address (defaults to `ADMIN_EMAIL` and Resend's test address) |
 
 ## Scripts
 
