@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/lib/redux/StoreProvider";
+import { buildMetadata, SITE_URL } from "@/lib/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Roman Estate | Luxury Properties",
-  description: "Premium real estate consulting and property management.",
+  metadataBase: new URL(SITE_URL),
+  ...buildMetadata({
+    title: "Roman Estate | Luxury Properties",
+    description: "Premium real estate consulting and property management.",
+  }),
 };
 
 export default function RootLayout({
