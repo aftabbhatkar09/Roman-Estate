@@ -89,7 +89,7 @@ export default function Navbar() {
                     href={link.href}
                     className={`relative text-md font-semibold transition-all duration-300 group ${
                       isActive
-                        ? "text-brand-primary"
+                        ? "text-brand-primary-dark"
                         : "text-gray-500 hover:text-brand-dark"
                     }`}
                   >

@@ -11,6 +11,7 @@ export default function ImageWithFallback({
   src,
   alt,
   fill,
+  quality = 90,
   ...props
 }: ImageWithFallbackProps) {
   const [errored, setErrored] = useState(false);
@@ -36,7 +37,7 @@ export default function ImageWithFallback({
       fill={fill}
       src={src!}
       alt={alt || "Image"}
-      quality={85}
+      quality={quality}
       onError={() => setErrored(true)}
     />
   );

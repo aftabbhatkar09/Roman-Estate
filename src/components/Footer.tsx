@@ -30,7 +30,7 @@ export default function Footer() {
             <div className="flex gap-4 flex-wrap justify-center">
               <Link
                 href="/properties"
-                className="bg-white text-brand-primary px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold hover:bg-white/90 transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2 text-sm sm:text-base"
+                className="bg-white text-brand-primary-dark px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold hover:bg-white/90 transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2 text-sm sm:text-base"
               >
                 Browse Properties <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
@@ -209,7 +209,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
+        <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-400">
           <p>
             &copy; {new Date().getFullYear()} Roman Estate. All rights reserved.
           </p>

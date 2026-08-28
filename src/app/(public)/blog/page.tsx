@@ -1,15 +1,14 @@
 import connectDB from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import BlogListingClient from "./BlogListingClient";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Real Estate Insights & News | Roman Estate",
   description:
     "Stay updated with the latest trends in Mumbai's real estate market, investment tips, and neighborhood guides.",
-};
-
-export const dynamic = "force-dynamic";
+  path: "/blog",
+});
 
 async function getBlogs() {
   try {

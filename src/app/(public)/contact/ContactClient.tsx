@@ -15,6 +15,7 @@ import {
   Building2,
 } from "lucide-react";
 import Image from "next/image";
+import Reveal from "@/components/Reveal";
 import { useSubmitInquiryMutation } from "@/lib/redux/slices/apiSlice";
 
 export default function ContactPage() {
@@ -65,6 +66,8 @@ export default function ContactPage() {
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
             alt="Office"
             fill
+            sizes="100vw"
+            quality={90}
             className="object-cover"
           />
         </div>
@@ -117,7 +120,7 @@ export default function ContactPage() {
                   iconColor: "text-brand-primary",
                 },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 sm:gap-6 group">
+                <Reveal key={i} delay={i * 100} className="flex items-start gap-4 sm:gap-6 group">
                   <div
                     className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-linear-to-br ${item.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500`}
                   >
@@ -126,9 +129,9 @@ export default function ContactPage() {
                     />
                   </div>
                   <div className="space-y-1 min-w-0">
-                    <h3 className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+                    <h2 className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">
                       {item.title}
-                    </h3>
+                    </h2>
                     <p className="text-base sm:text-lg md:text-xl font-black text-brand-dark wrap-break-word">
                       {item.content}
                     </p>
@@ -136,19 +139,19 @@ export default function ContactPage() {
                       {item.sub}
                     </p>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
 
             {/* Social Cards */}
-            <div className="bg-linear-to-br from-brand-dark to-brand-dark-light rounded-3xl sm:rounded-4xl md:rounded-[3rem] p-6 sm:p-8 md:p-10 lg:p-12 text-white relative overflow-hidden group shadow-2xl">
+            <Reveal delay={300} className="bg-linear-to-br from-brand-dark to-brand-dark-light rounded-3xl sm:rounded-4xl md:rounded-[3rem] p-6 sm:p-8 md:p-10 lg:p-12 text-white relative overflow-hidden group shadow-2xl">
               <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-linear-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 group-hover:scale-150 transition-transform duration-1000" />
               <div className="relative z-10 space-y-6 sm:space-y-8">
                 <div className="space-y-3 sm:space-y-4">
-                  <h3 className="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-3">
+                  <h2 className="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-3">
                     <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary-light shrink-0" />
                     Digital Presence
-                  </h3>
+                  </h2>
                   <p className="text-gray-400 font-medium leading-relaxed text-sm sm:text-base">
                     Join our exclusive community for real-time market insights
                     and off-market opportunities.
@@ -171,11 +174,11 @@ export default function ContactPage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
 
           {/* Right: Contact Form */}
-          <div className="lg:col-span-7">
+          <Reveal delay={150} className="lg:col-span-7">
             <div className="bg-white rounded-3xl sm:rounded-4xl md:rounded-[3rem] shadow-card border border-gray-100 p-5 sm:p-6 md:p-10 lg:p-16 relative overflow-hidden">
               {submitted ? (
                 <div className="text-center py-10 sm:py-16 space-y-6 sm:space-y-10">
@@ -233,7 +236,7 @@ export default function ContactPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                       <div className="space-y-2 sm:space-y-3">
-                        <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
+                        <label className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
                           Full Name
                         </label>
                         <input
@@ -248,7 +251,7 @@ export default function ContactPage() {
                         />
                       </div>
                       <div className="space-y-2 sm:space-y-3">
-                        <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
+                        <label className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
                           Email Address
                         </label>
                         <input
@@ -265,7 +268,7 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2 sm:space-y-3">
-                      <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
+                      <label className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
                         Mobile Number
                       </label>
                       <input
@@ -281,7 +284,7 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2 sm:space-y-3">
-                      <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
+                      <label className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
                         <Building2 className="w-3 h-3" /> Requirement Type
                       </label>
                       <div className="flex gap-2 sm:gap-3">
@@ -310,7 +313,7 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2 sm:space-y-3">
-                      <label className="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">
+                      <label className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
                         Brief Inquiry
                       </label>
                       <textarea
@@ -349,17 +352,19 @@ export default function ContactPage() {
                 </div>
               )}
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
 
       {/* Map Section */}
-      <div className="max-w-7xl mx-auto px-4 pb-20 sm:pb-24 md:pb-32">
+      <Reveal className="max-w-7xl mx-auto px-4 pb-20 sm:pb-24 md:pb-32">
         <div className="h-75 sm:h-100 md:h-125 lg:h-150 bg-gray-50 rounded-3xl sm:rounded-4xl md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
           <Image
             src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=2000"
             alt="Office Location"
             fill
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            quality={90}
             className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
           />
           <div className="absolute inset-0 bg-linear-to-t from-brand-dark/60 to-transparent" />
@@ -386,7 +391,7 @@ export default function ContactPage() {
             </a>
           </div>
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

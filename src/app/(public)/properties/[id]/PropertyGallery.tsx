@@ -95,7 +95,7 @@ export default function PropertyGallery({
               <Images className="w-4 h-4 text-brand-primary" /> Photo Gallery (
               {allImages.length})
             </span>
-            <span className="text-[10px] text-gray-400 font-bold">
+            <span className="text-[10px] text-gray-500 font-bold">
               {activeIdx + 1} of {allImages.length}
             </span>
           </div>
@@ -176,6 +176,8 @@ export default function PropertyGallery({
               src={allImages[activeIdx]}
               alt={title}
               fill
+              sizes="100vw"
+              quality={95}
               className="object-contain p-4 sm:p-8 md:p-10"
             />
             <button

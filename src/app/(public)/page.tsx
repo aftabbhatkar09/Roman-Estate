@@ -15,7 +15,6 @@ import {
   Landmark,
   TrendingUp,
 } from "lucide-react";
-import type { Metadata } from "next";
 import connectDB from "@/lib/mongodb";
 import Property from "@/models/Property";
 import Partner from "@/models/Partner";
@@ -23,6 +22,9 @@ import FeaturedCarousel from "@/components/FeaturedCarousel";
 import PartnersCarousel from "@/components/PartnersCarousel";
 import HeroSearch from "@/components/HeroSearch";
 import FaqAccordion from "@/components/FaqAccordion";
+import Reveal from "@/components/Reveal";
+import AnimatedCounter from "@/components/AnimatedCounter";
+import { buildMetadata } from "@/lib/metadata";
 
 interface HomeProperty {
   _id: string;
@@ -40,13 +42,11 @@ interface HomeProperty {
   status?: string;
 }
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Roman Estate | Luxury Real Estate Mumbai",
   description:
     "Roman Estate, a trusted real estate consultant in Mumbai, helps you discover luxury homes, buy flats, and invest in Mumbai's best residential and commercial properties with confidence.",
-};
-
-export const dynamic = "force-dynamic";
+});
 
 async function getFeaturedProperties() {
   try {
@@ -90,9 +90,11 @@ async function getPartners() {
 }
 
 export default async function HomePage() {
-  const featuredProperties = await getFeaturedProperties();
-  const latestProperties = await getLatestProperties();
-  const partners = await getPartners();
+  const [featuredProperties, latestProperties, partners] = await Promise.all([
+    getFeaturedProperties(),
+    getLatestProperties(),
+    getPartners(),
+  ]);
 
   return (
     <div className="flex flex-col">
@@ -150,20 +152,21 @@ export default async function HomePage() {
             { label: "Years of Excellence", value: "32", icon: Trophy },
             { label: "Global Reach", value: "15+", icon: Globe },
           ].map((stat, i) => (
-            <div
+            <Reveal
               key={i}
+              delay={i * 100}
               className="flex flex-col items-center text-center group"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-2 sm:mb-4 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:rotate-6 transition-all duration-300">
                 <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary group-hover:text-white transition-colors" />
               </div>
               <p className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mb-1">
-                {stat.value}
+                <AnimatedCounter value={stat.value} />
               </p>
               <p className="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest">
                 {stat.label}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -171,7 +174,7 @@ export default async function HomePage() {
       {/* Featured Properties Section */}
       <section className="py-16 sm:py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6 md:flex-row md:justify-between mb-10 md:mb-20">
+          <Reveal className="flex flex-col items-center md:items-start text-center md:text-left gap-6 md:flex-row md:justify-between mb-10 md:mb-20">
             <div className="space-y-3 sm:space-y-4 max-w-xl">
               <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
                 Curated Selection
@@ -188,7 +191,7 @@ export default async function HomePage() {
               Explore Collection{" "}
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
-          </div>
+          </Reveal>
 
           <FeaturedCarousel properties={featuredProperties} />
         </div>
@@ -197,7 +200,7 @@ export default async function HomePage() {
       {/* Partners Section */}
       <section className="py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
+          <Reveal className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20">
             <div className="space-y-4">
               <span className="text-brand-primary text-sm font-bold uppercase tracking-[0.3em]">
                 Our Network
@@ -206,7 +209,7 @@ export default async function HomePage() {
                 Trusted by Industry Titans
               </h2>
             </div>
-          </div>
+          </Reveal>
 
           <PartnersCarousel partners={partners} />
         </div>
@@ -217,13 +220,15 @@ export default async function HomePage() {
         <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-brand-primary/5 to-transparent -skew-x-12 transform translate-x-1/2" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center">
-            <div className="relative aspect-square max-w-md mx-auto lg:max-w-none w-full">
+            <Reveal className="relative aspect-square max-w-md mx-auto lg:max-w-none w-full">
               <div className="absolute inset-3 sm:inset-4 border-2 border-brand-primary/30 rounded-3xl sm:rounded-4xl md:rounded-[3rem] -rotate-3" />
               <div className="absolute inset-0 bg-linear-to-br from-brand-primary/10 to-brand-accent/10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] rotate-3" />
               <Image
                 src="/bg2.jpg"
                 alt="Our Expertise"
                 fill
+                sizes="(max-width: 1024px) 448px, 640px"
+                quality={90}
                 className="relative z-10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] object-cover shadow-2xl"
               />
               <div className="absolute -bottom-6 sm:-bottom-8 md:-bottom-10 -right-4 sm:-right-6 md:-right-10 glass-morphism p-4 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-2xl z-20">
@@ -234,9 +239,9 @@ export default async function HomePage() {
                   Years of Trust
                 </p>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="space-y-6 md:space-y-10">
+            <Reveal delay={150} className="space-y-6 md:space-y-10">
               <div className="space-y-4 sm:space-y-6">
                 <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
                   Why Roman Estate
@@ -275,7 +280,7 @@ export default async function HomePage() {
                     icon: HeartHandshake,
                   },
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-3 sm:gap-4 group">
+                  <Reveal key={i} delay={200 + i * 100} className="flex gap-3 sm:gap-4 group">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-linear-to-br from-white/5 to-white/2 border border-white/10 flex items-center justify-center shrink-0 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:border-transparent transition-all">
                       <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary-light group-hover:text-white transition-colors" />
                     </div>
@@ -287,7 +292,7 @@ export default async function HomePage() {
                         {item.desc}
                       </p>
                     </div>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
 
@@ -298,7 +303,7 @@ export default async function HomePage() {
                 Consult an Expert{" "}
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -306,7 +311,7 @@ export default async function HomePage() {
       {/* Why Invest in Mumbai Section */}
       <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
+          <Reveal className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
               Market Insights
             </span>
@@ -322,7 +327,7 @@ export default async function HomePage() {
               you&apos;re purchasing your first home or expanding your
               investment portfolio.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-10">
             {[
@@ -342,8 +347,9 @@ export default async function HomePage() {
                 icon: TrendingUp,
               },
             ].map((item, i) => (
-              <div
+              <Reveal
                 key={i}
+                delay={i * 120}
                 className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:rotate-6 transition-all duration-300">
@@ -355,7 +361,7 @@ export default async function HomePage() {
                 <p className="text-sm sm:text-base text-gray-500 leading-relaxed">
                   {item.desc}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -364,14 +370,14 @@ export default async function HomePage() {
       {/* Our Process Section */}
       <section className="py-16 sm:py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
+          <Reveal className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
               How We Work
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-brand-dark">
               Our Process
             </h2>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-10">
             {[
@@ -400,8 +406,9 @@ export default async function HomePage() {
                 desc: "Smooth possession and ongoing support long after the sale.",
               },
             ].map((step, i) => (
-              <div
+              <Reveal
                 key={i}
+                delay={(i % 3) * 120}
                 className="relative bg-gray-50 rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
               >
                 <span className="absolute top-5 sm:top-6 right-5 sm:right-6 text-3xl sm:text-5xl font-black gradient-text opacity-20 group-hover:opacity-40 transition-opacity">
@@ -416,7 +423,7 @@ export default async function HomePage() {
                 <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
                   {step.desc}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -425,7 +432,7 @@ export default async function HomePage() {
       {/* Latest Listings Grid */}
       <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
+          <Reveal className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
               Latest Additions
             </span>
@@ -438,13 +445,13 @@ export default async function HomePage() {
               Explore our newest listings, ranging from sleek modern penthouses
               to premium commercial spaces.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-10">
-            {latestProperties.map((property: HomeProperty) => (
+            {latestProperties.map((property: HomeProperty, i: number) => (
+              <Reveal key={property._id} delay={(i % 3) * 120} className="h-full">
               <Link
                 href={`/properties/${property._id}`}
-                key={property._id}
                 className="premium-card group/item bg-white flex flex-col h-full"
               >
                 <div className="relative aspect-16/10 overflow-hidden">
@@ -469,9 +476,9 @@ export default async function HomePage() {
                 </div>
 
                 <div className="p-4 sm:p-6 md:p-8 flex-1 flex flex-col">
-                  <h4 className="text-base sm:text-lg md:text-xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors mb-2 line-clamp-1">
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors mb-2 line-clamp-1">
                     {property.title}
-                  </h4>
+                  </h3>
                   <div className="flex items-center text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6">
                     <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-brand-primary shrink-0" />
                     <span className="line-clamp-1">
@@ -490,6 +497,7 @@ export default async function HomePage() {
                   </div>
                 </div>
               </Link>
+              </Reveal>
             ))}
           </div>
 
@@ -581,7 +589,7 @@ export default async function HomePage() {
       {/* CTA Section */}
       <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="relative overflow-hidden bg-white rounded-3xl sm:rounded-4xl border border-gray-100 px-6 sm:px-12 md:px-20 py-14 sm:py-20 md:py-24 text-center">
+          <Reveal className="relative overflow-hidden bg-white rounded-3xl sm:rounded-4xl border border-gray-100 px-6 sm:px-12 md:px-20 py-14 sm:py-20 md:py-24 text-center">
             <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-brand-primary/30 to-transparent" />
             <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-72 sm:w-96 h-40 bg-linear-to-r from-brand-primary/10 to-brand-accent/10 blur-3xl pointer-events-none" />
             <div className="relative z-10 space-y-5 sm:space-y-6">
@@ -607,21 +615,21 @@ export default async function HomePage() {
                 </Link>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-12 md:mb-16">
+          <Reveal className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-12 md:mb-16">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
               Common Questions
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark">
               Everything You Need to Know
             </h2>
-          </div>
+          </Reveal>
 
           <FaqAccordion
             faqs={[

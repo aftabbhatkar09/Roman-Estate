@@ -87,12 +87,14 @@ export default function FeaturedCarousel({
       {/* Navigation Buttons — overlaid on left/right edges */}
       <button
         onClick={() => scroll("left")}
+        aria-label="Previous properties"
         className="absolute left-2 top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-gray-200 bg-white/90 backdrop-blur-sm items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg hidden sm:flex"
       >
         <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
       <button
         onClick={() => scroll("right")}
+        aria-label="Next properties"
         className="absolute right-2 top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-gray-200 bg-white/90 backdrop-blur-sm items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg hidden sm:flex"
       >
         <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -146,9 +148,9 @@ export default function FeaturedCarousel({
 
               <div className="p-2.5 sm:p-3 flex-1 flex flex-col justify-between">
                 <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-brand-dark group-hover/card:text-brand-primary transition-colors line-clamp-1 mb-1">
+                  <h3 className="text-xs sm:text-sm font-bold text-brand-dark group-hover/card:text-brand-primary transition-colors line-clamp-1 mb-1">
                     {property.title}
-                  </h4>
+                  </h3>
                   <div className="flex items-center text-gray-500 text-[10px] sm:text-[11px] mb-2 sm:mb-3">
                     <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-0.5 text-brand-primary shrink-0" />
                     <span className="line-clamp-1">

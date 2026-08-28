@@ -23,10 +23,10 @@ export default function FaqAccordion({ faqs }: { faqs: Faq[] }) {
             className="w-full text-left bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100 hover:border-brand-primary/30 transition-all cursor-pointer group shadow-sm hover:shadow-md"
           >
             <div className="flex justify-between items-start sm:items-center gap-3">
-              <h4 className="font-bold text-brand-dark flex items-start sm:items-center gap-2 sm:gap-3 text-sm sm:text-base">
+              <h3 className="font-bold text-brand-dark flex items-start sm:items-center gap-2 sm:gap-3 text-sm sm:text-base">
                 <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary shrink-0 mt-0.5 sm:mt-0" />
                 {faq.q}
-              </h4>
+              </h3>
               <Plus
                 className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-300 group-hover:text-brand-primary transition-transform shrink-0 mt-0.5 sm:mt-0 ${
                   isOpen ? "rotate-45 text-brand-primary" : ""

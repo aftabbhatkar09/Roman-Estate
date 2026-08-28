@@ -12,6 +12,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import ImageWithFallback from "@/components/ImageWithFallback";
+import Reveal from "@/components/Reveal";
 import Link from "next/link";
 
 interface PropertyItem {
@@ -102,7 +103,7 @@ export default function PropertiesClient({
 
           {/* Search */}
           <div className="space-y-3">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">
               Location or Project
             </label>
             <div className="relative">
@@ -121,7 +122,7 @@ export default function PropertiesClient({
 
           {/* Property Type */}
           <div className="space-y-3">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">
               Property Type
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -143,7 +144,7 @@ export default function PropertiesClient({
 
           {/* Status */}
           <div className="space-y-3">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">
               Listing Status
             </label>
             <div className="flex flex-col gap-2">
@@ -165,7 +166,7 @@ export default function PropertiesClient({
 
           {/* Price Range */}
           <div className="space-y-3">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">
               Budget Range (₹)
             </label>
             <div className="space-y-3">
@@ -209,7 +210,7 @@ export default function PropertiesClient({
             <h2 className="text-xl sm:text-2xl font-black text-brand-dark tracking-tight">
               Property Collection
             </h2>
-            <p className="text-gray-400 text-sm font-medium mt-1">
+            <p className="text-gray-500 text-sm font-medium mt-1">
               Showing{" "}
               <span className="text-brand-primary font-bold">
                 {filteredProperties.length}
@@ -239,10 +240,10 @@ export default function PropertiesClient({
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-            {filteredProperties.map((property) => (
+            {filteredProperties.map((property, i) => (
+              <Reveal key={property._id} delay={(i % 4) * 100} className="h-full">
               <Link
                 href={`/properties/${property._id}`}
-                key={property._id}
                 className="premium-card group/item bg-white flex flex-col h-full"
               >
                 <div className="relative aspect-4/3 overflow-hidden">
@@ -282,13 +283,13 @@ export default function PropertiesClient({
 
                 <div className="p-5 sm:p-6 md:p-8 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2 text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                    <div className="flex items-center gap-2 text-brand-primary-dark text-xs font-bold uppercase tracking-[0.2em] mb-2">
                       <Star className="w-3 h-3 fill-current" />
                       Premium Listing
                     </div>
-                    <h4 className="text-xl sm:text-2xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors line-clamp-1 mb-2">
+                    <h3 className="text-xl sm:text-2xl font-bold text-brand-dark group-hover/item:text-brand-primary transition-colors line-clamp-1 mb-2">
                       {property.title}
-                    </h4>
+                    </h3>
                     <div className="flex items-center text-gray-500 text-sm mb-6">
                       <MapPin className="w-4 h-4 mr-1.5 text-brand-primary shrink-0" />
                       <span className="line-clamp-1">
@@ -326,6 +327,7 @@ export default function PropertiesClient({
                   </div>
                 </div>
               </Link>
+              </Reveal>
             ))}
           </div>
         )}

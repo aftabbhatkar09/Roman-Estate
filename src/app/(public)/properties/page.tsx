@@ -1,13 +1,14 @@
 import connectDB from "@/lib/mongodb";
 import Property from "@/models/Property";
 import PropertiesClient from "./PropertiesClient";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Luxury Properties in Mumbai | Roman Estate",
   description:
     "Explore luxury homes in Mumbai and premium commercial properties with Roman Estate — your trusted real estate channel partner for new launch projects and residential projects in Mumbai.",
-};
+  path: "/properties",
+});
 
 export const dynamic = "force-dynamic";
 

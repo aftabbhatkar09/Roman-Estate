@@ -8,12 +8,16 @@ import {
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
+import { buildMetadata } from "@/lib/metadata";
+import Reveal from "@/components/Reveal";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
-export const metadata = {
+export const metadata = buildMetadata({
   title: "About Us | Roman Estate",
   description:
     "Learn about Roman Estate's legacy of luxury real estate in Mumbai.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
@@ -25,6 +29,8 @@ export default function AboutPage() {
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000"
             alt="Modern Office"
             fill
+            sizes="100vw"
+            quality={90}
             className="object-cover"
           />
         </div>
@@ -53,7 +59,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 md:py-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center">
-            <div className="relative">
+            <Reveal className="relative">
               <div className="absolute -top-10 -left-10 w-48 sm:w-64 h-48 sm:h-64 bg-brand-primary/5 rounded-full blur-3xl" />
               <div className="relative z-10 space-y-6 sm:space-y-8">
                 <div className="space-y-3 sm:space-y-4">
@@ -93,7 +99,7 @@ export default function AboutPage() {
                       desc: "Decades of deep-rooted market intelligence.",
                     },
                   ].map((item, i) => (
-                    <div key={i} className="space-y-2 sm:space-y-3 group">
+                    <Reveal key={i} delay={i * 100} className="space-y-2 sm:space-y-3 group">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center group-hover:from-brand-primary group-hover:to-brand-accent transition-all duration-500">
                         <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary group-hover:text-white" />
                       </div>
@@ -103,17 +109,19 @@ export default function AboutPage() {
                       <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-medium">
                         {item.desc}
                       </p>
-                    </div>
+                    </Reveal>
                   ))}
                 </div>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="relative h-75 sm:h-100 md:h-125 lg:h-full min-h-100 sm:min-h-125 lg:min-h-150 rounded-4xl sm:rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl">
+            <Reveal delay={150} className="relative h-75 sm:h-100 md:h-125 lg:h-full min-h-100 sm:min-h-125 lg:min-h-150 rounded-4xl sm:rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl">
               <Image
                 src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?auto=format&fit=crop&q=80&w=1000"
                 alt="Architecture"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                quality={90}
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-linear-to-t from-brand-dark/40 to-transparent" />
@@ -137,7 +145,7 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -153,14 +161,14 @@ export default function AboutPage() {
               { label: "Market Experience", val: "30yrs" },
               { label: "Global Network", val: "12+" },
             ].map((stat, i) => (
-              <div key={i} className="text-center space-y-1 sm:space-y-2">
+              <Reveal key={i} delay={i * 100} className="text-center space-y-1 sm:space-y-2">
                 <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black gradient-text tracking-tight">
-                  {stat.val}
+                  <AnimatedCounter value={stat.val} />
                 </p>
                 <p className="text-[9px] sm:text-[10px] text-gray-400 font-black uppercase tracking-[0.3em]">
                   {stat.label}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -169,7 +177,7 @@ export default function AboutPage() {
       {/* Team Section */}
       <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
+          <Reveal className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
               The Professionals
             </span>
@@ -180,7 +188,7 @@ export default function AboutPage() {
               Our team consists of industry veterans with unparalleled knowledge
               of Mumbai&apos;s luxury property landscape.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
             {[
@@ -200,7 +208,7 @@ export default function AboutPage() {
                 img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
               },
             ].map((member, i) => (
-              <div key={i} className="premium-card bg-white group/item">
+              <Reveal key={i} delay={i * 120} className="premium-card bg-white group/item">
                 <div className="relative aspect-3/4 overflow-hidden">
                   <Image
                     src={member.img}
@@ -221,7 +229,7 @@ export default function AboutPage() {
                     {member.role}
                   </p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -234,7 +242,7 @@ export default function AboutPage() {
             <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-brand-primary/5 to-transparent -skew-x-12 transform translate-x-1/2" />
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
-              <div className="space-y-6 sm:space-y-8">
+              <Reveal className="space-y-6 sm:space-y-8">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
                   Why Discerning Clients <br />
                   Choose Us
@@ -246,8 +254,9 @@ export default function AboutPage() {
                     "Strategic investment advisory with proven ROI.",
                     "Complete discretion and confidentiality for elite clients.",
                   ].map((text, i) => (
-                    <div
+                    <Reveal
                       key={i}
+                      delay={i * 100}
                       className="flex items-center gap-3 sm:gap-4 group"
                     >
                       <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-linear-to-br from-brand-primary/20 to-brand-accent/20 flex items-center justify-center shrink-0 group-hover:from-brand-primary group-hover:to-brand-accent transition-colors">
@@ -256,12 +265,12 @@ export default function AboutPage() {
                       <p className="text-gray-400 font-medium group-hover:text-white transition-colors text-sm sm:text-base">
                         {text}
                       </p>
-                    </div>
+                    </Reveal>
                   ))}
                 </div>
-              </div>
+              </Reveal>
 
-              <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
+              <Reveal delay={150} className="space-y-6 sm:space-y-8 text-center lg:text-left">
                 <p className="text-lg sm:text-xl md:text-2xl font-medium text-gray-300 leading-relaxed italic">
                   &ldquo;Our mission is to empower our clients through expert
                   guidance, ensuring every real estate decision is a step toward
@@ -274,7 +283,7 @@ export default function AboutPage() {
                   Start Your Journey{" "}
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </Link>
-              </div>
+              </Reveal>
             </div>
           </div>
         </div>

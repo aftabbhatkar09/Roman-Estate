@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { FileText, Calendar, ArrowRight, Search, Clock } from "lucide-react";
 import ImageWithFallback from "@/components/ImageWithFallback";
+import Reveal from "@/components/Reveal";
 import Link from "next/link";
 
 interface BlogItem {
@@ -66,9 +67,9 @@ export default function BlogListingClient({
             <FileText className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-gray-200" />
           </div>
           <div className="space-y-3 sm:space-y-4">
-            <h3 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
               No articles found
-            </h3>
+            </h2>
             <p className="text-gray-400 font-medium leading-relaxed text-sm sm:text-base">
               We couldn&apos;t find any entries matching your search criteria.{" "}
               <br className="hidden sm:block" />
@@ -84,10 +85,10 @@ export default function BlogListingClient({
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
-          {filteredBlogs.map((blog) => (
+          {filteredBlogs.map((blog, i) => (
+            <Reveal key={blog._id} delay={(i % 3) * 100} className="h-full">
             <Link
               href={`/blog/${blog.slug}`}
-              key={blog._id}
               className="premium-card group/item bg-white flex flex-col h-full"
             >
               <div className="relative aspect-16/10 overflow-hidden">
@@ -122,9 +123,9 @@ export default function BlogListingClient({
                   </div>
                 </div>
 
-                <h3 className="text-lg sm:text-xl md:text-2xl font-black text-brand-dark group-hover/item:text-brand-primary transition-colors mb-3 sm:mb-4 line-clamp-2 leading-tight tracking-tight">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-black text-brand-dark group-hover/item:text-brand-primary transition-colors mb-3 sm:mb-4 line-clamp-2 leading-tight tracking-tight">
                   {blog.title}
-                </h3>
+                </h2>
 
                 <p className="text-gray-500 font-medium text-xs sm:text-sm mb-4 sm:mb-6 md:mb-8 line-clamp-3 leading-relaxed">
                   {blog.excerpt}
@@ -146,6 +147,7 @@ export default function BlogListingClient({
                 </div>
               </div>
             </Link>
+            </Reveal>
           ))}
         </div>
       )}

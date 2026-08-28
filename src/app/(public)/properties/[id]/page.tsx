@@ -1,3 +1,4 @@
+import { cache } from "react";
 import connectDB from "@/lib/mongodb";
 import Property from "@/models/Property";
 import {
@@ -14,27 +15,29 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import PropertyGallery from "./PropertyGallery";
+import { buildMetadata } from "@/lib/metadata";
+import Reveal from "@/components/Reveal";
 
 interface PropertyPageProps {
   params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({
-  params,
-}: PropertyPageProps): Promise<Metadata> {
-  const { id } = await params;
-  await connectDB();
-  const property = await Property.findById(id);
-
-  if (!property) return { title: "Property Not Found" };
-
-  return {
-    title: `${property.title} | Roman Estate`,
-    description: property.description.substring(0, 160),
-  };
+// Pre-renders every listing at build time. New listings added later still
+// work — Next.js renders and caches them on their first visit.
+export async function generateStaticParams() {
+  try {
+    await connectDB();
+    const properties = await Property.find({}).select("_id").lean();
+    return properties.map((property) => ({ id: String(property._id) }));
+  } catch (error) {
+    console.error("Error generating static params for property:", error);
+    return [];
+  }
 }
 
-async function getProperty(id: string) {
+// Memoized per-request: generateMetadata and the page component both need
+// this document, so this ensures only one DB round-trip instead of two.
+const getProperty = cache(async (id: string) => {
   try {
     await connectDB();
     const property = await Property.findById(id).lean();
@@ -43,6 +46,22 @@ async function getProperty(id: string) {
   } catch {
     return null;
   }
+});
+
+export async function generateMetadata({
+  params,
+}: PropertyPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const property = await getProperty(id);
+
+  if (!property) return { title: "Property Not Found" };
+
+  return buildMetadata({
+    title: `${property.title} | Roman Estate`,
+    description: property.description.substring(0, 160),
+    images: property.images?.length ? property.images : undefined,
+    path: `/properties/${id}`,
+  });
 }
 
 export default async function PropertyDetailPage({
@@ -63,7 +82,7 @@ export default async function PropertyDetailPage({
           {/* Left Column: Details */}
           <div className="lg:col-span-8 space-y-10 sm:space-y-12 md:space-y-16">
             {/* Title & Price Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start gap-6 sm:gap-8 border-b border-gray-100 pb-8 sm:pb-10 md:pb-12">
+            <Reveal className="flex flex-col md:flex-row justify-between items-start gap-6 sm:gap-8 border-b border-gray-100 pb-8 sm:pb-10 md:pb-12">
               <div className="space-y-3 sm:space-y-4">
                 <div className="flex flex-wrap gap-2 sm:gap-3">
                   <span className="bg-linear-to-r from-brand-primary/10 to-brand-accent/10 text-brand-primary px-3 sm:px-4 py-1 rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-widest border border-brand-primary/20">
@@ -108,7 +127,7 @@ export default async function PropertyDetailPage({
                   </p>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Key Specs */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
@@ -137,25 +156,26 @@ export default async function PropertyDetailPage({
                   ),
                 },
               ].map((spec, i) => (
-                <div
+                <Reveal
                   key={i}
+                  delay={i * 100}
                   className="bg-gray-50/50 p-3 sm:p-4 md:p-5 lg:p-8 rounded-[1rem] sm:rounded-3xl md:rounded-4xl border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-card transition-all duration-500"
                 >
                   <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <spec.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary group-hover:text-white" />
                   </div>
-                  <p className="text-[8px] sm:text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1 sm:mb-2">
+                  <p className="text-[8px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-1 sm:mb-2">
                     {spec.label}
                   </p>
                   <p className="text-sm sm:text-base md:text-lg lg:text-xl font-black text-brand-dark">
                     {spec.value}
                   </p>
-                </div>
+                </Reveal>
               ))}
             </div>
 
             {/* Description */}
-            <div className="space-y-5 sm:space-y-6 md:space-y-8">
+            <Reveal className="space-y-5 sm:space-y-6 md:space-y-8">
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-1 h-8 sm:w-1.5 sm:h-10 bg-linear-to-b from-brand-primary to-brand-accent rounded-full" />
                 <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
@@ -171,21 +191,22 @@ export default async function PropertyDetailPage({
                     </p>
                   ))}
               </div>
-            </div>
+            </Reveal>
 
             {/* Amenities */}
             {property.amenities && property.amenities.length > 0 && (
               <div className="space-y-6 sm:space-y-8 md:space-y-10">
-                <div className="flex items-center gap-3 sm:gap-4">
+                <Reveal className="flex items-center gap-3 sm:gap-4">
                   <div className="w-1 h-8 sm:w-1.5 sm:h-10 bg-linear-to-b from-brand-primary to-brand-accent rounded-full" />
                   <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
                     Exclusive Features
                   </h2>
-                </div>
+                </Reveal>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                   {property.amenities.map((amenity: string, i: number) => (
-                    <div
+                    <Reveal
                       key={i}
+                      delay={(i % 6) * 80}
                       className="flex items-center p-3 sm:p-4 md:p-5 bg-white rounded-xl sm:rounded-2xl border border-gray-100 group hover:border-brand-primary/30 hover:shadow-card transition-all duration-500"
                     >
                       <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mr-3 sm:mr-4 shrink-0 group-hover:from-brand-primary group-hover:to-brand-accent transition-colors">
@@ -194,7 +215,7 @@ export default async function PropertyDetailPage({
                       <span className="font-bold text-brand-dark text-sm sm:text-base">
                         {amenity}
                       </span>
-                    </div>
+                    </Reveal>
                   ))}
                 </div>
               </div>
@@ -203,7 +224,7 @@ export default async function PropertyDetailPage({
 
           {/* Right Column: Sidebar */}
           <div className="lg:col-span-4 space-y-6 sm:space-y-8">
-            <div className="bg-linear-to-br from-brand-dark to-brand-dark-light rounded-3xl sm:rounded-4xl md:rounded-[3rem] p-5 sm:p-6 md:p-8 lg:p-10 text-white shadow-2xl overflow-hidden group sticky top-28">
+            <Reveal delay={100} className="bg-linear-to-br from-brand-dark to-brand-dark-light rounded-3xl sm:rounded-4xl md:rounded-[3rem] p-5 sm:p-6 md:p-8 lg:p-10 text-white shadow-2xl overflow-hidden group sticky top-28">
               <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-linear-to-br from-brand-primary/15 to-brand-accent/15 rounded-full -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 group-hover:scale-150 transition-transform duration-1000" />
 
               <div className="relative z-10 space-y-5 sm:space-y-6 md:space-y-8">
@@ -248,9 +269,9 @@ export default async function PropertyDetailPage({
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="bg-linear-to-br from-brand-primary/5 to-brand-accent/5 p-5 sm:p-6 md:p-8 lg:p-10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] border border-brand-primary/10 relative overflow-hidden">
+            <Reveal delay={200} className="bg-linear-to-br from-brand-primary/5 to-brand-accent/5 p-5 sm:p-6 md:p-8 lg:p-10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] border border-brand-primary/10 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-linear-to-br from-brand-primary/5 to-brand-accent/5 rounded-full -mr-8 sm:-mr-10 -mt-8 sm:-mt-10" />
               <h4 className="font-black text-brand-dark mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
                 <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary shrink-0" />
@@ -267,33 +288,33 @@ export default async function PropertyDetailPage({
                 </span>
                 . This unit offers high liquidity and premium rental yield.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="bg-gray-50 p-5 sm:p-6 md:p-8 rounded-3xl sm:rounded-4xl md:rounded-[2.5rem] border border-gray-100">
+            <Reveal delay={300} className="bg-gray-50 p-5 sm:p-6 md:p-8 rounded-3xl sm:rounded-4xl md:rounded-[2.5rem] border border-gray-100">
               <h4 className="font-black text-brand-dark mb-4 sm:mb-6 text-[10px] sm:text-xs uppercase tracking-[0.2em]">
                 Property Signature
               </h4>
               <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm font-medium">
                 <div className="flex justify-between items-center py-2 sm:py-3 border-b border-gray-100 gap-2">
-                  <span className="text-gray-400 shrink-0">Reference ID</span>
+                  <span className="text-gray-500 shrink-0">Reference ID</span>
                   <span className="font-black text-brand-dark font-mono text-right break-all max-w-45">
                     #{property._id?.toString().slice(-8).toUpperCase()}
                   </span>
                 </div>
                 <div className="flex justify-between items-center py-2 sm:py-3 border-b border-gray-100 gap-2">
-                  <span className="text-gray-400 shrink-0">Category</span>
+                  <span className="text-gray-500 shrink-0">Category</span>
                   <span className="font-black text-brand-dark text-right">
                     {property.type}
                   </span>
                 </div>
                 <div className="flex justify-between items-center py-2 sm:py-3 gap-2">
-                  <span className="text-gray-400 shrink-0">City</span>
+                  <span className="text-gray-500 shrink-0">City</span>
                   <span className="font-black text-brand-dark text-right">
                     {property.location.city}
                   </span>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </div>
