@@ -111,7 +111,7 @@ export default function PropertiesClient({
               <input
                 type="text"
                 placeholder="Where would you like to live?"
-                className="w-full pl-11 pr-4 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
+                className="w-full pl-11 pr-4 py-4 bg-cream border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
                 value={filter.search}
                 onChange={(e) =>
                   setFilter({ ...filter, search: e.target.value })
@@ -133,7 +133,7 @@ export default function PropertiesClient({
                   className={`px-4 py-3 rounded-xl text-xs font-bold transition-all border ${
                     filter.type === t
                       ? "bg-linear-to-r from-brand-primary to-brand-accent text-white border-transparent shadow-lg shadow-brand-primary/20"
-                      : "border-gray-100 text-gray-500 hover:border-brand-primary/50 hover:text-brand-primary bg-gray-50/50"
+                      : "border-gray-100 text-gray-500 hover:border-brand-primary/50 hover:text-brand-primary bg-cream/50"
                   }`}
                 >
                   {t}
@@ -155,7 +155,7 @@ export default function PropertiesClient({
                   className={`w-full text-left px-5 py-3.5 rounded-xl text-sm font-bold transition-all ${
                     filter.status === status
                       ? "bg-linear-to-r from-brand-primary to-brand-accent text-white shadow-lg shadow-brand-primary/20"
-                      : "text-gray-500 hover:bg-gray-100 bg-gray-50/50"
+                      : "text-gray-500 hover:bg-gray-100 bg-cream/50"
                   }`}
                 >
                   {status}
@@ -177,7 +177,7 @@ export default function PropertiesClient({
                 onChange={(e) =>
                   setFilter({ ...filter, minPrice: e.target.value })
                 }
-                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
+                className="w-full px-5 py-3.5 bg-cream border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
               />
               <input
                 type="number"
@@ -186,7 +186,7 @@ export default function PropertiesClient({
                 onChange={(e) =>
                   setFilter({ ...filter, maxPrice: e.target.value })
                 }
-                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
+                className="w-full px-5 py-3.5 bg-cream border border-transparent rounded-xl text-sm outline-none focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 transition-all font-medium"
               />
             </div>
           </div>

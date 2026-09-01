@@ -65,7 +65,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
   if (!blog) notFound();
 
   return (
-    <article className="bg-white min-h-screen pb-24">
+    <article className="bg-cream min-h-screen pb-24">
       {/* Article Header/Hero */}
       <div className="relative min-h-120 sm:min-h-140 md:min-h-160 w-full overflow-hidden bg-brand-dark flex flex-col justify-end pt-28 sm:pt-32 pb-8 sm:pb-12 md:pb-16">
         <ImageWithFallback
@@ -152,7 +152,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
       {/* Article Content */}
       <div className="max-w-7xl mx-auto px-4 mt-8 sm:mt-12 md:mt-16 lg:mt-24 flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 lg:gap-20">
         <div className="lg:w-2/3">
-          <Reveal className="prose prose-sm sm:prose-base md:prose-lg lg:prose-xl max-w-none text-gray-500 font-medium leading-relaxed prose-headings:text-brand-dark prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-primary prose-strong:text-brand-dark prose-blockquote:border-brand-primary prose-blockquote:bg-gray-50 prose-blockquote:p-4 sm:prose-blockquote:p-6 md:prose-blockquote:p-8 prose-blockquote:rounded-xl sm:prose-blockquote:rounded-2xl md:prose-blockquote:rounded-3xl prose-blockquote:italic prose-blockquote:font-bold prose-blockquote:text-brand-dark">
+          <Reveal className="prose prose-sm sm:prose-base md:prose-lg lg:prose-xl max-w-none text-gray-500 font-medium leading-relaxed prose-headings:text-brand-dark prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-primary prose-strong:text-brand-dark prose-blockquote:border-brand-primary prose-blockquote:bg-cream prose-blockquote:p-4 sm:prose-blockquote:p-6 md:prose-blockquote:p-8 prose-blockquote:rounded-xl sm:prose-blockquote:rounded-2xl md:prose-blockquote:rounded-3xl prose-blockquote:italic prose-blockquote:font-bold prose-blockquote:text-brand-dark">
             {blog.content.split("\n").map((para: string, i: number) =>
               para.trim() ? (
                 <p key={i} className="mb-4 sm:mb-6 md:mb-8">
@@ -180,7 +180,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
 
         {/* Sidebar */}
         <aside className="lg:w-1/3 space-y-8 sm:space-y-10 md:space-y-12">
-          <Reveal className="bg-gray-50 p-6 sm:p-8 md:p-10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] border border-gray-100 space-y-5 sm:space-y-6 md:space-y-8">
+          <Reveal className="bg-cream p-6 sm:p-8 md:p-10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] border border-gray-100 space-y-5 sm:space-y-6 md:space-y-8">
             <div className="flex items-center gap-2 sm:gap-3">
               <Tag className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary shrink-0" />
               <h2 className="text-base sm:text-lg md:text-xl font-black text-brand-dark tracking-tight">

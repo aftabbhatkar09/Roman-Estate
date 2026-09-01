@@ -89,7 +89,7 @@ export default function PropertyGallery({
         </div>
 
         {/* Side Thumbnails showing all photos */}
-        <div className="hidden lg:flex lg:col-span-4 flex-col h-full bg-gray-50/80 p-4 sm:p-5 rounded-3xl md:rounded-4xl border border-gray-100/90 overflow-hidden">
+        <div className="hidden lg:flex lg:col-span-4 flex-col h-full bg-cream/80 p-4 sm:p-5 rounded-3xl md:rounded-4xl border border-gray-100/90 overflow-hidden">
           <div className="flex items-center justify-between pb-3.5 px-1 border-b border-gray-200/60 mb-4 shrink-0">
             <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-dark flex items-center gap-2">
               <Images className="w-4 h-4 text-brand-primary" /> Photo Gallery (

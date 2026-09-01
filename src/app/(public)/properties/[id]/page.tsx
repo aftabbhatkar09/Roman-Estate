@@ -73,7 +73,7 @@ export default async function PropertyDetailPage({
   if (!property) notFound();
 
   return (
-    <div className="bg-white min-h-screen pb-24 pt-24 sm:pt-28 md:pt-32">
+    <div className="bg-cream min-h-screen pb-24 pt-24 sm:pt-28 md:pt-32">
       {/* Hero Gallery */}
       <PropertyGallery images={property.images} title={property.title} />
 
@@ -159,7 +159,7 @@ export default async function PropertyDetailPage({
                 <Reveal
                   key={i}
                   delay={i * 100}
-                  className="bg-gray-50/50 p-3 sm:p-4 md:p-5 lg:p-8 rounded-[1rem] sm:rounded-3xl md:rounded-4xl border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-card transition-all duration-500"
+                  className="bg-cream/50 p-3 sm:p-4 md:p-5 lg:p-8 rounded-[1rem] sm:rounded-3xl md:rounded-4xl border border-gray-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-card transition-all duration-500"
                 >
                   <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <spec.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary group-hover:text-white" />
@@ -290,7 +290,7 @@ export default async function PropertyDetailPage({
               </p>
             </Reveal>
 
-            <Reveal delay={300} className="bg-gray-50 p-5 sm:p-6 md:p-8 rounded-3xl sm:rounded-4xl md:rounded-[2.5rem] border border-gray-100">
+            <Reveal delay={300} className="bg-cream p-5 sm:p-6 md:p-8 rounded-3xl sm:rounded-4xl md:rounded-[2.5rem] border border-gray-100">
               <h4 className="font-black text-brand-dark mb-4 sm:mb-6 text-[10px] sm:text-xs uppercase tracking-[0.2em]">
                 Property Signature
               </h4>

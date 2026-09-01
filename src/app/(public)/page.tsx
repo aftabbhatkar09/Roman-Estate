@@ -99,9 +99,9 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-28 sm:pt-32 overflow-hidden bg-brand-dark">
+      <section className="relative min-h-screen flex items-center justify-center pt-28 sm:pt-32 pb-32 sm:pb-40 md:pb-48 overflow-hidden bg-brand-dark">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-linear-to-br from-brand-primary/30 via-brand-dark/80 to-brand-accent/20 z-10" />
+          <div className="absolute inset-0 bg-linear-to-br from-brand-primary/25 via-brand-dark/40 to-brand-accent/15 z-10" />
           <Image
             src="/bg.jpg"
             alt="Luxury Mumbai Home"
@@ -110,7 +110,7 @@ export default async function HomePage() {
             className="object-cover scale-105"
             priority
           />
-          <div className="absolute inset-0 bg-linear-to-t from-brand-dark via-brand-dark/60 to-transparent z-10" />
+          <div className="absolute inset-0 bg-linear-to-t from-brand-dark via-brand-dark/35 to-transparent z-10" />
         </div>
 
         <div className="relative z-40 max-w-7xl mx-auto px-4 text-center text-white space-y-6 md:space-y-12 py-12 sm:py-16 md:py-20">
@@ -119,8 +119,8 @@ export default async function HomePage() {
               Your Trusted Partner in Every Square Foot.
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
-              Experience Real Estate <br className="hidden sm:block" />
-              with Confidence
+              Find the Right Property. <br className="hidden sm:block" />
+              Make the Right Investment
             </h1>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed px-2 sm:px-0">
               Premium residential and commercial properties across Mumbai — from
@@ -143,31 +143,34 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="relative z-30 -mt-12 sm:-mt-16 max-w-6xl mx-auto w-full px-4">
-        <div className="bg-white rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-2xl shadow-brand-primary/10 p-4 sm:p-6 md:p-8 lg:p-12 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 border border-gray-100">
-          {[
-            { label: "Premium Properties", value: "1,200+", icon: Building2 },
-            { label: "Happy Homeowners", value: "850+", icon: Users },
-            { label: "Years of Excellence", value: "32", icon: Trophy },
-            { label: "Global Reach", value: "15+", icon: Globe },
-          ].map((stat, i) => (
-            <Reveal
-              key={i}
-              delay={i * 100}
-              className="flex flex-col items-center text-center group"
-            >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-2 sm:mb-4 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:rotate-6 transition-all duration-300">
-                <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary group-hover:text-white transition-colors" />
-              </div>
-              <p className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mb-1">
-                <AnimatedCounter value={stat.value} />
-              </p>
-              <p className="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest">
-                {stat.label}
-              </p>
-            </Reveal>
-          ))}
+      {/* Stats Section — card straddles the hero/content boundary: top half over the photo, bottom half over the white section below */}
+      <section className="relative z-30 -mt-24 sm:-mt-32 md:-mt-40 lg:-mt-44">
+        <div className="absolute inset-x-0 top-1/2 bottom-0 bg-white z-0" />
+        <div className="relative z-10 max-w-6xl mx-auto w-full px-4">
+          <div className="bg-white rounded-2xl sm:rounded-3xl md:rounded-4xl p-4 sm:p-6 md:p-8 lg:p-12 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 border-2 border-brand-primary/20">
+            {[
+              { label: "Premium Properties", value: "1,200+", icon: Building2 },
+              { label: "Happy Homeowners", value: "850+", icon: Users },
+              { label: "Years of Excellence", value: "32", icon: Trophy },
+              { label: "Global Reach", value: "15+", icon: Globe },
+            ].map((stat, i) => (
+              <Reveal
+                key={i}
+                delay={i * 100}
+                className="flex flex-col items-center text-center group"
+              >
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-linear-to-br from-brand-primary/10 to-brand-accent/10 flex items-center justify-center mb-2 sm:mb-4 group-hover:from-brand-primary group-hover:to-brand-accent group-hover:rotate-6 transition-all duration-300">
+                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-primary group-hover:text-white transition-colors" />
+                </div>
+                <p className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mb-1">
+                  <AnimatedCounter value={stat.value} />
+                </p>
+                <p className="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest">
+                  {stat.label}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -309,7 +312,7 @@ export default async function HomePage() {
       </section>
 
       {/* Why Invest in Mumbai Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
+      <section className="py-16 sm:py-20 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
@@ -409,7 +412,7 @@ export default async function HomePage() {
               <Reveal
                 key={i}
                 delay={(i % 3) * 120}
-                className="relative bg-gray-50 rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                className="relative bg-cream rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
               >
                 <span className="absolute top-5 sm:top-6 right-5 sm:right-6 text-3xl sm:text-5xl font-black gradient-text opacity-20 group-hover:opacity-40 transition-opacity">
                   {String(i + 1).padStart(2, "0")}
@@ -430,7 +433,7 @@ export default async function HomePage() {
       </section>
 
       {/* Latest Listings Grid */}
-      <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
+      <section className="py-16 sm:py-20 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
@@ -565,7 +568,7 @@ export default async function HomePage() {
               ].map((t, i) => (
                 <div
                   key={i}
-                  className="bg-gray-50 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl md:rounded-4xl space-y-4 sm:space-y-6 relative group bg-linear-to-br hover:from-brand-primary hover:to-brand-accent transition-all duration-500 cursor-default"
+                  className="bg-cream p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl md:rounded-4xl space-y-4 sm:space-y-6 relative group bg-linear-to-br hover:from-brand-primary hover:to-brand-accent transition-all duration-500 cursor-default"
                 >
                   <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-brand-primary group-hover:text-white/30 transition-colors" />
                   <p className="text-sm sm:text-base text-gray-600 group-hover:text-white transition-colors leading-relaxed">
@@ -587,7 +590,7 @@ export default async function HomePage() {
       </section> */}
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
+      <section className="py-16 sm:py-20 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal className="relative overflow-hidden bg-white rounded-3xl sm:rounded-4xl border border-gray-100 px-6 sm:px-12 md:px-20 py-14 sm:py-20 md:py-24 text-center">
             <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-brand-primary/30 to-transparent" />
@@ -620,7 +623,7 @@ export default async function HomePage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
+      <section className="py-16 sm:py-20 md:py-32 bg-cream">
         <div className="max-w-3xl mx-auto px-4">
           <Reveal className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-12 md:mb-16">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">

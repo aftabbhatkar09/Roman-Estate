@@ -1,6 +1,6 @@
 export default function PropertiesLoading() {
   return (
-    <div className="bg-gray-50 min-h-screen pb-24 animate-pulse">
+    <div className="bg-cream min-h-screen pb-24 animate-pulse">
       {/* Header skeleton */}
       <div className="bg-white border-b border-gray-100 pt-28 sm:pt-32 pb-12 sm:pb-16">
         <div className="max-w-7xl mx-auto px-4">

@@ -21,7 +21,7 @@ export const metadata = buildMetadata({
 
 export default function AboutPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       {/* Hero Section */}
       <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 bg-brand-dark overflow-hidden">
         <div className="absolute inset-0 opacity-20">
@@ -175,7 +175,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-gray-50">
+      <section className="py-16 sm:py-20 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">

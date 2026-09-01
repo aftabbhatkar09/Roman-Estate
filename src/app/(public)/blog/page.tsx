@@ -27,7 +27,7 @@ export default async function BlogListingPage() {
   const blogs = await getBlogs();
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-24">
+    <div className="bg-cream min-h-screen pb-24">
       {/* Header */}
       <div className="bg-white border-b border-gray-100 pt-28 sm:pt-32 pb-12 sm:pb-16 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-1/3 h-full bg-linear-to-r from-brand-primary/5 to-transparent skew-x-12 -translate-x-24" />

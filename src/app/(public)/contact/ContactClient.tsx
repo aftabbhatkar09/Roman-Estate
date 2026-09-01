@@ -58,10 +58,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-cream min-h-screen">
       {/* Hero Header */}
       <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 bg-brand-dark overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-45">
           <Image
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
             alt="Office"
@@ -71,8 +71,8 @@ export default function ContactPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-linear-to-br from-brand-primary/20 via-brand-dark/90 to-brand-accent/10" />
-        <div className="absolute inset-0 bg-linear-to-b from-transparent to-brand-dark" />
+        <div className="absolute inset-0 bg-linear-to-br from-brand-primary/20 via-brand-dark/55 to-brand-accent/10" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent to-brand-dark/80" />
 
         <div className="max-w-7xl mx-auto px-4 relative z-10 text-center space-y-4 sm:space-y-6">
           <span className="inline-block px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-linear-to-r from-brand-primary to-brand-accent text-white text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] shadow-lg shadow-brand-primary/25">
@@ -242,7 +242,7 @@ export default function ContactPage() {
                         <input
                           type="text"
                           required
-                          className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
+                          className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-cream border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
                           placeholder="Ex: Alexander Roman"
                           value={formData.name}
                           onChange={(e) =>
@@ -257,7 +257,7 @@ export default function ContactPage() {
                         <input
                           type="email"
                           required
-                          className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
+                          className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-cream border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
                           placeholder="alex@domain.com"
                           value={formData.email}
                           onChange={(e) =>
@@ -274,7 +274,7 @@ export default function ContactPage() {
                       <input
                         type="tel"
                         required
-                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
+                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-cream border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
                         placeholder="+91 00000 00000"
                         value={formData.phone}
                         onChange={(e) =>
@@ -319,7 +319,7 @@ export default function ContactPage() {
                       <textarea
                         required
                         rows={4}
-                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all resize-none font-bold text-brand-dark text-sm sm:text-base"
+                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-cream border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all resize-none font-bold text-brand-dark text-sm sm:text-base"
                         placeholder="What are you looking for?"
                         value={formData.message}
                         onChange={(e) =>
@@ -358,7 +358,7 @@ export default function ContactPage() {
 
       {/* Map Section */}
       <Reveal className="max-w-7xl mx-auto px-4 pb-20 sm:pb-24 md:pb-32">
-        <div className="h-75 sm:h-100 md:h-125 lg:h-150 bg-gray-50 rounded-3xl sm:rounded-4xl md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
+        <div className="h-75 sm:h-100 md:h-125 lg:h-150 bg-cream rounded-3xl sm:rounded-4xl md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
           <Image
             src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=2000"
             alt="Office Location"
