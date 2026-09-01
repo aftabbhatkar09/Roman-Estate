@@ -1,16 +1,23 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Property from "@/models/Property";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getSession } from "@/lib/session";
+import { parsePagination, paginationHeaders } from "@/lib/pagination";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     await connectDB();
-    const properties = await Property.find({}).sort({ createdAt: -1 }).lean();
-    return NextResponse.json(properties);
+    const { page, limit, skip } = parsePagination(request);
+    const [properties, total] = await Promise.all([
+      Property.find({}).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+      Property.countDocuments({}),
+    ]);
+    return NextResponse.json(properties, {
+      headers: paginationHeaders({ page, limit, total }),
+    });
   } catch (error: unknown) {
     const err = error as {
       message?: string;
@@ -45,6 +52,7 @@ export async function POST(request: Request) {
     };
 
     const property = await Property.create(propertyData);
+    revalidateTag("properties", { expire: 0 });
     revalidatePath("/properties");
     revalidatePath("/admin/properties");
     return NextResponse.json(

@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import connectDB from "@/lib/mongodb";
 import Property from "@/models/Property";
 import PropertiesClient from "./PropertiesClient";
@@ -16,16 +17,40 @@ interface PropertiesPageProps {
   searchParams: Promise<{ search?: string; type?: string; status?: string }>;
 }
 
-async function getProperties() {
-  try {
-    await connectDB();
-    const properties = await Property.find({}).sort({ createdAt: -1 }).lean();
-    return JSON.parse(JSON.stringify(properties));
-  } catch (error) {
-    console.error("Error fetching properties:", error);
-    return [];
-  }
-}
+// Cached across requests (not just per-request) so this listing never has to
+// round-trip Mongo unless a property actually changed — admin writes bust it
+// via revalidateTag("properties"). Only the fields the cards render are
+// selected (no description/amenities, only the cover image) to keep the
+// cached payload — and every page load — as small as possible.
+const getProperties = unstable_cache(
+  async () => {
+    try {
+      await connectDB();
+      const properties = await Property.find({})
+        .select({
+          title: 1,
+          price: 1,
+          location: 1,
+          type: 1,
+          status: 1,
+          bedrooms: 1,
+          bathrooms: 1,
+          size: 1,
+          featured: 1,
+          createdAt: 1,
+          images: { $slice: 1 },
+        })
+        .sort({ createdAt: -1 })
+        .lean();
+      return JSON.parse(JSON.stringify(properties));
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+      return [];
+    }
+  },
+  ["properties-list"],
+  { tags: ["properties"], revalidate: 3600 },
+);
 
 export default async function PropertiesPage({
   searchParams,

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Partner from "@/models/Partner";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
@@ -44,6 +44,7 @@ export async function PUT(request: NextRequest, context: Params) {
     if (!partner) {
       return NextResponse.json({ error: "Partner not found" }, { status: 404 });
     }
+    revalidateTag("partners", { expire: 0 });
     revalidatePath("/");
     revalidatePath("/admin/partners");
     return NextResponse.json({
@@ -69,6 +70,7 @@ export async function DELETE(request: NextRequest, context: Params) {
     if (!partner) {
       return NextResponse.json({ error: "Partner not found" }, { status: 404 });
     }
+    revalidateTag("partners", { expire: 0 });
     revalidatePath("/");
     revalidatePath("/admin/partners");
     return NextResponse.json({ message: "Partner deleted successfully" });

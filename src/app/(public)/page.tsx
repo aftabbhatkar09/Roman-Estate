@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { unstable_cache } from "next/cache";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import {
   MapPin,
@@ -48,46 +49,79 @@ export const metadata = buildMetadata({
     "Roman Estate, a trusted real estate consultant in Mumbai, helps you discover luxury homes, buy flats, and invest in Mumbai's best residential and commercial properties with confidence.",
 });
 
-async function getFeaturedProperties() {
-  try {
-    await connectDB();
-    const properties = await Property.find({ featured: true })
-      .sort({ createdAt: -1 })
-      .limit(6)
-      .lean();
-    return JSON.parse(JSON.stringify(properties));
-  } catch (error) {
-    console.error("Error fetching featured properties:", error);
-    return [];
-  }
-}
+// Home page reads are all cached across requests (not just per-request) and
+// only busted on demand when an admin actually changes properties/partners —
+// see revalidateTag("properties")/("partners") in the corresponding API
+// routes. Field selection matches exactly what the cards below render (cover
+// image only, no description/amenities) to keep the cached payload small.
+const propertyCardProjection = {
+  title: 1,
+  price: 1,
+  location: 1,
+  type: 1,
+  status: 1,
+  bedrooms: 1,
+  bathrooms: 1,
+  size: 1,
+  featured: 1,
+  createdAt: 1,
+  images: { $slice: 1 },
+} as const;
 
-async function getLatestProperties() {
-  try {
-    await connectDB();
-    const properties = await Property.find({})
-      .sort({ createdAt: -1 })
-      .limit(6)
-      .lean();
-    return JSON.parse(JSON.stringify(properties));
-  } catch (error) {
-    console.error("Error fetching latest properties:", error);
-    return [];
-  }
-}
+const getFeaturedProperties = unstable_cache(
+  async () => {
+    try {
+      await connectDB();
+      const properties = await Property.find({ featured: true })
+        .select(propertyCardProjection)
+        .sort({ createdAt: -1 })
+        .limit(6)
+        .lean();
+      return JSON.parse(JSON.stringify(properties));
+    } catch (error) {
+      console.error("Error fetching featured properties:", error);
+      return [];
+    }
+  },
+  ["home-featured-properties"],
+  { tags: ["properties"], revalidate: 3600 },
+);
 
-async function getPartners() {
-  try {
-    await connectDB();
-    const partners = await Partner.find({ active: true })
-      .sort({ order: 1, createdAt: -1 })
-      .lean();
-    return JSON.parse(JSON.stringify(partners));
-  } catch (error) {
-    console.error("Error fetching partners:", error);
-    return [];
-  }
-}
+const getLatestProperties = unstable_cache(
+  async () => {
+    try {
+      await connectDB();
+      const properties = await Property.find({})
+        .select(propertyCardProjection)
+        .sort({ createdAt: -1 })
+        .limit(6)
+        .lean();
+      return JSON.parse(JSON.stringify(properties));
+    } catch (error) {
+      console.error("Error fetching latest properties:", error);
+      return [];
+    }
+  },
+  ["home-latest-properties"],
+  { tags: ["properties"], revalidate: 3600 },
+);
+
+const getPartners = unstable_cache(
+  async () => {
+    try {
+      await connectDB();
+      const partners = await Partner.find({ active: true })
+        .sort({ order: 1, createdAt: -1 })
+        .lean();
+      return JSON.parse(JSON.stringify(partners));
+    } catch (error) {
+      console.error("Error fetching partners:", error);
+      return [];
+    }
+  },
+  ["home-partners"],
+  { tags: ["partners"], revalidate: 3600 },
+);
 
 export default async function HomePage() {
   const [featuredProperties, latestProperties, partners] = await Promise.all([

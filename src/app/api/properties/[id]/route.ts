@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Property from "@/models/Property";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
@@ -52,6 +52,7 @@ export async function PUT(request: NextRequest, context: Params) {
         { status: 404 },
       );
     }
+    revalidateTag("properties", { expire: 0 });
     revalidatePath("/properties");
     revalidatePath("/admin/properties");
     revalidatePath(`/properties/${id}`);
@@ -83,6 +84,7 @@ export async function DELETE(request: NextRequest, context: Params) {
         { status: 404 },
       );
     }
+    revalidateTag("properties", { expire: 0 });
     revalidatePath("/properties");
     revalidatePath("/admin/properties");
     return NextResponse.json({ message: "Property deleted successfully" });

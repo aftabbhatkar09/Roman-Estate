@@ -1,18 +1,27 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Partner from "@/models/Partner";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getSession } from "@/lib/session";
+import { parsePagination, paginationHeaders } from "@/lib/pagination";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     await connectDB();
-    const partners = await Partner.find({})
-      .sort({ order: 1, createdAt: -1 })
-      .lean();
-    return NextResponse.json(partners);
+    const { page, limit, skip } = parsePagination(request);
+    const [partners, total] = await Promise.all([
+      Partner.find({})
+        .sort({ order: 1, createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Partner.countDocuments({}),
+    ]);
+    return NextResponse.json(partners, {
+      headers: paginationHeaders({ page, limit, total }),
+    });
   } catch (error: unknown) {
     console.error("Partner GET Error:", error);
     const message = error instanceof Error ? error.message : "Unknown Error";
@@ -31,6 +40,7 @@ export async function POST(request: Request) {
     const data = await request.json();
 
     const partner = await Partner.create(data);
+    revalidateTag("partners", { expire: 0 });
     revalidatePath("/");
     revalidatePath("/admin/partners");
     return NextResponse.json(

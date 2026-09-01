@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import connectDB from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import BlogListingClient from "./BlogListingClient";
@@ -10,18 +11,27 @@ export const metadata = buildMetadata({
   path: "/blog",
 });
 
-async function getBlogs() {
-  try {
-    await connectDB();
-    const blogs = await Blog.find({ published: true })
-      .sort({ createdAt: -1 })
-      .lean();
-    return JSON.parse(JSON.stringify(blogs));
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    return [];
-  }
-}
+// Cached across requests — busted immediately on publish/edit/delete via
+// revalidateTag("blogs"). `content` (the full article body) is excluded
+// since the listing only ever renders the excerpt — no reason to ship every
+// post's full text just to show a card grid.
+const getBlogs = unstable_cache(
+  async () => {
+    try {
+      await connectDB();
+      const blogs = await Blog.find({ published: true })
+        .select("title slug excerpt image tags author createdAt")
+        .sort({ createdAt: -1 })
+        .lean();
+      return JSON.parse(JSON.stringify(blogs));
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+      return [];
+    }
+  },
+  ["blogs-list"],
+  { tags: ["blogs"], revalidate: 3600 },
+);
 
 export default async function BlogListingPage() {
   const blogs = await getBlogs();

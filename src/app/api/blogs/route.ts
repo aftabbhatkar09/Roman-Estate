@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Blog from "@/models/Blog";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getSession } from "@/lib/session";
+import { parsePagination, paginationHeaders } from "@/lib/pagination";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const session = await getSession();
     if (!session) {
@@ -14,8 +15,14 @@ export async function GET() {
     }
 
     await connectDB();
-    const blogs = await Blog.find({}).sort({ createdAt: -1 }).lean();
-    return NextResponse.json(blogs);
+    const { page, limit, skip } = parsePagination(request);
+    const [blogs, total] = await Promise.all([
+      Blog.find({}).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+      Blog.countDocuments({}),
+    ]);
+    return NextResponse.json(blogs, {
+      headers: paginationHeaders({ page, limit, total }),
+    });
   } catch (error: unknown) {
     const err = error as {
       message?: string;
@@ -48,6 +55,7 @@ export async function POST(request: Request) {
     }
 
     const blog = await Blog.create(data);
+    revalidateTag("blogs", { expire: 0 });
     revalidatePath("/blog");
     revalidatePath("/admin/blogs");
     return NextResponse.json(

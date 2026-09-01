@@ -3,11 +3,12 @@ import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { getSession } from "@/lib/session";
 import { hashPassword } from "@/lib/password";
+import { parsePagination, paginationHeaders } from "@/lib/pagination";
 
 export const dynamic = "force-dynamic";
 
 // ── GET /api/users ── list all users (password excluded) ─────────────────────
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const session = await getSession();
     if (!session) {
@@ -15,11 +16,19 @@ export async function GET() {
     }
 
     await connectDB();
-    const users = await User.find({})
-      .select("-password")
-      .sort({ createdAt: -1 })
-      .lean();
-    return NextResponse.json(users);
+    const { page, limit, skip } = parsePagination(request);
+    const [users, total] = await Promise.all([
+      User.find({})
+        .select("-password")
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      User.countDocuments({}),
+    ]);
+    return NextResponse.json(users, {
+      headers: paginationHeaders({ page, limit, total }),
+    });
   } catch (error: unknown) {
     const message =
       error instanceof Error ? error.message : "Failed to fetch users";

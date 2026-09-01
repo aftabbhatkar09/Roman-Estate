@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Blog from "@/models/Blog";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
@@ -49,6 +49,7 @@ export async function PUT(request: NextRequest, context: Params) {
     if (!blog) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
+    revalidateTag("blogs", { expire: 0 });
     revalidatePath("/blog");
     revalidatePath("/admin/blogs");
     revalidatePath(`/admin/blogs/${id}`);
@@ -75,6 +76,7 @@ export async function DELETE(request: NextRequest, context: Params) {
     if (!blog) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
+    revalidateTag("blogs", { expire: 0 });
     revalidatePath("/blog");
     revalidatePath("/admin/blogs");
     if (blog.slug) {

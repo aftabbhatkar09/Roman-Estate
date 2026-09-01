@@ -4,6 +4,7 @@ import Inquiry from "@/models/Inquiry";
 import { getSession } from "@/lib/session";
 import { sendInquiryNotification } from "@/lib/email";
 import { checkRateLimit, rateLimitResponse, getClientIp } from "@/lib/rateLimit";
+import { parsePagination, paginationHeaders } from "@/lib/pagination";
 
 export async function POST(request: Request) {
   try {
@@ -85,7 +86,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const session = await getSession();
     if (!session) {
@@ -93,8 +94,14 @@ export async function GET() {
     }
 
     await connectDB();
-    const inquiries = await Inquiry.find({}).sort({ createdAt: -1 }).lean();
-    return NextResponse.json(inquiries);
+    const { page, limit, skip } = parsePagination(request);
+    const [inquiries, total] = await Promise.all([
+      Inquiry.find({}).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+      Inquiry.countDocuments({}),
+    ]);
+    return NextResponse.json(inquiries, {
+      headers: paginationHeaders({ page, limit, total }),
+    });
   } catch (error: unknown) {
     const err = error as { message?: string };
     console.error("Inquiry GET Error:", error);
