@@ -152,9 +152,9 @@ export default async function HomePage() {
             <span className="inline-block px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-linear-to-r from-brand-primary to-brand-accent text-white text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] shadow-lg shadow-brand-primary/25">
               Your Trusted Partner in Every Square Foot.
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
-              Find the Right Property. <br className="hidden sm:block" />
-              Make the Right Investment
+            <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.1]">
+              Choose the Right Property. <br />
+              Build a Better Future.
             </h1>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed px-2 sm:px-0">
               Premium residential and commercial properties across Mumbai — from

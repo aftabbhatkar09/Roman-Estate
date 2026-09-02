@@ -95,7 +95,7 @@ export default function HeroSearch() {
           className="w-full md:w-auto premium-button-primary rounded-[1rem]! sm:rounded-3xl! flex items-center justify-center gap-2 group py-3 md:py-3"
         >
           <Search className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
-          <span className="md:hidden lg:inline">Find Properties</span>
+          <span className="md:hidden lg:inline">Choose the Right Property</span>
           <span className="hidden md:inline lg:hidden">Search</span>
         </button>
       </div>
