@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import DeleteModal from "@/components/DeleteModal";
+import Pagination from "@/components/admin/Pagination";
 
 interface User {
   _id: string;
@@ -27,8 +28,12 @@ interface User {
 
 export default function AdminUsersClient({
   initialUsers,
+  page,
+  totalPages,
 }: {
   initialUsers: User[];
+  page: number;
+  totalPages: number;
 }) {
   const router = useRouter();
   const [users, setUsers] = useState<User[]>(initialUsers);
@@ -353,6 +358,8 @@ export default function AdminUsersClient({
           </tbody>
         </table>
       </div>
+
+      <Pagination page={page} totalPages={totalPages} basePath="/admin/users" />
     </div>
   );
 }

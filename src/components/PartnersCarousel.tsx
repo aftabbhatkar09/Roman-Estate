@@ -42,6 +42,7 @@ export default function PartnersCarousel({
                   src={partner.logo}
                   alt={partner.name || "Partner"}
                   fill
+                  sizes="(min-width: 768px) 150px, 110px"
                   className="object-contain"
                 />
               </div>

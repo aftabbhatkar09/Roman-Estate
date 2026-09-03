@@ -5,6 +5,7 @@ import { Plus, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useDeleteBlogMutation } from "@/lib/redux/slices/apiSlice";
 import DeleteModal from "@/components/DeleteModal";
+import Pagination from "@/components/admin/Pagination";
 
 interface Blog {
   _id: string;
@@ -17,10 +18,14 @@ interface Blog {
 
 interface AdminBlogsClientProps {
   initialBlogs: Blog[];
+  page: number;
+  totalPages: number;
 }
 
 export default function AdminBlogsClient({
   initialBlogs,
+  page,
+  totalPages,
 }: AdminBlogsClientProps) {
   const [blogs, setBlogs] = useState<Blog[]>(initialBlogs);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -204,6 +209,8 @@ export default function AdminBlogsClient({
           </tbody>
         </table>
       </div>
+
+      <Pagination page={page} totalPages={totalPages} basePath="/admin/blogs" />
     </div>
   );
 }

@@ -14,6 +14,7 @@ import {
   useDeleteInquiryMutation,
 } from "@/lib/redux/slices/apiSlice";
 import DeleteModal from "@/components/DeleteModal";
+import Pagination from "@/components/admin/Pagination";
 
 const STATUS_OPTIONS = ["New", "In Progress", "Resolved"] as const;
 type Status = (typeof STATUS_OPTIONS)[number];
@@ -49,10 +50,20 @@ interface InquiryItem {
 
 export default function AdminInquiriesClient({
   initialInquiries,
+  page,
+  totalPages,
+  statusCounts,
 }: {
   initialInquiries: InquiryItem[];
+  page: number;
+  totalPages: number;
+  statusCounts: Record<Status, number>;
 }) {
   const [inquiries, setInquiries] = useState<InquiryItem[]>(initialInquiries);
+  // Seeded from true totals across all pages (not just this page), then
+  // patched in place as statuses change/inquiries are deleted so the
+  // summary stays accurate without a full page reload.
+  const [counts, setCounts] = useState(statusCounts);
   const [updateStatus] = useUpdateInquiryStatusMutation();
   const [deleteInquiry] = useDeleteInquiryMutation();
   const [loadingId, setLoadingId] = useState<string | null>(null);
@@ -62,6 +73,7 @@ export default function AdminInquiriesClient({
   }>({ open: false, inquiry: null });
 
   const handleStatusChange = async (id: string, newStatus: Status) => {
+    const previous = inquiries.find((inq) => inq._id === id)?.status;
     setLoadingId(id);
     try {
       await updateStatus({ id, status: newStatus }).unwrap();
@@ -70,6 +82,13 @@ export default function AdminInquiriesClient({
           inq._id === id ? { ...inq, status: newStatus } : inq,
         ),
       );
+      if (previous && previous !== newStatus) {
+        setCounts((prev) => ({
+          ...prev,
+          [previous]: prev[previous] - 1,
+          [newStatus]: prev[newStatus] + 1,
+        }));
+      }
       toast.success(`Status updated to "${newStatus}"`);
     } catch {
       toast.error("Failed to update status");
@@ -84,17 +103,15 @@ export default function AdminInquiriesClient({
     try {
       await deleteInquiry(inquiry._id).unwrap();
       setInquiries((prev) => prev.filter((inq) => inq._id !== inquiry._id));
+      setCounts((prev) => ({
+        ...prev,
+        [inquiry.status]: prev[inquiry.status] - 1,
+      }));
       setDeleteModal({ open: false, inquiry: null });
       toast.success("Inquiry deleted successfully");
     } catch {
       toast.error("Failed to delete inquiry");
     }
-  };
-
-  const counts = {
-    New: inquiries.filter((i) => i.status === "New").length,
-    "In Progress": inquiries.filter((i) => i.status === "In Progress").length,
-    Resolved: inquiries.filter((i) => i.status === "Resolved").length,
   };
 
   return (
@@ -255,6 +272,8 @@ export default function AdminInquiriesClient({
           })}
         </div>
       )}
+
+      <Pagination page={page} totalPages={totalPages} basePath="/admin/inquiries" />
     </div>
   );
 }

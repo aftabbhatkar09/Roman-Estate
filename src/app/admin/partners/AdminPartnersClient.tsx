@@ -6,6 +6,7 @@ import { Plus, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useDeletePartnerMutation } from "@/lib/redux/slices/apiSlice";
 import DeleteModal from "@/components/DeleteModal";
+import Pagination from "@/components/admin/Pagination";
 
 export interface Partner {
   _id: string;
@@ -18,10 +19,14 @@ export interface Partner {
 
 interface AdminPartnersClientProps {
   initialPartners: Partner[];
+  page: number;
+  totalPages: number;
 }
 
 export default function AdminPartnersClient({
   initialPartners,
+  page,
+  totalPages,
 }: AdminPartnersClientProps) {
   const [partners, setPartners] = useState<Partner[]>(initialPartners);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -230,6 +235,8 @@ export default function AdminPartnersClient({
           </tbody>
         </table>
       </div>
+
+      <Pagination page={page} totalPages={totalPages} basePath="/admin/partners" />
     </div>
   );
 }

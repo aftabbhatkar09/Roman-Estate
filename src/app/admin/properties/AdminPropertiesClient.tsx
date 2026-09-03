@@ -5,6 +5,7 @@ import { Plus, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useDeletePropertyMutation } from "@/lib/redux/slices/apiSlice";
 import DeleteModal from "@/components/DeleteModal";
+import Pagination from "@/components/admin/Pagination";
 
 interface Property {
   _id: string;
@@ -19,10 +20,14 @@ interface Property {
 
 interface AdminPropertiesClientProps {
   initialProperties: Property[];
+  page: number;
+  totalPages: number;
 }
 
 export default function AdminPropertiesClient({
   initialProperties,
+  page,
+  totalPages,
 }: AdminPropertiesClientProps) {
   const [properties, setProperties] = useState<Property[]>(initialProperties);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -212,6 +217,8 @@ export default function AdminPropertiesClient({
           </tbody>
         </table>
       </div>
+
+      <Pagination page={page} totalPages={totalPages} basePath="/admin/properties" />
     </div>
   );
 }

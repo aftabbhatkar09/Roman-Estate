@@ -27,9 +27,12 @@ const BlogSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-// Speeds up the public blog listing (published posts, newest first) and
-// the admin listing (all posts, newest first). `slug` is already indexed
-// via `unique: true` above.
+// Speeds up the public blog listing (published posts, newest first).
+// `slug` is already indexed via `unique: true` above.
 BlogSchema.index({ published: 1, createdAt: -1 });
+// Speeds up the admin listing, which sorts all posts (no `published`
+// filter) newest first — the compound index above can't serve that
+// efficiently on its own.
+BlogSchema.index({ createdAt: -1 });
 
 export default mongoose.models.Blog || mongoose.model<IBlog>('Blog', BlogSchema);
