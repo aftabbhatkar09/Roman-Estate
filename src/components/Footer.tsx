@@ -32,7 +32,8 @@ export default function Footer() {
                 href="/properties"
                 className="bg-white text-brand-primary-dark px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold hover:bg-white/90 transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2 text-sm sm:text-base"
               >
-                Browse Properties <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                Browse Properties{" "}
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
             </div>
           </div>
@@ -73,8 +74,8 @@ export default function Footer() {
               </Link>
             </div>
             <p className="text-sm sm:text-base leading-relaxed text-gray-400 max-w-xs">
-              Redefining luxury real estate in Mumbai for over three decades.
-              Excellence in every square foot.
+              Redefining luxury real estate in Mumbai with besopke precision.
+              Your trusted partner in every square foot.
             </p>
             <div className="flex gap-3">
               {[

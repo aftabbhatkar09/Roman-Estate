@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Building2,
   Home,
+  IndianRupee,
 } from "lucide-react";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
@@ -25,6 +26,7 @@ export default function ContactPage() {
     email: "",
     phone: "",
     bhk: "",
+    budget: "",
     requirementType: "Buying",
     message: "",
     _honeypot: "",
@@ -50,6 +52,7 @@ export default function ContactPage() {
         email: "",
         phone: "",
         bhk: "",
+        budget: "",
         requirementType: "Buying",
         message: "",
         _honeypot: "",
@@ -342,6 +345,21 @@ export default function ContactPage() {
                           ),
                         )}
                       </div>
+                    </div>
+
+                    <div className="space-y-2 sm:space-y-3">
+                      <label className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
+                        <IndianRupee className="w-3 h-3" /> Budget
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-cream border border-transparent rounded-xl sm:rounded-2xl focus:bg-white focus:border-brand-primary/30 focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all font-bold text-brand-dark text-sm sm:text-base"
+                        placeholder="Ex: 2.4 Cr"
+                        value={formData.budget}
+                        onChange={(e) =>
+                          setFormData({ ...formData, budget: e.target.value })
+                        }
+                      />
                     </div>
 
                     <div className="space-y-2 sm:space-y-3">

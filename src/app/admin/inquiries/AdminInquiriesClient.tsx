@@ -37,6 +37,7 @@ interface InquiryItem {
   phone: string;
   requirementType: string;
   bhk?: string;
+  budget?: string;
   message: string;
   status: Status;
   createdAt: string | Date;
@@ -195,6 +196,11 @@ export default function AdminInquiriesClient({
                       {inquiry.bhk && (
                         <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-gray-100 text-gray-600">
                           {inquiry.bhk}
+                        </span>
+                      )}
+                      {inquiry.budget && (
+                        <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-gray-100 text-gray-600">
+                          Budget: {inquiry.budget}
                         </span>
                       )}
                     </div>

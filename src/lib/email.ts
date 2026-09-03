@@ -51,6 +51,7 @@ interface InquiryNotificationInput {
   phone: string;
   requirementType: string;
   bhk?: string;
+  budget?: string;
   message: string;
 }
 
@@ -85,6 +86,7 @@ export async function sendInquiryNotification(inquiry: InquiryNotificationInput)
             <tr><td style="padding: 6px 0; color: #666;">Email</td><td style="padding: 6px 0;">${inquiry.email}</td></tr>
             <tr><td style="padding: 6px 0; color: #666;">Phone</td><td style="padding: 6px 0;">${inquiry.phone}</td></tr>
             ${inquiry.bhk ? `<tr><td style="padding: 6px 0; color: #666;">Property Size</td><td style="padding: 6px 0;">${inquiry.bhk}</td></tr>` : ""}
+            ${inquiry.budget ? `<tr><td style="padding: 6px 0; color: #666;">Budget</td><td style="padding: 6px 0;">${inquiry.budget}</td></tr>` : ""}
           </table>
           <p style="margin-top: 16px; white-space: pre-wrap;">${inquiry.message}</p>
           <p style="margin-top: 24px; font-size: 12px; color: #999;">
