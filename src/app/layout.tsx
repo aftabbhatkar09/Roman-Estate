@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     title: "Roman Estate | Luxury Properties",
     description: "Premium real estate consulting and property management.",
   }),
+  verification: {
+    google: "pDNYRrCVaB__DHhRzoEl6VPrX4peHvB-r7nAd_Z8Pxw",
+  },
 };
 
 export default function RootLayout({
