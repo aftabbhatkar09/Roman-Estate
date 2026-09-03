@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 import { useDeletePropertyMutation } from "@/lib/redux/slices/apiSlice";
 import DeleteModal from "@/components/DeleteModal";
 
@@ -43,9 +44,10 @@ export default function AdminPropertiesClient({
       setProperties(properties.filter((p) => p._id !== selectedProperty._id));
       setIsModalOpen(false);
       setSelectedProperty(null);
+      toast.success("Property deleted successfully");
     } catch (error) {
       console.error("Error deleting property:", error);
-      alert("Failed to delete property");
+      toast.error("Failed to delete property");
     }
   };
 

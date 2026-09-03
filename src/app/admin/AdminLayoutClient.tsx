@@ -15,6 +15,7 @@ import {
   UserCog,
 } from "lucide-react";
 import { useState } from "react";
+import { Toaster } from "sonner";
 import type { Role } from "@/lib/session";
 
 const baseItems = [
@@ -161,6 +162,8 @@ export default function AdminLayoutClient({
 
   return (
     <div className="flex h-screen bg-[#fafbfc] overflow-hidden">
+      <Toaster position="top-right" richColors closeButton />
+
       {/* Desktop Sidebar — fixed */}
       <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col shrink-0 fixed left-0 top-0 z-30 h-screen">
         <SidebarContent

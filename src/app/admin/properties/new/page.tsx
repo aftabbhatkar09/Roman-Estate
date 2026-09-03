@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 import { useCreatePropertyMutation } from "@/lib/redux/slices/apiSlice";
 import ImageUrlManager from "@/components/ImageUrlManager";
 
@@ -69,13 +70,15 @@ export default function NewProperty() {
         images,
       };
       await createProperty(dataToSubmit).unwrap();
+      toast.success("Property created successfully");
       router.push("/admin/properties");
       router.refresh();
     } catch (err: unknown) {
-      setError(
+      const message =
         (err as { data?: { error?: string } })?.data?.error ||
-          "Failed to create property. Please check all fields.",
-      );
+        "Failed to create property. Please check all fields.";
+      setError(message);
+      toast.error(message);
     }
   };
 

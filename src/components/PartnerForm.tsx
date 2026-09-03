@@ -9,6 +9,7 @@ import {
 } from "@/lib/redux/slices/apiSlice";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function PartnerForm() {
   const router = useRouter();
@@ -80,8 +81,10 @@ export default function PartnerForm() {
     try {
       if (isEditing) {
         await updatePartner({ id, data: formData }).unwrap();
+        toast.success("Partner updated successfully");
       } else {
         await createPartner(formData).unwrap();
+        toast.success("Partner created successfully");
       }
       router.push("/admin/partners");
       router.refresh();
@@ -92,6 +95,7 @@ export default function PartnerForm() {
         (err as Error)?.message ||
         "Failed to save partner";
       setError(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }

@@ -3,6 +3,7 @@ import { useState, useEffect, use, startTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 import {
   useGetPropertyByIdQuery,
   useUpdatePropertyMutation,
@@ -101,13 +102,15 @@ export default function EditProperty({
         images,
       };
       await updateProperty({ id, data: dataToSubmit }).unwrap();
+      toast.success("Property updated successfully");
       router.push("/admin/properties");
       router.refresh();
     } catch (err: unknown) {
-      setError(
+      const message =
         (err as { data?: { error?: string } })?.data?.error ||
-          "Failed to update property. Please check all fields.",
-      );
+        "Failed to update property. Please check all fields.";
+      toast.error(message);
+      setError(message);
     }
   };
 

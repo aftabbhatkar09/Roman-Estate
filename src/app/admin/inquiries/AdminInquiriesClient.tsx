@@ -8,6 +8,7 @@ import {
   Trash2,
   Building2,
 } from "lucide-react";
+import { toast } from "sonner";
 import {
   useUpdateInquiryStatusMutation,
   useDeleteInquiryMutation,
@@ -68,8 +69,9 @@ export default function AdminInquiriesClient({
           inq._id === id ? { ...inq, status: newStatus } : inq,
         ),
       );
+      toast.success(`Status updated to "${newStatus}"`);
     } catch {
-      alert("Failed to update status");
+      toast.error("Failed to update status");
     } finally {
       setLoadingId(null);
     }
@@ -82,8 +84,9 @@ export default function AdminInquiriesClient({
       await deleteInquiry(inquiry._id).unwrap();
       setInquiries((prev) => prev.filter((inq) => inq._id !== inquiry._id));
       setDeleteModal({ open: false, inquiry: null });
+      toast.success("Inquiry deleted successfully");
     } catch {
-      alert("Failed to delete inquiry");
+      toast.error("Failed to delete inquiry");
     }
   };
 

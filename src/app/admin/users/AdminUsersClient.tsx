@@ -13,6 +13,7 @@ import {
   AlertCircle,
   X,
 } from "lucide-react";
+import { toast } from "sonner";
 import DeleteModal from "@/components/DeleteModal";
 
 interface User {
@@ -48,6 +49,7 @@ export default function AdminUsersClient({
 
   const showError = (msg: string) => {
     setErrorMsg(msg);
+    toast.error(msg);
     setTimeout(() => setErrorMsg(""), 5000);
   };
 
@@ -63,6 +65,7 @@ export default function AdminUsersClient({
       }
       setUsers((prev) => prev.filter((u) => u._id !== userId));
       setDeleteModal({ open: false, user: null });
+      toast.success("User deleted successfully");
       router.refresh();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to delete user.";
@@ -85,6 +88,9 @@ export default function AdminUsersClient({
       if (!res.ok) throw new Error(data.error || "Failed to update");
       setUsers((prev) =>
         prev.map((u) => (u._id === user._id ? { ...u, active: !u.active } : u)),
+      );
+      toast.success(
+        `User ${!user.active ? "activated" : "deactivated"} successfully`,
       );
       router.refresh();
     } catch (err: unknown) {

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 import SingleImageUpload from "@/components/SingleImageUpload";
 import { useCreateBlogMutation } from "@/lib/redux/slices/apiSlice";
 
@@ -51,14 +52,15 @@ export default function NewBlog() {
           .filter(Boolean),
       };
       await createBlog(dataToSubmit).unwrap();
+      toast.success("Blog post created successfully");
       router.push("/admin/blogs");
       router.refresh();
     } catch (err: unknown) {
       const e = err as { data?: { error?: string } };
-      setError(
-        e?.data?.error ||
-          "Failed to create blog post. Please check all fields.",
-      );
+      const message =
+        e?.data?.error || "Failed to create blog post. Please check all fields.";
+      setError(message);
+      toast.error(message);
     }
   };
 

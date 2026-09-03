@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 import { useDeleteBlogMutation } from "@/lib/redux/slices/apiSlice";
 import DeleteModal from "@/components/DeleteModal";
 
@@ -39,9 +40,10 @@ export default function AdminBlogsClient({
       setBlogs(blogs.filter((b) => b._id !== selectedBlog._id));
       setIsModalOpen(false);
       setSelectedBlog(null);
+      toast.success("Blog post deleted successfully");
     } catch (error) {
       console.error("Error deleting blog:", error);
-      alert("Failed to delete blog");
+      toast.error("Failed to delete blog");
     }
   };
 

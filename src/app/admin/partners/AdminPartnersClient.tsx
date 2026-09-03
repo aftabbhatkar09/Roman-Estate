@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import { Plus, Edit, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 import { useDeletePartnerMutation } from "@/lib/redux/slices/apiSlice";
 import DeleteModal from "@/components/DeleteModal";
 
@@ -40,9 +41,10 @@ export default function AdminPartnersClient({
       setPartners(partners.filter((p) => p._id !== selectedPartner._id));
       setIsModalOpen(false);
       setSelectedPartner(null);
+      toast.success("Partner deleted successfully");
     } catch (error) {
       console.error("Error deleting partner:", error);
-      alert("Failed to delete partner");
+      toast.error("Failed to delete partner");
     }
   };
 

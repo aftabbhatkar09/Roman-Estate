@@ -3,6 +3,7 @@ import { useState, useEffect, use, startTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 import SingleImageUpload from "@/components/SingleImageUpload";
 import {
   useGetBlogByIdQuery,
@@ -74,11 +75,14 @@ export default function EditBlog({
           .filter(Boolean),
       };
       await updateBlog({ id, data: dataToSubmit }).unwrap();
+      toast.success("Blog post updated successfully");
       router.push("/admin/blogs");
       router.refresh();
     } catch (err: unknown) {
       const e = err as { data?: { error?: string } };
-      setError(e?.data?.error || "Failed to update blog post.");
+      const message = e?.data?.error || "Failed to update blog post.";
+      setError(message);
+      toast.error(message);
     }
   };
 

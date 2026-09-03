@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Save, Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
 
 const FIELD =
   "w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-sm";
@@ -36,10 +37,14 @@ export default function NewUserPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to create user");
+      toast.success("User created successfully");
       router.push("/admin/users");
       router.refresh();
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Failed to create user");
+      const message =
+        err instanceof Error ? err.message : "Failed to create user";
+      setError(message);
+      toast.error(message);
     } finally {
       setSaving(false);
     }
