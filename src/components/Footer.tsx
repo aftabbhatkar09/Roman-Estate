@@ -74,7 +74,7 @@ export default function Footer() {
               </Link>
             </div>
             <p className="text-sm sm:text-base leading-relaxed text-gray-400 max-w-xs">
-              Redefining luxury real estate in Mumbai with besopke precision.
+              Redefining luxury real estate in Mumbai with bespoke precision.
               Your trusted partner in every square foot.
             </p>
             <div className="flex gap-3">
