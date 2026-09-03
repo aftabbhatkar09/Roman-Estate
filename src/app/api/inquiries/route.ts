@@ -54,6 +54,7 @@ export async function POST(request: Request) {
         email: inquiry.email,
         phone: inquiry.phone,
         requirementType: inquiry.requirementType,
+        bhk: inquiry.bhk,
         message: inquiry.message,
       }),
     );

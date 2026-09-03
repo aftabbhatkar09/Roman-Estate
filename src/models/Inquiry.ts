@@ -5,6 +5,7 @@ export interface IInquiry extends Document {
   email: string;
   phone: string;
   requirementType: 'Buying' | 'Selling' | 'Renting';
+  bhk?: '1 BHK' | '2 BHK' | '3 BHK' | '4 BHK';
   message: string;
   propertyId?: mongoose.Types.ObjectId;
   status: 'New' | 'In Progress' | 'Resolved';
@@ -21,6 +22,10 @@ const InquirySchema: Schema = new Schema(
       type: String,
       enum: ['Buying', 'Selling', 'Renting'],
       required: true,
+    },
+    bhk: {
+      type: String,
+      enum: ['1 BHK', '2 BHK', '3 BHK', '4 BHK'],
     },
     message: { type: String, required: true },
     propertyId: { type: Schema.Types.ObjectId, ref: 'Property' },

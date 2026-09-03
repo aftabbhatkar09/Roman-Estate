@@ -122,7 +122,7 @@ export default async function PropertyDetailPage({
                   <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.25em] text-gray-400 mb-0.5">
                     Valuation
                   </p>
-                  <p className="text-2xl sm:text-3xl md:text-4xl font-black linear-text tracking-tight whitespace-nowrap">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-black gradient-text tracking-tight whitespace-nowrap">
                     ₹{property.price.toLocaleString("en-IN")}
                   </p>
                 </div>
@@ -240,7 +240,7 @@ export default async function PropertyDetailPage({
 
                 <div className="space-y-3 sm:space-y-4">
                   {/* <a
-                    href="tel:+919876543210"
+                    href="tel:+918424886355"
                     className="w-full premium-button-primary py-3.5 sm:py-4 md:py-5 text-base sm:text-lg flex items-center justify-center group/call"
                   >
                     <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 group-hover/call:rotate-12 transition-transform shrink-0" />{" "}

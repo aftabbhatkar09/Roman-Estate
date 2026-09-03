@@ -13,6 +13,7 @@ import {
   Briefcase,
   ArrowRight,
   Building2,
+  Home,
 } from "lucide-react";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
@@ -23,6 +24,7 @@ export default function ContactPage() {
     name: "",
     email: "",
     phone: "",
+    bhk: "",
     requirementType: "Buying",
     message: "",
     _honeypot: "",
@@ -47,6 +49,7 @@ export default function ContactPage() {
         name: "",
         email: "",
         phone: "",
+        bhk: "",
         requirementType: "Buying",
         message: "",
         _honeypot: "",
@@ -98,7 +101,7 @@ export default function ContactPage() {
                 {
                   icon: Phone,
                   title: "Private Advisory",
-                  content: "+91 98765 43210",
+                  content: "+91 84248 86355",
                   sub: "Mon-Sat: 9:00 AM – 7:00 PM",
                   gradient: "from-brand-primary/10 to-brand-accent/10",
                   iconColor: "text-brand-primary",
@@ -106,7 +109,7 @@ export default function ContactPage() {
                 {
                   icon: Mail,
                   title: "Digital Correspondence",
-                  content: "hello@romanestate.com",
+                  content: "theromanestate@gmail.com",
                   sub: "Response within 12 hours",
                   gradient: "from-brand-primary/5 to-brand-accent/5",
                   iconColor: "text-brand-primary",
@@ -114,7 +117,7 @@ export default function ContactPage() {
                 {
                   icon: MapPin,
                   title: "Corporate Headquarters",
-                  content: "Opera House, Charni Road, Mumbai 400004",
+                  content: "Dockyard Road, Mazgoan, Mumbai 400010",
                   sub: "By Appointment Only",
                   gradient: "from-brand-primary/10 to-brand-accent/10",
                   iconColor: "text-brand-primary",
@@ -285,6 +288,35 @@ export default function ContactPage() {
 
                     <div className="space-y-2 sm:space-y-3">
                       <label className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
+                        <Home className="w-3 h-3" /> Property Size
+                      </label>
+                      <div className="flex flex-wrap gap-2 sm:gap-3">
+                        {(["1 BHK", "2 BHK", "3 BHK", "4 BHK"] as const).map(
+                          (size) => (
+                            <button
+                              key={size}
+                              type="button"
+                              onClick={() =>
+                                setFormData({
+                                  ...formData,
+                                  bhk: formData.bhk === size ? "" : size,
+                                })
+                              }
+                              className={`flex-1 min-w-20 px-3 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold border transition-all ${
+                                formData.bhk === size
+                                  ? "bg-linear-to-r from-brand-primary to-brand-accent text-white border-transparent shadow-lg shadow-brand-primary/25"
+                                  : "bg-white text-gray-500 border-gray-200 hover:border-brand-primary/30"
+                              }`}
+                            >
+                              {size}
+                            </button>
+                          ),
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 sm:space-y-3">
+                      <label className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
                         <Building2 className="w-3 h-3" /> Requirement Type
                       </label>
                       <div className="flex gap-2 sm:gap-3">
@@ -359,15 +391,15 @@ export default function ContactPage() {
       {/* Map Section */}
       <Reveal className="max-w-7xl mx-auto px-4 pb-20 sm:pb-24 md:pb-32">
         <div className="h-75 sm:h-100 md:h-125 lg:h-150 bg-cream rounded-3xl sm:rounded-4xl md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
-          <Image
-            src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=2000"
-            alt="Office Location"
-            fill
-            sizes="(max-width: 1280px) 100vw, 1280px"
-            quality={90}
-            className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+          <iframe
+            title="Roman Estate office location — Dockyard Road, Mazgoan, Mumbai"
+            src="https://www.google.com/maps?q=Dockyard+Road,+Mazgoan,+Mumbai+400010&output=embed"
+            className="absolute inset-0 w-full h-full"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-brand-dark/60 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-brand-dark/60 to-transparent pointer-events-none" />
           <div className="absolute bottom-3 sm:bottom-6 md:bottom-10 lg:bottom-16 left-3 sm:left-6 md:left-10 lg:left-16 right-3 sm:right-auto glass-morphism p-4 sm:p-6 md:p-8 lg:p-12 rounded-3xl sm:rounded-4xl md:rounded-[3rem] shadow-2xl border border-white/20 transform group-hover:-translate-y-2 transition-transform duration-500">
             <div className="flex items-center gap-2 sm:gap-4 mb-3 sm:mb-6">
               <div className="w-2 h-2 sm:w-3 sm:h-3 bg-linear-to-r from-brand-primary to-brand-accent rounded-full animate-pulse shrink-0" />
@@ -379,10 +411,10 @@ export default function ContactPage() {
               Visit Us in Mumbai
             </h3>
             <p className="text-gray-500 font-medium leading-relaxed max-w-50 sm:max-w-xs text-xs sm:text-sm md:text-base">
-              Opera House, Charni Road, Mumbai, Maharashtra 400004
+              Dockyard Road, Mazgoan, Mumbai 400010
             </p>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Opera+House,+Charni+Road,+Mumbai,+Maharashtra+400004"
+              href="https://www.google.com/maps/search/?api=1&query=Dockyard+Road,+Mazgoan,+Mumbai+400010"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 sm:mt-6 md:mt-8 premium-button-primary py-2! sm:py-3! px-5! sm:px-6! md:px-8! text-[11px] sm:text-sm flex items-center gap-2 w-fit"

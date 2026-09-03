@@ -79,7 +79,7 @@ export default function SettingsPage() {
                     </label>
                     <input
                       type="email"
-                      defaultValue="admin@romanestate.com"
+                      defaultValue="theromanestate@gmail.com"
                       className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-bold text-gray-700"
                     />
                   </div>
@@ -89,7 +89,7 @@ export default function SettingsPage() {
                     </label>
                     <input
                       type="tel"
-                      defaultValue="+91 98765 43210"
+                      defaultValue="+91 84248 86355"
                       className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-bold text-gray-700"
                     />
                   </div>

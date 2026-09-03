@@ -243,7 +243,7 @@ export default async function HomePage() {
                 Our Network
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-dark">
-                Trusted by Industry Titans
+                Connected with the Best
               </h2>
             </div>
           </Reveal>
@@ -261,21 +261,13 @@ export default async function HomePage() {
               <div className="absolute inset-3 sm:inset-4 border-2 border-brand-primary/30 rounded-3xl sm:rounded-4xl md:rounded-[3rem] -rotate-3" />
               <div className="absolute inset-0 bg-linear-to-br from-brand-primary/10 to-brand-accent/10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] rotate-3" />
               <Image
-                src="/bg2.jpg"
+                src="/why-us.jpeg"
                 alt="Our Expertise"
                 fill
                 sizes="(max-width: 1024px) 448px, 640px"
                 quality={90}
                 className="relative z-10 rounded-3xl sm:rounded-4xl md:rounded-[3rem] object-cover shadow-2xl"
               />
-              <div className="absolute -bottom-6 sm:-bottom-8 md:-bottom-10 -right-4 sm:-right-6 md:-right-10 glass-morphism p-4 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-2xl z-20">
-                <p className="text-2xl sm:text-3xl md:text-5xl font-black gradient-text mb-1">
-                  30+
-                </p>
-                <p className="text-[10px] sm:text-xs text-brand-dark font-bold uppercase tracking-widest">
-                  Years of Trust
-                </p>
-              </div>
             </Reveal>
 
             <Reveal delay={150} className="space-y-6 md:space-y-10">
@@ -284,8 +276,8 @@ export default async function HomePage() {
                   Why Roman Estate
                 </span>
                 <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
-                  Premium Homes, <br />
-                  Trusted Guidance
+                  Where Every Promise <br />
+                  <span className="gradient-text">Becomes a Possession.</span>
                 </h3>
                 <p className="text-base sm:text-lg text-gray-400 leading-relaxed max-w-xl">
                   We don&apos;t just sell properties; we build legacies. Our

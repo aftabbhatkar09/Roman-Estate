@@ -174,8 +174,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-cream">
+      {/* Team Section — temporarily disabled, no real team photos/bios yet */}
+      {/* <section className="py-16 sm:py-20 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal className="text-center space-y-3 sm:space-y-4 mb-12 sm:mb-16 md:mb-20">
             <span className="text-brand-primary text-[11px] sm:text-sm font-bold uppercase tracking-[0.3em]">
@@ -233,7 +233,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Values Section */}
       <section className="py-16 sm:py-20 md:py-32 bg-white">

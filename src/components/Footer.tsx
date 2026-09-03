@@ -155,34 +155,34 @@ export default function Footer() {
                   <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                 </div>
                 <span className="text-gray-400 text-sm sm:text-base leading-relaxed">
-                  Opera House, Charni Road,
+                  Dockyard Road, Mazgoan,
                   <br />
-                  Mumbai, Maharashtra 400004
+                  Mumbai 400010
                 </span>
               </li>
               <li>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+918424886355"
                   className="flex items-center gap-3 sm:gap-4 group transition-colors"
                 >
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-brand-primary group-hover:bg-brand-primary/10 transition-all">
                     <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                   </div>
                   <span className="text-gray-400 group-hover:text-white text-sm sm:text-base">
-                    +91 98765 43210
+                    +91 84248 86355
                   </span>
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@romanestate.com"
+                  href="mailto:theromanestate@gmail.com"
                   className="flex items-center gap-3 sm:gap-4 group transition-colors"
                 >
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-brand-primary group-hover:bg-brand-primary/10 transition-all">
                     <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                   </div>
                   <span className="text-gray-400 group-hover:text-white text-sm sm:text-base">
-                    info@romanestate.com
+                    theromanestate@gmail.com
                   </span>
                 </a>
               </li>

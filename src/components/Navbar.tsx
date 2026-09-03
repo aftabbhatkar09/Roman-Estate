@@ -109,13 +109,13 @@ export default function Navbar() {
             {/* CTA + Admin */}
             <div className="hidden md:flex items-center gap-5">
               <a
-                href="tel:+919876543210"
+                href="tel:+918424886355"
                 className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-brand-primary transition-colors"
               >
                 <div className="w-9 h-9 rounded-xl bg-brand-primary/10 flex items-center justify-center">
                   <Phone className="w-4 h-4 text-brand-primary" />
                 </div>
-                <span className="hidden lg:inline">+91 98765 43210</span>
+                <span className="hidden lg:inline">+91 84248 86355</span>
               </a>
               <Link
                 href="/admin"
@@ -211,13 +211,13 @@ export default function Navbar() {
             {/* Mobile CTAs Footer */}
             <div className="p-6 border-t border-gray-100 space-y-3 bg-gray-50/70 shrink-0">
               <a
-                href="tel:+919876543210"
+                href="tel:+918424886355"
                 className="flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white border border-gray-200 text-base font-bold text-gray-800 shadow-sm"
               >
                 <div className="w-8 h-8 rounded-xl bg-brand-primary/10 flex items-center justify-center">
                   <Phone className="w-4 h-4 text-brand-primary" />
                 </div>
-                +91 98765 43210
+                +91 84248 86355
               </a>
               <Link
                 href="/admin"

@@ -35,6 +35,7 @@ interface InquiryItem {
   email: string;
   phone: string;
   requirementType: string;
+  bhk?: string;
   message: string;
   status: Status;
   createdAt: string | Date;
@@ -188,6 +189,11 @@ export default function AdminInquiriesClient({
                         <Building2 className="w-3 h-3 inline mr-1 -mt-0.5" />
                         {inquiry.requirementType || "Not specified"}
                       </span>
+                      {inquiry.bhk && (
+                        <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-gray-100 text-gray-600">
+                          {inquiry.bhk}
+                        </span>
+                      )}
                     </div>
 
                     <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100/50">
