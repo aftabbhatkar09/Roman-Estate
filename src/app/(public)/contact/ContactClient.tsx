@@ -120,7 +120,7 @@ export default function ContactPage() {
                 {
                   icon: MapPin,
                   title: "Corporate Headquarters",
-                  content: "Dockyard Road, Mazgoan, Mumbai 400010",
+                  content: "Mazgoan, Mumbai 400010",
                   sub: "By Appointment Only",
                   gradient: "from-brand-primary/10 to-brand-accent/10",
                   iconColor: "text-brand-primary",
@@ -410,8 +410,8 @@ export default function ContactPage() {
       <Reveal className="max-w-7xl mx-auto px-4 pb-20 sm:pb-24 md:pb-32">
         <div className="h-75 sm:h-100 md:h-125 lg:h-150 bg-cream rounded-3xl sm:rounded-4xl md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-gray-100 relative group shadow-card">
           <iframe
-            title="Roman Estate office location — Dockyard Road, Mazgoan, Mumbai"
-            src="https://www.google.com/maps?q=Dockyard+Road,+Mazgoan,+Mumbai+400010&output=embed"
+            title="Roman Estate office location — Mazgoan, Mumbai"
+            src="https://www.google.com/maps?q=Mazgoan,+Mumbai+400010&output=embed"
             className="absolute inset-0 w-full h-full"
             style={{ border: 0 }}
             loading="lazy"
@@ -429,10 +429,10 @@ export default function ContactPage() {
               Visit Us in Mumbai
             </h3>
             <p className="text-gray-500 font-medium leading-relaxed max-w-50 sm:max-w-xs text-xs sm:text-sm md:text-base">
-              Dockyard Road, Mazgoan, Mumbai 400010
+              Mazgoan, Mumbai 400010
             </p>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Dockyard+Road,+Mazgoan,+Mumbai+400010"
+              href="https://www.google.com/maps/search/?api=1&query=Mazgoan,+Mumbai+400010"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 sm:mt-6 md:mt-8 premium-button-primary py-2! sm:py-3! px-5! sm:px-6! md:px-8! text-[11px] sm:text-sm flex items-center gap-2 w-fit"

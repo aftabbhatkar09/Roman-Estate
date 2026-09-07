@@ -29,6 +29,11 @@ export default function Reveal({
       return () => cancelAnimationFrame(raf);
     }
 
+    // threshold: 0 — fires as soon as any part of the element is visible.
+    // A higher threshold (e.g. 0.15) is a % of the element's OWN height, not
+    // the viewport's, so it silently never fires for tall content (a full
+    // blog article can be several thousand px tall — no normal scroll
+    // position ever shows 15% of that), leaving the content invisible.
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -36,7 +41,7 @@ export default function Reveal({
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+      { threshold: 0, rootMargin: "0px 0px -60px 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();

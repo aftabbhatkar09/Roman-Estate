@@ -156,7 +156,7 @@ export default function Footer() {
                   <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
                 </div>
                 <span className="text-gray-400 text-sm sm:text-base leading-relaxed">
-                  Dockyard Road, Mazgoan,
+                  Mazgoan,
                   <br />
                   Mumbai 400010
                 </span>
