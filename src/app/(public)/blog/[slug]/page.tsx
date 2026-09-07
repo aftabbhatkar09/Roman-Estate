@@ -78,7 +78,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
             objectPosition: "center center",
             opacity: 0.55,
           }}
-          quality={90}
+          quality={100}
           priority
         />
         <div className="absolute inset-0 bg-linear-to-t from-brand-dark via-brand-dark/45 to-brand-dark/20" />

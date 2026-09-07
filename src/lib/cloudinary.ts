@@ -19,9 +19,12 @@ export async function uploadImage(
     resource_type: "image",
     // "auto:best" favors visual fidelity over file size — images are the
     // core product on a real-estate site, so err on the side of clarity.
+    // width cap of 3840 (not 2560) so full-bleed hero banners still have
+    // enough native resolution left for crisp rendering on large/retina
+    // displays — "limit" never upscales, so smaller uploads are untouched.
     quality: "auto:best",
     fetch_format: "auto",
-    transformation: [{ width: 2560, crop: "limit" }],
+    transformation: [{ width: 3840, crop: "limit" }],
   });
 
   return result.secure_url;

@@ -90,6 +90,8 @@ export default function SingleImageUpload({
             src={value}
             alt="Preview"
             fill
+            sizes="(max-width: 768px) 100vw, 672px"
+            quality={95}
             className={`${objectFit} transition-opacity`}
           />
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
