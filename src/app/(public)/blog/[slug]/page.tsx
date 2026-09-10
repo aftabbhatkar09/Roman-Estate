@@ -230,7 +230,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
           {/* Featured Listing Ad */}
           <Reveal delay={300} className="relative aspect-4/5 max-h-125 rounded-4xl sm:rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden group">
             <Image
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800"
+              src="/images/Blog-article.png"
               alt="Featured Property"
               fill
               sizes="(max-width: 1024px) 100vw, 33vw"

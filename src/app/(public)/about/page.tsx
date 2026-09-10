@@ -26,7 +26,7 @@ export default function AboutPage() {
       <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 bg-brand-dark overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <Image
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000"
+            src="/images/about-page.avif"
             alt="Modern Office"
             fill
             sizes="100vw"
@@ -117,7 +117,7 @@ export default function AboutPage() {
 
             <Reveal delay={150} className="relative h-75 sm:h-100 md:h-125 lg:h-full min-h-100 sm:min-h-125 lg:min-h-150 rounded-4xl sm:rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?auto=format&fit=crop&q=80&w=1000"
+                src="/images/about-page-2.avif"
                 alt="Architecture"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

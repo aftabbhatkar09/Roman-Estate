@@ -69,7 +69,7 @@ export default function ContactPage() {
       <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 bg-brand-dark overflow-hidden">
         <div className="absolute inset-0 opacity-45">
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
+            src="/images/contact-page-hero.avif"
             alt="Office"
             fill
             sizes="100vw"
