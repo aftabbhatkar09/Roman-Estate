@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, User } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const navLinks = [
@@ -106,24 +106,15 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* CTA + Admin */}
+            {/* CTA */}
             <div className="hidden md:flex items-center gap-5">
               <a
                 href="tel:+918424886355"
-                className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-brand-primary transition-colors"
-              >
-                <div className="w-9 h-9 rounded-xl bg-brand-primary/10 flex items-center justify-center">
-                  <Phone className="w-4 h-4 text-brand-primary" />
-                </div>
-                <span className="hidden lg:inline">+91 84248 86355</span>
-              </a>
-              <Link
-                href="/admin"
                 className="premium-button-primary py-2.5! px-6! text-sm flex items-center gap-2"
               >
-                <User className="w-4 h-4" />
-                Admin
-              </Link>
+                <Phone className="w-4 h-4" />
+                <span>+91 84248 86355</span>
+              </a>
             </div>
 
             {/* Mobile Menu Toggle Button */}
@@ -212,21 +203,11 @@ export default function Navbar() {
             <div className="p-6 border-t border-gray-100 space-y-3 bg-gray-50/70 shrink-0">
               <a
                 href="tel:+918424886355"
-                className="flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white border border-gray-200 text-base font-bold text-gray-800 shadow-sm"
+                className="flex items-center justify-center gap-3 w-full premium-button-primary py-3.5 text-base font-bold"
               >
-                <div className="w-8 h-8 rounded-xl bg-brand-primary/10 flex items-center justify-center">
-                  <Phone className="w-4 h-4 text-brand-primary" />
-                </div>
+                <Phone className="w-5 h-5" />
                 +91 84248 86355
               </a>
-              <Link
-                href="/admin"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-2 w-full premium-button-primary py-3.5 text-base font-bold"
-              >
-                <User className="w-5 h-5" />
-                Admin Panel
-              </Link>
             </div>
           </aside>
         </div>
