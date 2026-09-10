@@ -10,6 +10,7 @@ import {
   Database,
   Smartphone,
 } from "lucide-react";
+import ChangePasswordForm from "@/components/admin/ChangePasswordForm";
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("General");
@@ -55,9 +56,11 @@ export default function SettingsPage() {
                 <ShieldCheck className="w-5 h-5 mr-3 text-indigo-600" />
                 {activeTab} Settings
               </h2>
-              <button className="bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2 rounded-xl text-sm font-bold hover:from-indigo-700 hover:to-indigo-600 transition-all flex items-center shadow-lg shadow-indigo-500/20 active:scale-95">
-                <Save className="w-4 h-4 mr-2" /> Save Changes
-              </button>
+              {activeTab === "General" && (
+                <button className="bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2 rounded-xl text-sm font-bold hover:from-indigo-700 hover:to-indigo-600 transition-all flex items-center shadow-lg shadow-indigo-500/20 active:scale-95">
+                  <Save className="w-4 h-4 mr-2" /> Save Changes
+                </button>
+              )}
             </div>
 
             {activeTab === "General" && (
@@ -116,7 +119,9 @@ export default function SettingsPage() {
               </div>
             )}
 
-            {activeTab !== "General" && (
+            {activeTab === "Security" && <ChangePasswordForm />}
+
+            {(activeTab === "Notifications" || activeTab === "System") && (
               <div className="py-12 text-center space-y-4">
                 <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
                   <SettingsIcon className="w-8 h-8 text-gray-300" />
